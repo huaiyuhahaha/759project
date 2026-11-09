@@ -1,10 +1,14 @@
 // Davidson benchmark on seeded dense symmetric diagonally dominant matrices.
 //
-//   davidson_bench <n> <serial|openmp>
+//   davidson_bench <n> <serial|openmp>   time the C++ solver
+//   davidson_bench <n> dump <file>       write the benchmark inputs for PySCF
 //
 // Times only the Davidson() call: one warm-up solve, then kRuns measured solves
 // on the same matrix and guess. Prints one JSON object with the timings, the
 // median per-kernel profile, and an independent check of the returned pairs.
+// dump writes A (n x n) then the guess (n x kRoots), both row-major
+// little-endian float64, so another solver gets exactly the same bytes; both
+// modes print the same input_checksum of those bytes.
 // Run through bench/run_davidson_bench.py, which fixes build flags and threads.
 
 #include "davidson.h"
@@ -52,6 +56,24 @@ Matrix make_matrix(int n) {
         }
     }
     return A;
+}
+
+// Position-weighted sum of the 64-bit words of A then guess (row-major), mod
+// 2^64. Every weight is odd, so changing any single value changes the sum.
+// bench/pyscf_davidson_bench.py computes the same function with NumPy.
+std::uint64_t input_checksum(const Matrix& A, const Matrix& guess) {
+    std::uint64_t h = 0, pos = 0;
+    auto add = [&](const Matrix& M) {
+        for (int i = 0; i < M.rows(); ++i)
+            for (int j = 0; j < M.cols(); ++j) {
+                std::uint64_t w;
+                std::memcpy(&w, &M[i][j], sizeof w);
+                h += w * (2 * pos++ + 1);
+            }
+    };
+    add(A);
+    add(guess);
+    return h;
 }
 
 double median(std::vector<double> v) {
@@ -145,16 +167,45 @@ int run(int n, Backend backend, const char* backend_name) {
                 res.iterations, res.expansions, res.dropped_corrections, res.subspace_size);
     for (int k = 0; k < kRoots; ++k)
         std::printf("%s%.17g", k ? ", " : "", res.eigenvalues[k]);
-    std::printf("], \"max_residual\": %.6g, \"orth_error\": %.6g, \"ok\": %s}\n",
-                max_resid, orth_err, ok ? "true" : "false");
+    std::printf("], \"max_residual\": %.6g, \"orth_error\": %.6g, \"input_checksum\": \"%016llx\", "
+                "\"ok\": %s}\n",
+                max_resid, orth_err,
+                static_cast<unsigned long long>(input_checksum(A, guess)), ok ? "true" : "false");
     return ok ? 0 : 1;
+}
+
+int dump(int n, const char* path) {
+    const Matrix A = make_matrix(n);
+    const Matrix guess = initialize_vector(kRoots, A);
+    std::FILE* f = std::fopen(path, "wb");
+    if (!f) {
+        std::fprintf(stderr, "cannot open '%s' for writing\n", path);
+        return 1;
+    }
+    bool ok = true;
+    for (int i = 0; i < n; ++i)
+        ok = ok && std::fwrite(A[i], sizeof(double), n, f) == static_cast<std::size_t>(n);
+    for (int i = 0; i < n; ++i)
+        ok = ok && std::fwrite(guess[i], sizeof(double), kRoots, f) ==
+                       static_cast<std::size_t>(kRoots);
+    ok = (std::fclose(f) == 0) && ok;
+    if (!ok) {
+        std::fprintf(stderr, "write to '%s' failed\n", path);
+        return 1;
+    }
+    std::printf("{\"n\": %d, \"k\": %d, \"seed\": %llu, \"input_checksum\": \"%016llx\"}\n", n,
+                kRoots, static_cast<unsigned long long>(kSeed),
+                static_cast<unsigned long long>(input_checksum(A, guess)));
+    return 0;
 }
 
 }  // namespace
 
 int main(int argc, char** argv) {
-    if (argc != 3) {
-        std::fprintf(stderr, "usage: %s <n> <serial|openmp>\n", argv[0]);
+    const bool dumping = argc == 4 && std::strcmp(argv[2], "dump") == 0;
+    if (argc != 3 && !dumping) {
+        std::fprintf(stderr, "usage: %s <n> <serial|openmp>\n       %s <n> dump <file>\n",
+                     argv[0], argv[0]);
         return 2;
     }
     char* end = nullptr;
@@ -162,6 +213,14 @@ int main(int argc, char** argv) {
     if (*end != '\0' || n < kRoots || n > 1 << 15) {
         std::fprintf(stderr, "bad n '%s'\n", argv[1]);
         return 2;
+    }
+    if (dumping) {
+        try {
+            return dump(static_cast<int>(n), argv[3]);
+        } catch (const std::exception& e) {
+            std::fprintf(stderr, "exception: %s\n", e.what());
+            return 1;
+        }
     }
     Backend backend;
     if (std::strcmp(argv[2], "serial") == 0)
