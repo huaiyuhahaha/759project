@@ -51,8 +51,9 @@ if args.sanitize:
 with tempfile.TemporaryDirectory() as tmp:
     exe = pathlib.Path(tmp) / "davidson_e2e"
     build = ["g++", "-std=c++17", *flags, "-fopenmp", "-Wall", "-Wextra", "-pedantic",
-             f"-I{ROOT}", str(ROOT / "matrix.cpp"), str(ROOT / "davidson.cpp"),
-             str(ROOT / "checks" / "davidson_e2e.cpp"), "-o", str(exe)]
+             f"-I{ROOT}", str(ROOT / "matrix.cpp"), str(ROOT / "gemm.cpp"),
+             str(ROOT / "davidson.cpp"), str(ROOT / "checks" / "davidson_e2e.cpp"),
+             "-o", str(exe)]
     print("build:", " ".join(build))
     print(f"OpenMP backend threads: {OMP_THREADS}; BLAS threads: 1", flush=True)
     if subprocess.run(build).returncode != 0:

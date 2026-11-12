@@ -67,16 +67,22 @@ The matvec was chosen from measurements. On the benchmark matrices it takes 96% 
 ## Layout
 
 ```
-matrix.h/.cpp                  dense row-major Matrix
+matrix.h/.cpp                  dense row-major Matrix; operator* calls gemm()
+gemm.h/.cpp                    cache-blocked AVX2/AVX-512 + OpenMP matrix multiply (C += A*B)
+matrix_optimize_4.cpp          earlier single-threaded AVX-512 blocked multiply (benchmarked as "huaiyu")
 davidson.h/.cpp                initialize_vector, MatrixJacobi, orthonormalize_against, Davidson
 checks/davidson_e2e.cpp        E2E check program (n=8, n=64, and the drop-criterion check)
 checks/run_davidson_e2e.py     builds it and runs every case on both backends
 bench/davidson_bench.cpp       C++ timing program; also writes benchmark inputs for PySCF
 bench/pyscf_davidson_bench.py  PySCF davidson1 runner
 bench/run_davidson_bench.py    builds and runs the full benchmark and prints the tables
+checks/gemm_check.cpp          gemm and Matrix::operator* correctness checks
+checks/run_gemm_check.py       builds them for native, AVX2 and generic targets and runs them
+bench/gemm_bench.cpp           times one multiply variant, checks it against OpenBLAS
+bench/run_gemm_bench.py        builds and runs the multiply benchmark (or a blocking sweep)
 ```
 
-There is no Makefile: the two `run_*.py` scripts build their own binaries with `g++` in a temporary directory.
+There is no Makefile: the `run_*.py` scripts build their own binaries with `g++` in a temporary directory.
 
 ## Prerequisites (tested versions)
 
@@ -84,6 +90,8 @@ There is no Makefile: the two `run_*.py` scripts build their own binaries with `
 - `g++` with C++17 and OpenMP: tested with g++ 11.4.0. The sanitizer check also needs ASan/UBSan, which come with Ubuntu's g++.
 - Python 3 with NumPy for the checks: tested with Python 3.10.12 and NumPy 2.1.1.
 - For the benchmark, also PySCF (tested 2.15.0, with SciPy 1.14.1 installed). threadpoolctl (tested 3.8.0) is optional; it only records thread-pool sizes.
+
+- For the multiply benchmark, OpenBLAS headers and library (`sudo apt install libopenblas-dev`; tested 0.3.20).
 
 ```bash
 python3 -m pip install --user numpy pyscf threadpoolctl
@@ -97,6 +105,8 @@ Run from the repo root in a Linux/WSL shell. Each command exits 0 only if everyt
 python3 checks/run_davidson_e2e.py              # E2E checks, -O2, serial and OpenMP backends
 python3 checks/run_davidson_e2e.py --sanitize   # same checks under ASan + UBSan, with leak detection
 python3 bench/run_davidson_bench.py             # full benchmark (options: --sizes, --threads, --pyscf-threads)
+python3 checks/run_gemm_check.py                # gemm checks (native, AVX2 and generic builds); --sanitize for ASan + UBSan
+python3 bench/run_gemm_bench.py                 # multiply benchmark (options: --sizes, --threads, --thin, --openblas-coretype, --sweep)
 ```
 
 From Windows, prefix each command with `wsl -d Ubuntu --cd "<repo path>" --`.
@@ -166,3 +176,47 @@ All times are median ms. "-1" and "-8" are thread counts.
 - `max_space=12`, the default. PySCF raises this internally to 24 for 4 roots, and each solve restarted once.
 - The matvec function applies `A.dot(x)` to each vector separately.
 - The preconditioner is the C++ guarded diagonal one. However, `davidson1` passes the lowest Ritz value as the shift for every root, whereas the C++ solver uses each root's own θ.
+
+## Matrix multiply ([gemm.cpp](gemm.cpp))
+
+`gemm(m, n, k, A, lda, B, ldb, C, ldc, nthreads)` computes C += A·B for row-major matrices with leading dimensions. `Matrix::operator*` calls it with a zeroed result. It follows the GotoBLAS/BLIS design and builds on [matrix_optimize_4.cpp](matrix_optimize_4.cpp):
+
+1. **Micro-kernel.** One MR×NR tile of C stays in vector registers for the whole depth loop. Each step loads NR values of B, broadcasts MR values of A and issues MR·NR/VW FMAs. The kernel is chosen at compile time:
+   - AVX-512: 12×16 (24 zmm accumulators);
+   - AVX2+FMA: 6×8 (12 ymm accumulators, no spills, checked in the assembly);
+   - otherwise a scalar 4×4 fallback.
+2. **Packing.** For each depth block of kc, A is copied into MR-row panels and B into NR-column panels. Both panels are contiguous in the order the kernel reads them, and partial panels are zero-padded, so the kernel has no bounds checks. Partial C tiles go through a small temporary tile.
+3. **Cache blocking.** A kc×NR panel of B stays in L1 while a thread sweeps the A panels of its mc-row block, which stays in L2. B is packed nc columns at a time for L3. Defaults (mc/kc/nc):
+   - AVX2: 72/256/4096, the best in a local sweep (`--sweep`) and the same as BLIS for Haswell;
+   - AVX-512: 144/192/4096, not tuned yet.
+4. **OpenMP.** One parallel region. Packing is split across threads, then the (mc-row block, NR-column panel) pairs are split statically, so threads write disjoint tiles of C and need no reduction. For thin B (few column panels), mc shrinks so every thread gets at least four tasks. The implicit barriers after each `omp for` order packing and computing.
+
+**Correctness.** [checks/run_gemm_check.py](checks/run_gemm_check.py) runs 160 checks per build (15 more on AVX-512 CPUs): shapes 0, 1 and around the tile size, padded leading dimensions (NaN in A/B padding, a sentinel in C padding that must survive), tiny blocking sizes that force many partial blocks, 1–max threads, thin shapes, argument validation and `Matrix::operator*`. Each entry must be within 2(k+2)ε(|C₀| + Σ|a||b|) of a triple-loop reference. All builds pass, also under ASan + UBSan. On an AVX-512 CPU the native build also checks `cache_register_multiplication`. Injected bugs (dropped edge column, ignored lda, short depth block, truncated row block, a missing barrier, writes past n) each fail the checks.
+
+### Local results (Intel i7-14700HX laptop, not the final benchmark machine)
+
+Setup: 8 P-cores + 12 E-cores, AVX2 (no AVX-512), g++ 11.4.0 `-O3 -march=native -fopenmp`, OpenBLAS 0.3.20 with `--openblas-coretype Haswell`. t threads run on the first t physical cores; with t ≤ 8 those are P-cores. One run of `python3 bench/run_gemm_bench.py --sizes 512 1024 2048 4096 --threads 1 2 4 8 20 --thin 1 4 16 --openblas-coretype Haswell`; median of 7 runs (naive: 3), GFLOP/s. Repeated runs on this laptop vary by up to ~10% (turbo and temperature).
+
+| n (square) | naive, 1 thr | blocked, 1 | OpenBLAS, 1 | blocked, 8 | OpenBLAS, 8 | blocked, 20 | OpenBLAS, 20 |
+|---|---|---|---|---|---|---|---|
+| 512 | 0.92 | 54.6 | 55.1 | 360 | 362 | 294 | 273 |
+| 1024 | 0.93 | 51.5 | 55.5 | 401 | 421 | 356 | 339 |
+| 2048 | 0.93 | 54.4 | 55.9 | 405 | 434 | 353 | 370 |
+| 4096 | — | 51.8 | 56.1 | 423 | 442 | 358 | 395 |
+
+- The blocked multiply is 55–59× faster than the old naive loop on one thread. It reaches 92–99% of OpenBLAS on one thread and 93–99% on 8 threads.
+- 8 threads give 6.6–8.2× over one thread (the 8.2× at n = 4096 is partly run-to-run variation of the 1-thread time).
+- 20 threads (adding the E-cores) are slower than 8 for both libraries: the static split gives the slower E-cores as much work as the P-cores.
+- Thin shapes (n×n times n×c, as in a Davidson block matvec, n = 4096), blocked as % of OpenBLAS speed:
+
+  | c | 1 thread | 8 threads |
+  |---|---|---|
+  | 1 | 60% | 83% |
+  | 4 | 58% | 111% |
+  | 16 | 74% | 194% |
+
+  On one thread the blocked multiply loses because packing A adds a full extra pass over A, while each element of A is used only c times. With 8 threads it is faster than OpenBLAS for c ≥ 4.
+
+**OpenBLAS caveats.**
+- OpenBLAS 0.3.20 detects this CPU as "Prescott" (SSE3) and runs ~3× slower (18.7 GFLOP/s on one thread) unless `OPENBLAS_CORETYPE` is set. The benchmark prints the core OpenBLAS used.
+- With `OMP_PROC_BIND` set, libgomp pins the main thread to one core at startup and the OpenBLAS pthreads inherit that mask, so 8 OpenBLAS threads ran at 19 GFLOP/s. `run_gemm_bench.py` therefore does not set `OMP_PROC_BIND` for OpenBLAS runs; it restricts them to the same cores with `sched_setaffinity`. The PySCF runs in `run_davidson_bench.py` set `OMP_PROC_BIND=close` and may be affected the same way.

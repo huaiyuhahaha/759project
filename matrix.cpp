@@ -1,5 +1,7 @@
 #include "matrix.h"
 
+#include "gemm.h"
+
 #include <algorithm>
 #include <limits>
 #include <stdexcept>
@@ -49,6 +51,8 @@ Matrix::~Matrix() { delete[] data_; }
 
 int Matrix::rows() const noexcept { return rows_; }
 int Matrix::cols() const noexcept { return cols_; }
+double* Matrix::data() noexcept { return data_; }
+const double* Matrix::data() const noexcept { return data_; }
 
 std::size_t Matrix::size() const noexcept {
     return static_cast<std::size_t>(rows_) * static_cast<std::size_t>(cols_);
@@ -90,15 +94,9 @@ Matrix Matrix::operator*(const Matrix& other) const {
     if (cols_ != other.rows_)
         throw std::invalid_argument("Matrix multiplication dimensions do not match");
 
-    Matrix result(rows_, other.cols_);
-    // i-k-j order reads the right-hand row and writes the result row contiguously.
-    for (int i = 0; i < rows_; ++i) {
-        for (int k = 0; k < cols_; ++k) {
-            const double a = (*this)[i][k];
-            for (int j = 0; j < other.cols_; ++j)
-                result[i][j] += a * other[k][j];
-        }
-    }
+    Matrix result(rows_, other.cols_);  // zero-initialized, so gemm's C += A*B gives A*B
+    gemm(rows_, other.cols_, cols_, data_, cols_, other.data_, other.cols_,
+         result.data_, result.cols_);
     return result;
 }
 

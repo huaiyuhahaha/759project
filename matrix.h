@@ -16,11 +16,17 @@ public:
     int rows() const noexcept;
     int cols() const noexcept;
 
+    // Contiguous row-major storage: element (i, j) is data()[i * cols() + j].
+    double* data() noexcept;
+    const double* data() const noexcept;
+
     double* operator[](int row);
     const double* operator[](int row) const;
 
     Matrix operator+(const Matrix& other) const;
     Matrix operator-(const Matrix& other) const;
+    // Cache-blocked SIMD multiply (gemm.h), threaded with OpenMP over
+    // OMP_NUM_THREADS threads when built with -fopenmp.
     Matrix operator*(const Matrix& other) const;
 
 private:
