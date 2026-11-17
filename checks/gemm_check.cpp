@@ -10,6 +10,8 @@
 //   - tiny blocking sizes that force many kc/nc/mc blocks and partial blocks;
 //   - 1, 2, 3, 7 and the maximum number of threads;
 //   - thin shapes like the Davidson block matvec A (n x n) * V (n x 4);
+//   - n larger than the default nc (several column blocks);
+//   - concurrent calls from inside an OpenMP parallel region, nested off and on;
 //   - argument validation, and Matrix::operator* including empty shapes.
 // With -DCHECK_HUAIYU (AVX-512 builds only) it also checks
 // cache_register_multiplication() from matrix_optimize_4.cpp.
@@ -228,9 +230,41 @@ int main() {
     check_gemm(4, 1000, 1000, 0, T, nullptr, rng);
     check_gemm(1, 1, 5000, 0, T, nullptr, rng);
 
+    // n > default nc: several column blocks (jc loop), the last one partial.
+    check_gemm(2 * MR + 1, def.nc + 3 * NR + 1, 70, 1, T, nullptr, rng);
+
     // 4. Repeated calls reuse the packing buffers; a smaller call after a larger one.
     check_gemm(300, 300, 300, 0, T, nullptr, rng);
     check_gemm(10, 10, 10, 0, T, nullptr, rng);
+
+#ifdef _OPENMP
+    // 4b. Concurrent calls from inside a parallel region. Each calling thread
+    // has its own (thread_local) packing buffers; run once with nested
+    // parallelism off (inner team of 1) and once on (inner teams of 2).
+    for (int levels : {1, 2}) {
+        const int saved_levels = omp_get_max_active_levels();
+        omp_set_max_active_levels(levels);
+        constexpr int kCallers = 4, kRounds = 3;
+        std::vector<Problem> probs;
+        for (int c = 0; c < kCallers * kRounds; ++c)
+            probs.push_back(make_problem(40 + 13 * c, 30 + 11 * c, 50 + 17 * c, c % 2, rng));
+        std::vector<std::vector<double>> Cs;
+        for (const Problem& p : probs)
+            Cs.push_back(p.C0);
+#pragma omp parallel num_threads(kCallers)
+        {
+            // Each thread does several calls of different sizes, so buffers grow and are reused.
+            for (int c = omp_get_thread_num(); c < kCallers * kRounds; c += omp_get_num_threads()) {
+                const Problem& p = probs[c];
+                gemm(p.m, p.n, p.k, p.A.data(), p.lda, p.B.data(), p.ldb, Cs[c].data(), p.ldc, 2);
+            }
+        }
+        omp_set_max_active_levels(saved_levels);
+        for (int c = 0; c < kCallers * kRounds; ++c)
+            verify(probs[c], Cs[c], "gemm inside a parallel region, max_active_levels=" +
+                                        std::to_string(levels) + ", call " + std::to_string(c));
+    }
+#endif
 
     // 5. Argument validation.
     std::vector<double> buf(16, 0.0);

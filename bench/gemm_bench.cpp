@@ -1,7 +1,11 @@
 // Time one matrix-multiply implementation on C (m x n) += A (m x k) * B (k x n).
 //
 // Usage: gemm_bench <variant> <m> <n> <k> <threads> [runs] [mc kc nc]
-//   variant  naive    the original Matrix::operator* loop (i-k-j, through operator[])
+//   variant  naive    the original Matrix::operator* (master 0e014e3), compiled from
+//                     the verbatim copy in bench/original_matrix.cpp; as before,
+//                     it allocates its zeroed result inside the timed call
+//            loop     the same i-k-j loop on raw restrict pointers, which the compiler
+//                     vectorizes (no blocking, no packing, single-threaded)
 //            huaiyu   cache_register_multiplication() from matrix_optimize_4.cpp
 //                     (single-threaded; only in AVX-512 builds with -DHAVE_HUAIYU)
 //            blocked  gemm() from gemm.h with <threads> OpenMP threads
@@ -33,6 +37,7 @@
 
 #include "gemm.h"
 #include "matrix.h"
+#include "original_matrix.h"
 
 #ifdef _OPENMP
 #include <omp.h>
@@ -47,19 +52,23 @@ void cache_register_multiplication(const double* A, const double* B, double* C,
 
 namespace {
 
-// The Matrix::operator* body before gemm() replaced it, kept as the baseline.
-void naive_multiply(const Matrix& A, const Matrix& B, Matrix& C) {
-    for (int i = 0; i < A.rows(); ++i) {
-        for (int k = 0; k < A.cols(); ++k) {
-            const double a = A[i][k];
-            for (int j = 0; j < B.cols(); ++j)
-                C[i][j] += a * B[k][j];
+// The naive loop on raw pointers without the per-access bounds checks:
+// what -O3 auto-vectorization gives for an unblocked i-k-j loop.
+void loop_multiply(int m, int n, int k, const double* __restrict A,
+                   const double* __restrict B, double* __restrict C) {
+    for (int i = 0; i < m; ++i) {
+        double* __restrict c = C + static_cast<std::size_t>(i) * n;
+        for (int p = 0; p < k; ++p) {
+            const double a = A[static_cast<std::size_t>(i) * k + p];
+            const double* __restrict b = B + static_cast<std::size_t>(p) * n;
+            for (int j = 0; j < n; ++j)
+                c[j] += a * b[j];
         }
     }
 }
 
 [[noreturn]] void usage(const char* msg) {
-    std::fprintf(stderr, "gemm_bench: %s\nusage: gemm_bench <naive|huaiyu|blocked|openblas> "
+    std::fprintf(stderr, "gemm_bench: %s\nusage: gemm_bench <naive|loop|huaiyu|blocked|openblas> "
                          "<m> <n> <k> <threads> [runs] [mc kc nc]\n", msg);
     std::exit(2);
 }
@@ -87,7 +96,7 @@ int main(int argc, char** argv) {
     if (argc == 10)
         blocking = {parse_int(argv[7], "mc"), parse_int(argv[8], "kc"), parse_int(argv[9], "nc")};
 
-    bool known = variant == "naive" || variant == "blocked";
+    bool known = variant == "naive" || variant == "loop" || variant == "blocked";
 #ifdef HAVE_OPENBLAS
     known = known || variant == "openblas";
     openblas_set_num_threads(variant == "openblas" ? threads : 1);
@@ -97,8 +106,8 @@ int main(int argc, char** argv) {
 #endif
     if (!known)
         usage(("variant not available in this build: " + variant).c_str());
-    if ((variant == "naive" || variant == "huaiyu") && threads != 1)
-        usage("naive and huaiyu are single-threaded; use threads = 1");
+    if ((variant == "naive" || variant == "loop" || variant == "huaiyu") && threads != 1)
+        usage("naive, loop and huaiyu are single-threaded; use threads = 1");
 
     Matrix A(m, k), B(k, n), C(m, n);
     std::mt19937_64 rng(759);
@@ -109,9 +118,22 @@ int main(int argc, char** argv) {
     for (std::size_t i = 0; i < asize; ++i) A.data()[i] = u(rng);
     for (std::size_t i = 0; i < bsize; ++i) B.data()[i] = u(rng);
 
+    // Copies of A and B in the original Matrix class, for the naive variant only.
+    const bool naive = variant == "naive";
+    original_matrix::Matrix Aorig(naive ? m : 0, naive ? k : 0), Borig(naive ? k : 0, naive ? n : 0);
+    original_matrix::Matrix Corig(0, 0);
+    if (naive) {
+        for (int i = 0; i < m; ++i)
+            std::copy_n(A.data() + static_cast<std::size_t>(i) * k, k, Aorig[i]);
+        for (int i = 0; i < k; ++i)
+            std::copy_n(B.data() + static_cast<std::size_t>(i) * n, n, Borig[i]);
+    }
+
     auto multiply = [&] {
         if (variant == "naive") {
-            naive_multiply(A, B, C);
+            Corig = Aorig * Borig;
+        } else if (variant == "loop") {
+            loop_multiply(m, n, k, A.data(), B.data(), C.data());
         } else if (variant == "blocked") {
             gemm(m, n, k, A.data(), k, B.data(), n, C.data(), n, threads, blocking);
 #ifdef HAVE_OPENBLAS
@@ -136,6 +158,9 @@ int main(int argc, char** argv) {
         if (r > 0)
             times.push_back(dt);
     }
+    if (naive)  // outside the timer: move the original-class result into C for the check
+        for (int i = 0; i < m; ++i)
+            std::copy_n(Corig[i], n, C.data() + static_cast<std::size_t>(i) * n);
     std::sort(times.begin(), times.end());
     const double median = runs % 2 ? times[runs / 2]
                                    : 0.5 * (times[runs / 2 - 1] + times[runs / 2]);

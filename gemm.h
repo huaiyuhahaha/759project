@@ -10,7 +10,8 @@
 
 // Cache-blocking sizes, in matrix elements.
 struct GemmBlocking {
-    int mc;  // rows of A per task: an mc x kc block of packed A should fit in L2
+    int mc;  // rows of A per task (m is split into equal blocks of about mc rows):
+             // an mc x kc block of packed A should fit in L2
     int kc;  // depth of each rank-kc update: MR x kc and kc x NR panels should fit in L1
     int nc;  // columns of B packed at once: the kc x nc block should fit in L3
 };

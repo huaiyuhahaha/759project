@@ -4,7 +4,11 @@ The micro-kernel is chosen at compile time, so the checks are built once per
 target and every build is run:
   - native:  -march=native (AVX-512 kernel on AVX-512 CPUs, else AVX2+FMA);
   - avx2:    -mavx2 -mfma (skipped if this CPU lacks AVX2/FMA);
-  - generic: no -march flag, i.e. baseline x86-64, which uses the scalar kernel.
+  - generic: no -march flag, i.e. baseline x86-64, which uses the scalar kernel;
+  - avx512-shape: the AVX-512 tile shape (12x16) and blocking built from GCC
+    generic vectors (-DGEMM_TEST_AVX512_SHAPE), runnable without AVX-512.
+    It covers everything in the AVX-512 build except the six intrinsic
+    wrappers, which only the native build on an AVX-512 CPU runs.
 On an AVX-512 CPU the native build also checks Huaiyu's
 cache_register_multiplication() from matrix_optimize_4.cpp.
 
@@ -24,7 +28,10 @@ import sys
 import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-TARGETS = {"native": ["-march=native"], "avx2": ["-mavx2", "-mfma"], "generic": []}
+TARGETS = {"native": ["-march=native"], "avx2": ["-mavx2", "-mfma"], "generic": [],
+           # AVX-512 tile shape and blocking on portable vectors (see gemm.cpp), so the
+           # AVX-512 configuration is exercised on CPUs without AVX-512 too.
+           "avx512-shape": ["-march=native", "-DGEMM_TEST_AVX512_SHAPE", "-Wno-psabi"]}
 
 
 def cpu_flags():
@@ -81,7 +88,7 @@ with tempfile.TemporaryDirectory() as tmp:
 
 print("\nSummary:")
 for name, status in results.items():
-    print(f"  {name:8} {status}")
+    print(f"  {name:12} {status}")
 ok = bool(results) and all(s == "PASS" for s in results.values())
 print("OVERALL:", "PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

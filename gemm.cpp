@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdlib>
+#include <cstring>
 #include <new>
 #include <stdexcept>
 
@@ -40,19 +41,34 @@ namespace {
 using idx = std::ptrdiff_t;
 
 // ---- SIMD abstraction: one vector register type and five operations. ----
-#if defined(__AVX512F__)
-using vreg = __m512d;
+#if defined(__AVX512F__) || defined(GEMM_TEST_AVX512_SHAPE)
+// AVX-512 tile shape and blocking, shared by the real kernel and its test build.
 constexpr int VW = 8;   // doubles per vector
 constexpr int MR = 12;  // tile rows:   12 x 2 accumulators + 2 B vectors + 1 broadcast = 27 of 32 zmm
 constexpr int NV = 2;   // tile vectors per row (NR = 16)
-constexpr const char* kKernelName = "avx512f 12x16";
 constexpr GemmBlocking kDefaultBlocking{144, 192, 4096};
+#if defined(GEMM_TEST_AVX512_SHAPE)
+// Test only (checks/run_gemm_check.py): the same shape on GCC generic 8-double
+// vectors, so the AVX-512 configuration of the packing, blocking and edge code
+// runs on CPUs without AVX-512. Only the intrinsic wrappers below differ.
+typedef double vreg __attribute__((vector_size(64)));
+constexpr const char* kKernelName = "emulated avx512 shape 12x16 (test only)";
+inline vreg vzero() { return vreg{}; }
+inline vreg vload(const double* p) { vreg v; std::memcpy(&v, p, sizeof v); return v; }
+inline void vstore(double* p, vreg v) { std::memcpy(p, &v, sizeof v); }
+inline vreg vbroadcast(double x) { return vreg{x, x, x, x, x, x, x, x}; }
+inline vreg vfmadd(vreg a, vreg b, vreg c) { return a * b + c; }
+inline vreg vadd(vreg a, vreg b) { return a + b; }
+#else
+using vreg = __m512d;
+constexpr const char* kKernelName = "avx512f 12x16";
 inline vreg vzero() { return _mm512_setzero_pd(); }
 inline vreg vload(const double* p) { return _mm512_loadu_pd(p); }
 inline void vstore(double* p, vreg v) { _mm512_storeu_pd(p, v); }
 inline vreg vbroadcast(double x) { return _mm512_set1_pd(x); }
 inline vreg vfmadd(vreg a, vreg b, vreg c) { return _mm512_fmadd_pd(a, b, c); }
 inline vreg vadd(vreg a, vreg b) { return _mm512_add_pd(a, b); }
+#endif
 #elif defined(__AVX2__) && defined(__FMA__)
 using vreg = __m256d;
 constexpr int VW = 4;
@@ -99,6 +115,19 @@ inline void micro_kernel(int kc, const double* __restrict Ap,
 #pragma GCC unroll 4
         for (int v = 0; v < NV; ++v)
             acc[r][v] = vzero();
+
+    // Start fetching the C tile now; it is only needed after the kc loop.
+    // Its rows are ldc apart, a pattern the hardware prefetchers miss, so
+    // without this every tile waits on DRAM latency once C outgrows L3.
+    // Each row is NR doubles and may be unaligned, so touch one element per
+    // 64-byte line plus the last element (2 lines per row for AVX2, 3 for AVX-512).
+#pragma GCC unroll 16
+    for (int r = 0; r < MR; ++r) {
+#pragma GCC unroll 4
+        for (int c = 0; c < NR; c += 8)
+            __builtin_prefetch(C + r * ldc + c, 1);
+        __builtin_prefetch(C + r * ldc + NR - 1, 1);
+    }
 
     for (int p = 0; p < kc; ++p) {
         vreg b[NV];
@@ -223,21 +252,24 @@ void gemm(int m, int n, int k, const double* A, int lda, const double* B, int ld
     // Clamp the blocking to the problem and to multiples of the tile.
     const idx kc = std::min<idx>(std::max(blocking.kc, 1), k);
     const idx nc = std::min<idx>(round_up(std::max(blocking.nc, 1), NR), round_up(n, NR));
-    idx mc = std::min<idx>(round_up(std::max(blocking.mc, 1), MR), round_up(m, MR));
-    // With few column panels (thin B), shrink mc so every thread gets several tasks.
+    const idx a_panels = ceil_div(m, MR);
+
+    // The m rows are split into ic_blocks row blocks of about mc rows. Block ib
+    // covers A panels [ib * a_panels / ic_blocks, (ib + 1) * a_panels / ic_blocks),
+    // so block sizes differ by at most one panel and the statically scheduled
+    // (row block, column panel) tasks all cost about the same. (Rounding m up
+    // to blocks of exactly mc would leave one short block, and the thread that
+    // gets it would idle at the barrier.)
+    idx ic_blocks = ceil_div(a_panels, ceil_div(std::max(blocking.mc, 1), MR));
+    // With few column panels (thin B), use more row blocks so every thread gets several tasks.
     const idx jr_panels = ceil_div(nc, NR);
     const idx min_tasks = 4 * static_cast<idx>(threads);
-    if (threads > 1 && ceil_div(m, mc) * jr_panels < min_tasks) {
-        const idx ic_wanted = ceil_div(min_tasks, jr_panels);
-        mc = std::max<idx>(MR, round_up(ceil_div(m, ic_wanted), MR));
-    }
+    if (threads > 1 && ic_blocks * jr_panels < min_tasks)
+        ic_blocks = std::min(a_panels, ceil_div(min_tasks, jr_panels));
 
-    const idx a_panels = ceil_div(m, MR);
     static thread_local PackBuffer a_buffer, b_buffer;
     double* const Apack = a_buffer.get(static_cast<std::size_t>(a_panels * MR * kc));
     double* const Bpack = b_buffer.get(static_cast<std::size_t>(kc * nc));
-
-    const idx ic_blocks = ceil_div(m, mc);
 
 #pragma omp parallel num_threads(threads) if (threads > 1)
     for (idx pc = 0; pc < k; pc += kc) {
@@ -270,8 +302,9 @@ void gemm(int m, int n, int k, const double* A, int lda, const double* B, int ld
                     const double* Bp = Bpack + jp * NR * kcur;
                     const idx j = jc + jp * NR;
                     const int nr = static_cast<int>(std::min<idx>(NR, n - j));
-                    const idx i_end = std::min<idx>(m, (ib + 1) * mc);
-                    for (idx i = ib * mc; i < i_end; i += MR) {
+                    const idx i_begin = ib * a_panels / ic_blocks * MR;
+                    const idx i_end = std::min<idx>(m, (ib + 1) * a_panels / ic_blocks * MR);
+                    for (idx i = i_begin; i < i_end; i += MR) {
                         const double* Ap = Apack + (i / MR) * MR * kcur;
                         const int mr = static_cast<int>(std::min<idx>(MR, m - i));
                         double* Cij = C + i * ldc + j;
