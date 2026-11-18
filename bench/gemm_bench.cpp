@@ -99,6 +99,8 @@ int main(int argc, char** argv) {
     bool known = variant == "naive" || variant == "loop" || variant == "blocked";
 #ifdef HAVE_OPENBLAS
     known = known || variant == "openblas";
+    // Must match OPENBLAS_NUM_THREADS, which run_gemm_bench.py sets the same
+    // way; never raise the count above the one OpenBLAS was started with.
     openblas_set_num_threads(variant == "openblas" ? threads : 1);
 #endif
 #ifdef HAVE_HUAIYU
@@ -165,10 +167,12 @@ int main(int argc, char** argv) {
     const double median = runs % 2 ? times[runs / 2]
                                    : 0.5 * (times[runs / 2 - 1] + times[runs / 2]);
 
-    // Reference, outside every timer.
+    // Reference, outside every timer. OpenBLAS keeps the thread count it was
+    // started with (OPENBLAS_NUM_THREADS: 1, or <threads> for the openblas
+    // variant): raising it at run time crashes OpenBLAS 0.3.28 inside its own
+    // threaded dgemm (segfault in dgemm_itcopy with 4+ threads).
     std::vector<double> ref(csize, 0.0);
 #ifdef HAVE_OPENBLAS
-    openblas_set_num_threads(threads);
     cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, m, n, k, 1.0, A.data(), k,
                 B.data(), n, 0.0, ref.data(), n);
     const char* ref_name = "openblas";
@@ -185,15 +189,20 @@ int main(int argc, char** argv) {
     const double gflops = median > 0 ? 2.0 * m * n * k / median * 1e-9 : 0.0;
 #ifdef HAVE_OPENBLAS
     const char* openblas_core = openblas_get_corename();
+    std::string openblas_config = openblas_get_config();  // e.g. "... USE_OPENMP ..."
+    while (!openblas_config.empty() && openblas_config.back() == ' ')
+        openblas_config.pop_back();
 #else
     const char* openblas_core = "none";
+    const std::string openblas_config = "none";
 #endif
     std::printf("{\"variant\": \"%s\", \"m\": %d, \"n\": %d, \"k\": %d, \"threads\": %d, "
                 "\"kernel\": \"%s\", \"mc\": %d, \"kc\": %d, \"nc\": %d, \"runs\": %d, "
                 "\"median\": %.9g, \"min\": %.9g, \"gflops\": %.6g, \"reference\": \"%s\", "
-                "\"max_err\": %.3g, \"ok\": %s, \"openblas_core\": \"%s\"}\n",
+                "\"max_err\": %.3g, \"ok\": %s, \"openblas_core\": \"%s\", "
+                "\"openblas_config\": \"%s\"}\n",
                 variant.c_str(), m, n, k, threads, gemm_kernel_name(), blocking.mc, blocking.kc,
                 blocking.nc, runs, median, times.front(), gflops, ref_name, max_err,
-                ok ? "true" : "false", openblas_core);
+                ok ? "true" : "false", openblas_core, openblas_config.c_str());
     return ok ? 0 : 1;
 }

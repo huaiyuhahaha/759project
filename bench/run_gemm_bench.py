@@ -20,19 +20,24 @@ one core and a whole run came out 20-50% slow.) OpenMP runs also get
 OMP_PLACES=cores OMP_PROC_BIND=close. OpenBLAS runs do NOT get OMP_PROC_BIND:
 libgomp would pin the main thread to one core at startup and OpenBLAS's
 worker threads inherit that mask, putting every BLAS thread on one core.
+With --openblas-openmp (an OpenBLAS built with USE_OPENMP=1, whose threads
+are OpenMP threads), OpenBLAS runs get the same OMP_PLACES/OMP_PROC_BIND
+pinning as the blocked gemm instead. The OpenBLAS build string is printed.
 
 OpenBLAS picks its kernels at run time from the CPU model (DYNAMIC_ARCH). Old
 versions misdetect new CPUs (0.3.20 reports a Raptor Lake i7-14700HX as
 "Prescott", an SSE3 core, and runs ~3x slower). The core it used is printed;
 override it with --openblas-coretype (e.g. Haswell for AVX2, SkylakeX for AVX-512).
 
---sweep instead times the blocked gemm over a grid of (mc, kc) block sizes at
---sweep-size, on 1 thread and on the largest thread count.
+--sweep instead times the blocked gemm over a grid of (mc, kc) block sizes
+(--sweep-mc, --sweep-kc) at --sweep-size, on 1 thread and on the largest
+thread count.
 
 Usage (works from any directory):
     python3 bench/run_gemm_bench.py [--sizes 256 512 1024 2048 4096] [--threads 1 2 4 8]
         [--naive-max 2048] [--runs 7] [--openblas-coretype Haswell] [--no-openblas]
-        [--blas-flags "-lopenblas"] [--thin 1 4 8 16] [--sweep] [--sweep-size 2048]
+        [--blas-flags "-lopenblas"] [--thin 1 4 8 16]
+        [--sweep] [--sweep-size 2048] [--sweep-mc 48 72 ...] [--sweep-kc 128 192 ...]
 """
 
 import argparse
@@ -56,6 +61,8 @@ parser.add_argument("--runs", type=int, default=7, help="timed runs per configur
 parser.add_argument("--naive-runs", type=int, default=3,
                     help="timed runs for the naive and loop variants")
 parser.add_argument("--openblas-coretype", default=None, help="sets OPENBLAS_CORETYPE")
+parser.add_argument("--openblas-openmp", action="store_true",
+                    help="OpenBLAS was built with USE_OPENMP=1: pin its threads like the OpenMP runs")
 parser.add_argument("--no-openblas", action="store_true", help="build and run without OpenBLAS")
 parser.add_argument("--blas-flags", default="-lopenblas", help="compiler/linker flags for OpenBLAS")
 parser.add_argument("--thin", type=int, nargs="*", default=[],
@@ -63,6 +70,8 @@ parser.add_argument("--thin", type=int, nargs="*", default=[],
                          "at the largest size and every thread count")
 parser.add_argument("--sweep", action="store_true", help="sweep blocking sizes instead")
 parser.add_argument("--sweep-size", type=int, default=2048)
+parser.add_argument("--sweep-mc", type=int, nargs="+", default=[48, 72, 96, 144, 192, 288])
+parser.add_argument("--sweep-kc", type=int, nargs="+", default=[128, 192, 256, 384, 512, 768, 1024])
 args = parser.parse_args()
 
 
@@ -109,7 +118,7 @@ def run(exe, variant, m, n, k, t, runs, blocking=None):
     env = dict(base_env, OMP_NUM_THREADS=str(t))
     if variant == "openblas":
         env["OPENBLAS_NUM_THREADS"] = str(t)
-    else:
+    if variant != "openblas" or args.openblas_openmp:
         env.update(OMP_PLACES="cores", OMP_PROC_BIND="close")
     cmd = [str(exe), variant, str(m), str(n), str(k), str(t), str(runs)]
     if blocking:
@@ -156,8 +165,8 @@ with tempfile.TemporaryDirectory() as tmp:
 
     if args.sweep:
         s = args.sweep_size
-        grid_mc = [48, 72, 96, 144, 192, 288]
-        grid_kc = [128, 192, 256, 384, 512]
+        grid_mc = args.sweep_mc
+        grid_kc = args.sweep_kc
         print(f"\nblocking sweep, blocked gemm, n={s}, GFLOP/s (median of {args.runs}); "
               "mc is rounded up to a multiple of MR")
         for t in sorted({1, max(threads)}):
@@ -202,6 +211,10 @@ for r in results:
 by_key = {(r["variant"], r["m"], r["n"], r["k"], r["threads"]): r for r in results}
 first = results[0]
 openblas_cores = sorted({r["openblas_core"] for r in results if r["variant"] == "openblas"})
+openblas_configs = sorted({r.get("openblas_config", "") for r in results if r["variant"] == "openblas"})
+if openblas_configs:
+    print(f"\nOpenBLAS build: {'; '.join(openblas_configs)}"
+          + ("; threads pinned like OpenMP runs" if args.openblas_openmp else "; threads not pinned"))
 print(f"\nkernel: {first['kernel']}; blocking mc={first['mc']} kc={first['kc']} nc={first['nc']}; "
       f"runs: {args.runs} (naive, loop {args.naive_runs}); OpenBLAS core: "
       f"{', '.join(openblas_cores) if openblas_cores else 'not run'}")

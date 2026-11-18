@@ -46,7 +46,7 @@ using idx = std::ptrdiff_t;
 constexpr int VW = 8;   // doubles per vector
 constexpr int MR = 12;  // tile rows:   12 x 2 accumulators + 2 B vectors + 1 broadcast = 27 of 32 zmm
 constexpr int NV = 2;   // tile vectors per row (NR = 16)
-constexpr GemmBlocking kDefaultBlocking{144, 192, 4096};
+constexpr GemmBlocking kDefaultBlocking{72, 768, 4096};  // best in an Euler sweep (EPYC 9254, Zen 4)
 #if defined(GEMM_TEST_AVX512_SHAPE)
 // Test only (checks/run_gemm_check.py): the same shape on GCC generic 8-double
 // vectors, so the AVX-512 configuration of the packing, blocking and edge code
