@@ -67,16 +67,25 @@ The matvec was chosen from measurements. On the benchmark matrices it takes 96% 
 ## Layout
 
 ```
-matrix.h/.cpp                  dense row-major Matrix
+matrix.h/.cpp                  dense row-major Matrix; operator* calls gemm()
+gemm.h/.cpp                    cache-blocked AVX2/AVX-512 + OpenMP matrix multiply (C += A*B)
+matrix_optimize_4.cpp          earlier single-threaded AVX-512 blocked multiply (benchmarked as "huaiyu")
 davidson.h/.cpp                initialize_vector, MatrixJacobi, orthonormalize_against, Davidson
 checks/davidson_e2e.cpp        E2E check program (n=8, n=64, and the drop-criterion check)
 checks/run_davidson_e2e.py     builds it and runs every case on both backends
 bench/davidson_bench.cpp       C++ timing program; also writes benchmark inputs for PySCF
 bench/pyscf_davidson_bench.py  PySCF davidson1 runner
 bench/run_davidson_bench.py    builds and runs the full benchmark and prints the tables
+checks/gemm_check.cpp          gemm and Matrix::operator* correctness checks
+checks/run_gemm_check.py       builds them for native, AVX2 and generic targets and runs them
+bench/gemm_bench.cpp           times one multiply variant, checks it against OpenBLAS
+bench/original_matrix.h/.cpp   verbatim copy of the original Matrix (master 0e014e3), the naive baseline
+bench/run_gemm_bench.py        builds and runs the multiply benchmark (or a blocking sweep)
+bench/euler_*.sh               Euler Slurm jobs: build OpenBLAS, probe a node, diagnose, benchmark
+bench/cpu_monitor.py           samples busy share and clock of the job's CPUs (used by the diagnosis job)
 ```
 
-There is no Makefile: the two `run_*.py` scripts build their own binaries with `g++` in a temporary directory.
+There is no Makefile: the `run_*.py` scripts build their own binaries with `g++` in a temporary directory.
 
 ## Prerequisites (tested versions)
 
@@ -84,6 +93,8 @@ There is no Makefile: the two `run_*.py` scripts build their own binaries with `
 - `g++` with C++17 and OpenMP: tested with g++ 11.4.0. The sanitizer check also needs ASan/UBSan, which come with Ubuntu's g++.
 - Python 3 with NumPy for the checks: tested with Python 3.10.12 and NumPy 2.1.1.
 - For the benchmark, also PySCF (tested 2.15.0, with SciPy 1.14.1 installed). threadpoolctl (tested 3.8.0) is optional; it only records thread-pool sizes.
+
+- For the multiply benchmark, OpenBLAS headers and library (`sudo apt install libopenblas-dev`; tested 0.3.20).
 
 ```bash
 python3 -m pip install --user numpy pyscf threadpoolctl
@@ -97,6 +108,8 @@ Run from the repo root in a Linux/WSL shell. Each command exits 0 only if everyt
 python3 checks/run_davidson_e2e.py              # E2E checks, -O2, serial and OpenMP backends
 python3 checks/run_davidson_e2e.py --sanitize   # same checks under ASan + UBSan, with leak detection
 python3 bench/run_davidson_bench.py             # full benchmark (options: --sizes, --threads, --pyscf-threads)
+python3 checks/run_gemm_check.py                # gemm checks (native, AVX2 and generic builds); --sanitize for ASan + UBSan
+python3 bench/run_gemm_bench.py                 # multiply benchmark (options: --sizes, --threads, --thin, --openblas-coretype, --sweep)
 ```
 
 From Windows, prefix each command with `wsl -d Ubuntu --cd "<repo path>" --`.
@@ -166,3 +179,102 @@ All times are median ms. "-1" and "-8" are thread counts.
 - `max_space=12`, the default. PySCF raises this internally to 24 for 4 roots, and each solve restarted once.
 - The matvec function applies `A.dot(x)` to each vector separately.
 - The preconditioner is the C++ guarded diagonal one. However, `davidson1` passes the lowest Ritz value as the shift for every root, whereas the C++ solver uses each root's own θ.
+
+## Matrix multiply ([gemm.cpp](gemm.cpp))
+
+`gemm(m, n, k, A, lda, B, ldb, C, ldc, nthreads)` computes C += A·B for row-major matrices with leading dimensions. `Matrix::operator*` calls it with a zeroed result. It follows the GotoBLAS/BLIS design and builds on [matrix_optimize_4.cpp](matrix_optimize_4.cpp):
+
+1. **Micro-kernel.** One MR×NR tile of C stays in vector registers for the whole depth loop. Each step loads NR values of B, broadcasts MR values of A and issues MR·NR/VW FMAs. The C tile is prefetched before the depth loop: its rows are ldc apart, which the hardware prefetchers do not follow, and once C no longer fits in L3 each tile would otherwise wait on DRAM (in an A/B test the prefetch gave about +2% on one thread and +3% on 8 threads at n = 2048, and no measurable change at n = 4096). The kernel is chosen at compile time:
+   - AVX-512: 12×16 (24 zmm accumulators; no spills in the assembly for `-march=skylake-avx512`);
+   - AVX2+FMA: 6×8 (12 ymm accumulators, no spills, checked in the assembly);
+   - otherwise a scalar 4×4 fallback.
+2. **Packing.** For each depth block of kc, A is copied into MR-row panels and B into NR-column panels. Both panels are contiguous in the order the kernel reads them, and partial panels are zero-padded, so the kernel has no bounds checks. Partial C tiles go through a small temporary tile.
+3. **Cache blocking.** A kc×NR panel of B stays in L1 while a thread sweeps the A panels of its mc-row block, which stays in L2. B is packed nc columns at a time for L3. Defaults (mc/kc/nc):
+   - AVX2: 72/256/4096, the best in a local sweep (`--sweep`) and the same as BLIS for Haswell;
+   - AVX-512: 72/768/4096, the best in a sweep on Euler (AMD EPYC 9254, Zen 4): 60 GFLOP/s on 1 thread and ~1080 on 24 threads at n = 2048, vs 55 and 818 with the earlier untuned 144/192.
+4. **OpenMP.** One parallel region. Packing is split across threads, then the (row block, NR-column panel) pairs are split statically, so threads write disjoint tiles of C and need no reduction. The m rows are cut into ⌈m/mc⌉ row blocks whose sizes differ by at most one MR panel, so every task costs about the same (cutting exact mc-row blocks left one short block, and the thread that got it idled at the barrier; balancing gave +2–5% on 8 threads at n = 1024 and 4096 in an A/B test). For thin B (few column panels), the number of row blocks grows so every thread gets at least four tasks. The implicit barriers after each `omp for` order packing and computing.
+
+**Correctness.** [checks/run_gemm_check.py](checks/run_gemm_check.py) runs 185 checks per build (15 more on AVX-512 CPUs): shapes 0, 1 and around the tile size, padded leading dimensions (NaN in A/B padding, a sentinel in C padding that must survive), tiny blocking sizes that force many partial blocks, 1–max threads, thin shapes, n > nc, concurrent calls from inside an OpenMP parallel region (nested parallelism off and on), argument validation and `Matrix::operator*`. Each entry must be within 2(k+2)ε(|C₀| + Σ|a||b|) of a triple-loop reference.
+- Builds: native, AVX2, generic (scalar kernel) and `avx512-shape`. The last one compiles the AVX-512 tile shape and blocking with portable GCC vectors, so the AVX-512 configuration runs on CPUs without AVX-512; only the six intrinsic wrappers are left for a real AVX-512 CPU. On an AVX-512 CPU the native build also checks `cache_register_multiplication`.
+- All builds pass, also under ASan + UBSan. On Euler (AMD EPYC 9254, real AVX-512) all four builds pass, including the native AVX-512 kernel and `cache_register_multiplication` (200 checks).
+- Injected bugs each fail the checks: a missing barrier after packing B or after the compute loop (5 of 5 runs), unbalanced row blocks that drop panels, an edge tile assigned instead of accumulated, B packed without the jc offset, A packed with the wrong depth stride, edge width from nc instead of n, and the kernel using the wrong C row stride. (Removing the barrier after packing A is harmless, since the barrier after packing B always follows it.)
+
+### Results on Euler (final)
+
+Setup:
+- Node: AMD EPYC 9254 (Zen 4, AVX-512), 2 sockets × 24 cores, shared with other jobs (no other process used our cores: [bench/euler_gemm_diag.sh](bench/euler_gemm_diag.sh)).
+- Job: [bench/euler_gemm_bench.sh](bench/euler_gemm_bench.sh), `-p instruction -c 48 --constraint=genoa`, i.e. 24 physical cores, which Slurm spread over both sockets. One thread per physical core.
+- g++ 14.3.0 `-O3 -march=native -fopenmp`; blocked gemm with the AVX-512 12×16 kernel and blocking 72/768/4096.
+- OpenBLAS 0.3.28 built from source ([bench/euler_build_openblas.sh](bench/euler_build_openblas.sh)) with `USE_OPENMP=1`, so its threads get the same `OMP_PLACES=cores OMP_PROC_BIND=close` pinning as ours; it picked its Cooper Lake (AVX-512) kernels.
+- Median of 7 runs (naive and loop: 3). The whole benchmark ran twice in the job; the table shows the first run. The second is within about 4% everywhere except n = 2048 on 16 threads (−6%).
+
+Baselines (single-threaded):
+- **naive** is the original `Matrix::operator*` from master (0e014e3). It is compiled from a verbatim copy, [bench/original_matrix.cpp](bench/original_matrix.cpp), in its own file as before. There the compiler inlines `operator[]` but still reloads the result's size and data pointer on every multiply-add, so the inner loop stays scalar. (Calling today's `Matrix::operator[]` from the benchmark file instead would add an out-of-line call per access and make the baseline look ~4× slower than the real original.)
+- **loop** is the same i-k-j loop on raw pointers, which `-O3` auto-vectorizes. It shows what blocking and packing add on top of plain vectorization.
+- **huaiyu** is `cache_register_multiplication` from [matrix_optimize_4.cpp](matrix_optimize_4.cpp).
+
+GFLOP/s, square n×n times n×n:
+
+| n | naive, 1 thr | loop, 1 | huaiyu, 1 | blocked, 1 | OpenBLAS, 1 | blocked, 8 | OpenBLAS, 8 | blocked, 24 | OpenBLAS, 24 |
+|---|---|---|---|---|---|---|---|---|---|
+| 512 | 3.36 | 19.8 | 57.3 | 57.9 | 60.0 | 320 | 327 | 584 | 657 |
+| 1024 | 3.45 | 19.3 | 57.7 | 58.3 | 61.3 | 382 | 395 | 830 | 894 |
+| 2048 | 3.26 | 11.3 | 58.1 | 59.9 | 61.2 | 408 | 415 | 1082 | 956 |
+| 4096 | — | — | 58.6 | 59.3 | 61.2 | 411 | 426 | 1094 | 1151 |
+
+- One thread: the blocked multiply is 17–18× faster than the original `operator*`, 2.9× / 3.0× / 5.3× faster than the auto-vectorized `loop` at n = 512 / 1024 / 2048, and 1–3% faster than `huaiyu`. It reaches 95–98% of OpenBLAS.
+- Threads: 94–103% of OpenBLAS on 2–8 threads, 86–101% on 16 and 89–113% on 24 (both runs). At n = 2048 on 24 threads it is 332× faster than the original `operator*`.
+- Scaling on 24 threads (speedup / 24): 0.42–0.44 at n = 512, 0.59 at 1024, 0.72–0.75 at 2048 and 0.77 at 4096. OpenBLAS scales about the same (0.78 at n = 4096), so the loss comes mostly from the machine (24 cores over 2 sockets and several L3 domains) and, for small n, from too little work per thread.
+- Thin shapes (n×n times n×c, as in a Davidson block matvec, n = 4096), blocked as % of OpenBLAS speed:
+
+  | c | 1 thread | 8 threads | 24 threads |
+  |---|---|---|---|
+  | 1 | 38% | 36% | 15% |
+  | 4 | 48% | 41% | 21% |
+  | 16 | 70% | 55% | 31% |
+
+  These shapes are memory-bound. The blocked multiply copies (packs) all of A before using each element only c times, which roughly doubles the memory traffic, and its per-thread work is small. OpenBLAS handles them with separate code paths. Thin shapes are not optimized yet.
+
+### Local results (Intel i7-14700HX laptop, AVX2)
+
+Setup: 8 P-cores + 12 E-cores, AVX2 (no AVX-512), g++ 11.4.0 `-O3 -march=native -fopenmp`, OpenBLAS 0.3.20 with `--openblas-coretype Haswell`. t threads run on one logical CPU of each of the first t physical cores; with t ≤ 8 those are P-cores. One run of `python3 bench/run_gemm_bench.py --sizes 512 1024 2048 4096 --threads 1 2 4 8 20 --thin 1 4 16 --openblas-coretype Haswell`; median of 7 runs (naive and loop: 3), GFLOP/s. Repeated runs on this laptop vary by a few percent (turbo and temperature).
+
+Baselines as above. OpenBLAS here is Ubuntu's pthreads build, whose threads are not pinned.
+
+| n (square) | naive, 1 thr | loop, 1 | blocked, 1 | OpenBLAS, 1 | blocked, 8 | OpenBLAS, 8 | blocked, 20 | OpenBLAS, 20 |
+|---|---|---|---|---|---|---|---|---|
+| 512 | 3.51 | 17.4 | 54.3 | 56.6 | 398 | 375 | 321 | 282 |
+| 1024 | 3.57 | 12.3 | 54.1 | 57.1 | 421 | 424 | 356 | 328 |
+| 2048 | 3.10 | 8.8 | 55.3 | 57.7 | 423 | 444 | 377 | 369 |
+| 4096 | — | — | 53.5 | 57.5 | 424 | 454 | 386 | 391 |
+
+- On one thread the blocked multiply is 15–18× faster than the original `operator*`, and 3.1× / 4.4× / 6.3× faster than the auto-vectorized `loop` at n = 512 / 1024 / 2048 (the loop slows down as B falls out of each cache level; the blocked multiply does not). On 8 threads it is 136× faster than the original at n = 2048.
+- It reaches 93–96% of OpenBLAS on one thread, 94–102% on 2 and 4 threads, and 93–106% on 8 threads.
+- 8 threads give 7.3–7.9× over one thread (efficiency 0.92–0.99).
+- 20 threads (adding the E-cores) are slower than 8 for both libraries: the static split gives the slower E-cores as much work as the P-cores.
+- Thin shapes (n×n times n×c, as in a Davidson block matvec, n = 4096), blocked as % of OpenBLAS speed:
+
+  | c | 1 thread | 8 threads |
+  |---|---|---|
+  | 1 | 53% | 90% |
+  | 4 | 56% | 92% |
+  | 16 | 70% | 179% |
+
+  On one thread the blocked multiply loses for the reason given above. The 8-thread column, where it looks faster for c = 16, is not reliable: the multi-threaded times of this unpinned OpenBLAS build varied a lot between runs (c = 16 on 8 threads: 179%, 196% and 308% in three runs), and with pinned OpenMP OpenBLAS threads on Euler the blocked multiply is slower for every thin shape.
+
+**OpenBLAS caveats.**
+- OpenBLAS 0.3.20 detects the laptop CPU as "Prescott" (SSE3) and runs ~3× slower (18.7 GFLOP/s on one thread) unless `OPENBLAS_CORETYPE` is set. The benchmark prints the core OpenBLAS used.
+- With `OMP_PROC_BIND` set, libgomp pins the main thread to one core at startup and the OpenBLAS pthreads inherit that mask, so 8 OpenBLAS threads ran at 19 GFLOP/s. `run_gemm_bench.py` therefore does not set `OMP_PROC_BIND` for OpenBLAS runs; it restricts them to the same cores with `sched_setaffinity`.
+- OpenBLAS does not pin its threads. When a run was allowed both hyper-threads of each core, the OS occasionally put two OpenBLAS threads on one core, and that whole run was 20–50% slow (1 of 20 runs at 8 threads, n = 2048). The benchmark therefore gives every run only one logical CPU per physical core. The PySCF runs in `run_davidson_bench.py` set `OMP_PROC_BIND=close` and may be affected the same way.
+- On Euler, the pthreads OpenBLAS build, whose threads are not pinned, fell to ~200 GFLOP/s on 8 cores at n = 1024–2048, while the same cores gave ~400 with pinned threads and no other process used them. The final benchmark therefore uses the OpenMP build with `--openblas-openmp`.
+- OpenBLAS 0.3.28 segfaults inside its threaded dgemm if `openblas_set_num_threads` raises the thread count above the one it started with (`OPENBLAS_NUM_THREADS`), at 4 or more threads. `gemm_bench` therefore never changes the OpenBLAS thread count after startup.
+
+### Reproducing on Euler
+
+```bash
+# login node: get the OpenBLAS source (compute nodes may have no internet)
+git clone --depth 1 --branch v0.3.28 https://github.com/OpenMathLib/OpenBLAS.git ~/opt/src/OpenBLAS
+cd ~/759project
+jid=$(sbatch --parsable bench/euler_build_openblas.sh omp)       # -> ~/opt/openblas-omp
+sbatch --dependency=afterok:$jid bench/euler_gemm_bench.sh        # checks + benchmark, ~6 min
+```

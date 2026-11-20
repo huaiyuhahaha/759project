@@ -100,8 +100,9 @@ dump_checksum = {}
 compiler = subprocess.run(["g++", "--version"], capture_output=True, text=True).stdout
 with tempfile.TemporaryDirectory() as tmp:
     exe = pathlib.Path(tmp) / "davidson_bench"
-    build = ["g++", *FLAGS, f"-I{ROOT}", str(ROOT / "matrix.cpp"), str(ROOT / "davidson.cpp"),
-             str(ROOT / "bench" / "davidson_bench.cpp"), "-o", str(exe)]
+    build = ["g++", *FLAGS, f"-I{ROOT}", str(ROOT / "matrix.cpp"), str(ROOT / "gemm.cpp"),
+             str(ROOT / "davidson.cpp"), str(ROOT / "bench" / "davidson_bench.cpp"),
+             "-o", str(exe)]
     print("build:", " ".join(build))
     print(f"compiler: {compiler.splitlines()[0] if compiler else 'unknown'}")
     print(f"CPUs available: {available}; C++ OpenMP threads: {threads}; "
