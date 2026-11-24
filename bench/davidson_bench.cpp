@@ -1,7 +1,7 @@
 // Davidson benchmark on seeded dense symmetric diagonally dominant matrices.
 //
-//   davidson_bench <n> <serial|openmp>   time the C++ solver
-//   davidson_bench <n> dump <file>       write the benchmark inputs for PySCF
+//   davidson_bench <n> <serial|openmp|cuda>   time the C++ / CUDA solver
+//   davidson_bench <n> dump <file>            write the benchmark inputs for PySCF
 //
 // Times only the Davidson() call: one warm-up solve, then kRuns measured solves
 // on the same matrix and guess. Prints one JSON object with the timings, the
@@ -30,6 +30,10 @@
 #include <omp.h>
 #endif
 
+#ifdef USE_CUDA
+#include <cuda_runtime.h>
+#endif
+
 namespace {
 
 constexpr int kRoots = 4;
@@ -41,10 +45,6 @@ constexpr std::uint64_t kSeed = 759;
 // Independent residual must be within this factor of the solver tolerance.
 constexpr double kResidualSlack = 10.0;
 
-// A_ii = i + 1 and A_ij = A_ji = u / n with u uniform in [-1, 1), so every
-// off-diagonal row sum is below (n - 1) / n < 1 <= A_ii: strictly diagonally
-// dominant. mt19937_64 and the bit-to-double mapping are fully specified, so
-// the matrix is identical across compilers and runs.
 Matrix make_matrix(int n) {
     std::mt19937_64 rng(kSeed);
     Matrix A(n, n);
@@ -58,9 +58,6 @@ Matrix make_matrix(int n) {
     return A;
 }
 
-// Position-weighted sum of the 64-bit words of A then guess (row-major), mod
-// 2^64. Every weight is odd, so changing any single value changes the sum.
-// bench/pyscf_davidson_bench.py computes the same function with NumPy.
 std::uint64_t input_checksum(const Matrix& A, const Matrix& guess) {
     std::uint64_t h = 0, pos = 0;
     auto add = [&](const Matrix& M) {
@@ -88,6 +85,24 @@ int run(int n, Backend backend, const char* backend_name) {
     const Matrix A = make_matrix(n);
     const Matrix guess = initialize_vector(kRoots, A);
 
+#ifdef USE_CUDA
+    if (backend == Backend::CUDA) {
+        cudaFree(0);  // initialize CUDA context before warm-up
+    }
+#endif
+
+    auto eigs_match = [&](const std::vector<double>& a, const std::vector<double>& b) {
+        if (a.size() != b.size())
+            return false;
+        if (backend != Backend::CUDA)
+            return a == b;
+        // GPU atomicAdd reductions can vary by a few ULPs across runs.
+        for (std::size_t i = 0; i < a.size(); ++i)
+            if (!(std::abs(a[i] - b[i]) <= 1e-13))
+                return false;
+        return true;
+    };
+
     std::vector<double> times;
     std::vector<DavidsonProfile> profiles;
     std::vector<double> first_eigs;
@@ -103,7 +118,7 @@ int run(int n, Backend backend, const char* backend_name) {
         }
         if (run == 0)
             first_eigs = r.eigenvalues;
-        else if (r.eigenvalues != first_eigs)
+        else if (!eigs_match(r.eigenvalues, first_eigs))
             deterministic = false;
         res = std::move(r);
     }
@@ -204,7 +219,7 @@ int dump(int n, const char* path) {
 int main(int argc, char** argv) {
     const bool dumping = argc == 4 && std::strcmp(argv[2], "dump") == 0;
     if (argc != 3 && !dumping) {
-        std::fprintf(stderr, "usage: %s <n> <serial|openmp>\n       %s <n> dump <file>\n",
+        std::fprintf(stderr, "usage: %s <n> <serial|openmp|cuda>\n       %s <n> dump <file>\n",
                      argv[0], argv[0]);
         return 2;
     }
@@ -227,6 +242,8 @@ int main(int argc, char** argv) {
         backend = Backend::Serial;
     else if (std::strcmp(argv[2], "openmp") == 0)
         backend = Backend::OpenMP;
+    else if (std::strcmp(argv[2], "cuda") == 0)
+        backend = Backend::CUDA;
     else {
         std::fprintf(stderr, "bad backend '%s'\n", argv[2]);
         return 2;

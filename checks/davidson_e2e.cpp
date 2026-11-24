@@ -174,7 +174,7 @@ int run_lindep_check() {
 }
 
 int usage(const char* prog) {
-    std::fprintf(stderr, "usage: %s <serial|openmp> <n> <ref0> <ref1>   (NumPy eigvalsh(A)[:2])\n"
+    std::fprintf(stderr, "usage: %s <serial|openmp|cuda> <n> <ref0> <ref1>   (NumPy eigvalsh(A)[:2])\n"
                          "       %s lindep\n", prog, prog);
     return 2;
 }
@@ -193,6 +193,8 @@ int main(int argc, char** argv) {
             backend = Backend::Serial;
         else if (std::strcmp(argv[1], "openmp") == 0)
             backend = Backend::OpenMP;
+        else if (std::strcmp(argv[1], "cuda") == 0)
+            backend = Backend::CUDA;
         else
             return usage(argv[0]);
 

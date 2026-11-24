@@ -188,7 +188,9 @@ DavidsonResult Davidson(const Matrix& A, const Matrix& guess, int nroots,
         throw std::invalid_argument("Davidson nroots must be in [1, n]");
     if (!(tol > 0) || max_iter < 1)
         throw std::invalid_argument("Davidson requires tol > 0 and max_iter >= 1");
-
+    if (backend == Backend::CUDA)
+        return DavidsonCUDA(A, guess, nroots, tol, max_iter);
+        
     DavidsonResult result;
     DavidsonProfile& prof = result.profile;
     std::vector<Vec> V, AV;  // orthonormal basis vectors and A times each one

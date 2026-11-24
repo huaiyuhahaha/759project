@@ -24,7 +24,8 @@ bool orthonormalize_against(const std::vector<std::vector<double>>& basis,
 // Serial is the validated baseline. OpenMP runs the dominant measured kernel,
 // the A v matvec, across threads (OMP_NUM_THREADS); all other kernels are
 // shared with Serial. Without -fopenmp the OpenMP backend runs single-threaded.
-enum class Backend { Serial, OpenMP };
+// CUDA offloads the Davidson loop to the GPU via DavidsonCUDA (requires -DUSE_CUDA).
+enum class Backend { Serial, OpenMP, CUDA };
 
 // Wall-clock seconds spent in each kernel during one Davidson call.
 struct DavidsonProfile {
@@ -48,11 +49,15 @@ struct DavidsonResult {
     Matrix eigenvectors{0, 0};           // n x nroots; column k pairs with eigenvalues[k]
 };
 
-// Serial Davidson for the nroots lowest eigenpairs of a real symmetric A.
+// Davidson solver for the nroots lowest eigenpairs of a real symmetric A.
 // guess (n x k, k >= nroots) seeds the search basis, e.g. initialize_vector(k, A).
 // Stops when every residual norm is below tol (converged), or unconverged when
 // max_iter cycles have run or no new independent direction can be added.
 DavidsonResult Davidson(const Matrix& A, const Matrix& guess, int nroots,
                         double tol, int max_iter, Backend backend = Backend::Serial);
+
+// GPU implementation defined in davidson.cu (linked when compiled with -DUSE_CUDA).
+DavidsonResult DavidsonCUDA(const Matrix& A, const Matrix& guess, int nroots,
+                            double tol, int max_iter);
 
 #endif
