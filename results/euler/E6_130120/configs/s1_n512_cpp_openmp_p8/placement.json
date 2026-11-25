@@ -1,0 +1,17 @@
+{
+  "placement_policy": "single_socket_single_numa_node",
+  "socket": 0,
+  "numa_node": 0,
+  "memory_policy": "pinned_first_touch",
+  "cpu_mapping": [
+    3,
+    4,
+    6,
+    13,
+    16,
+    17,
+    18,
+    19
+  ],
+  "placement_path": "single_socket.json"
+}

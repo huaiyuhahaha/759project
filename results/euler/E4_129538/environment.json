@@ -1,0 +1,524 @@
+{
+  "blas_alignment": {
+    "dependency_provider_matches": {
+      "numpy": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so"
+      ],
+      "petsc": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so"
+      ],
+      "scipy": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so"
+      ],
+      "slepc": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so"
+      ]
+    },
+    "openblas_paths": [
+      "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so"
+    ],
+    "other_blas_pools": [],
+    "reasons": [],
+    "required_dependency_targets": [
+      "numpy",
+      "scipy",
+      "petsc",
+      "slepc"
+    ],
+    "scope": "NumPy/SciPy extension dependencies and uniquely mapped native PETSc/SLEPc library dependencies after tiny BLAS operations; standalone PETSc/SLEPc extension ldd results are supplemental diagnostics. PySCF Davidson's matrix-vector callback uses NumPy. Extra PySCF library dependencies and all detected thread pools are retained separately.",
+    "status": "verified_shared_loaded_dependency"
+  },
+  "cpu_affinity": [
+    14,
+    15,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    62,
+    63,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95
+  ],
+  "dependencies": {
+    "mpi": {
+      "command": [
+        "ldd",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/MPI.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "paths": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libatomic.so.1.2.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libefa.so.1.7.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libfabric.so.1.33.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libhwloc.so.15.10.2",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libibverbs.so.1.19.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libiconv.so.2.7.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpi.so.12.6.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libnl-3.so.200.26.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libnl-route-3.so.200.26.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/librdmacm.so.1.5.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucm.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucp.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucs.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libuct.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libxml2.so.16.1.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libz.so.1.3.2",
+        "/usr/lib64/ld-linux-x86-64.so.2",
+        "/usr/lib64/libc.so.6",
+        "/usr/lib64/libdl.so.2",
+        "/usr/lib64/libm.so.6",
+        "/usr/lib64/libpthread.so.0",
+        "/usr/lib64/librt.so.1"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x000014596cf6a000)\n\tlibmpi.so.12 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../../libmpi.so.12 (0x000014596bcfb000)\n\tlibc.so.6 => /lib64/libc.so.6 (0x000014596bb10000)\n\tlibhwloc.so.15 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../../libhwloc.so.15 (0x000014596bab0000)\n\tlibucp.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../../libucp.so.0 (0x000014596b9ad000)\n\tlibucs.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../../libucs.so.0 (0x000014596b93b000)\n\tlibfabric.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../../libfabric.so.1 (0x000014596b76c000)\n\tlibpthread.so.0 => /lib64/libpthread.so.0 (0x000014596b767000)\n\tlibrt.so.1 => /lib64/librt.so.1 (0x000014596b762000)\n\t/lib64/ld-linux-x86-64.so.2 (0x000014596cf6c000)\n\tlibm.so.6 => /lib64/libm.so.6 (0x000014596b6b6000)\n\tlibxml2.so.16 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././libxml2.so.16 (0x000014596b570000)\n\tlibuct.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././libuct.so.0 (0x000014596b530000)\n\tlibucm.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././libucm.so.0 (0x000014596b515000)\n\tlibdl.so.2 => /lib64/libdl.so.2 (0x000014596b510000)\n\tlibrdmacm.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././librdmacm.so.1 (0x000014596b4ee000)\n\tlibefa.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././libefa.so.1 (0x000014596b4da000)\n\tlibibverbs.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././libibverbs.so.1 (0x000014596b4b5000)\n\tlibnl-3.so.200 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././libnl-3.so.200 (0x000014596b490000)\n\tlibnl-route-3.so.200 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././libnl-route-3.so.200 (0x000014596b3f8000)\n\tlibatomic.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../.././libatomic.so.1 (0x000014596b3ec000)\n\tlibz.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../../././libz.so.1 (0x000014596b3cf000)\n\tlibiconv.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/../../../././libiconv.so.2 (0x000014596b2bc000)\n"
+    },
+    "numpy": {
+      "command": [
+        "ldd",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/_core/_multiarray_umath.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "paths": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libgcc_s.so.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libgfortran.so.5.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libomp.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libquadmath.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libstdc++.so.6.0.36",
+        "/usr/lib64/ld-linux-x86-64.so.2",
+        "/usr/lib64/libc.so.6",
+        "/usr/lib64/libdl.so.2",
+        "/usr/lib64/libm.so.6",
+        "/usr/lib64/libpthread.so.0",
+        "/usr/lib64/librt.so.1"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x00001516d2acd000)\n\tlibcblas.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/_core/../../../../libcblas.so.3 (0x00001516cfb80000)\n\tlibstdc++.so.6 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/_core/../../../../libstdc++.so.6 (0x00001516cf8cb000)\n\tlibm.so.6 => /lib64/libm.so.6 (0x00001516cf80e000)\n\tlibgcc_s.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/_core/../../../../libgcc_s.so.1 (0x00001516cf7e0000)\n\tlibc.so.6 => /lib64/libc.so.6 (0x00001516cf606000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00001516d2acf000)\n\tlibpthread.so.0 => /lib64/libpthread.so.0 (0x00001516cf601000)\n\tlibgfortran.so.5 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/_core/../../../../libgfortran.so.5 (0x00001516cf29f000)\n\tlibgomp.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/_core/../../../../libgomp.so.1 (0x00001516cf18f000)\n\tlibdl.so.2 => /lib64/libdl.so.2 (0x00001516cf18a000)\n\tlibquadmath.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/_core/../../../.././libquadmath.so.0 (0x00001516cf141000)\n\tlibrt.so.1 => /lib64/librt.so.1 (0x00001516cf13c000)\n"
+    },
+    "petsc": {
+      "command": [
+        "ldd",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libpetsc.so.3.26.1"
+      ],
+      "paths": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libHYPRE.so.3.2.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libamd.so.3.3.3",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libatomic.so.1.2.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-auth.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-cal.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-common.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-compression.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-http.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-io.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-s3.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-sdkutils.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-checksums.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libbtf.so.2.3.2",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libbz2.so.1.0.8",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libcamd.so.3.3.3",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libccolamd.so.3.3.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libcholmod.so.5.3.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libcolamd.so.3.3.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libcrypto.so.3",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libdmumps.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libefa.so.1.7.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libfabric.so.1.33.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libfftw3.so.3.7.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libfftw3_mpi.so.3.7.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libgcc_s.so.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libgfortran.so.5.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libhdf5.so.320.2.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libhwloc.so.15.10.2",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libibverbs.so.1.19.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libiconv.so.2.7.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libklu.so.2.3.5",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/liblzma.so.5",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmetis.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpi.so.12.6.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpifort.so.12.6.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmumps_common.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libnl-3.so.200.26.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libnl-route-3.so.200.26.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libomp.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libparmetis.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libpord.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libptesmumps.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotch.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotcherr.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotchparmetisv3.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libquadmath.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/librdmacm.so.1.5.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libs2n.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libscalapack.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libscotch.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libscotcherr.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsmumps.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libspqr.so.4.3.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libstdc++.so.6.0.36",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuitesparseconfig.so.7.10.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuperlu.so.7.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuperlu_dist.so.9.2.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsz.so.2.0.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucm.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucp.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucs.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libuct.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libumfpack.so.6.3.5",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libxml2.so.16.1.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libz.so.1.3.2",
+        "/usr/lib64/ld-linux-x86-64.so.2",
+        "/usr/lib64/libc.so.6",
+        "/usr/lib64/libdl.so.2",
+        "/usr/lib64/libm.so.6",
+        "/usr/lib64/libpthread.so.0",
+        "/usr/lib64/librt.so.1",
+        "/usr/lib64/libyaml-0.so.2.0.9"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x000014aa763c4000)\n\tlibHYPRE.so.302 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libHYPRE.so.302 (0x000014aa741a6000)\n\tlibspqr.so.4 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libspqr.so.4 (0x000014aa74137000)\n\tlibumfpack.so.6 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libumfpack.so.6 (0x000014aa74051000)\n\tlibklu.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libklu.so.2 (0x000014aa74018000)\n\tlibcholmod.so.5 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libcholmod.so.5 (0x000014aa73dc4000)\n\tlibamd.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libamd.so.3 (0x000014aa73db5000)\n\tlibfftw3_mpi.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libfftw3_mpi.so.3 (0x000014aa73d9d000)\n\tlibfftw3.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libfftw3.so.3 (0x000014aa73b54000)\n\tlibsmumps.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libsmumps.so (0x000014aa738d6000)\n\tlibdmumps.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libdmumps.so (0x000014aa73656000)\n\tlibpthread.so.0 => /lib64/libpthread.so.0 (0x000014aa73640000)\n\tlibscalapack.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libscalapack.so (0x000014aa73006000)\n\tlibsuperlu_dist.so.9 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuperlu_dist.so.9 (0x000014aa72e1b000)\n\tlibsuperlu.so.7 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuperlu.so.7 (0x000014aa72d8f000)\n\tliblapack.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/liblapack.so.3 (0x000014aa70720000)\n\tlibptscotchparmetisv3.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotchparmetisv3.so.7.0 (0x000014aa70719000)\n\tlibptscotch.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotch.so.7.0 (0x000014aa706c3000)\n\tlibscotch.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libscotch.so.7.0 (0x000014aa7061d000)\n\tlibhdf5.so.320 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libhdf5.so.320 (0x000014aa70081000)\n\tlibparmetis.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libparmetis.so (0x000014aa6fffb000)\n\tlibmetis.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libmetis.so (0x000014aa6ff87000)\n\tlibm.so.6 => /lib64/libm.so.6 (0x000014aa6fedb000)\n\tlibyaml-0.so.2 => /lib64/libyaml-0.so.2 (0x000014aa6feb9000)\n\tlibhwloc.so.15 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libhwloc.so.15 (0x000014aa6fe59000)\n\tlibdl.so.2 => /lib64/libdl.so.2 (0x000014aa6fe54000)\n\tlibmpi.so.12 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpi.so.12 (0x000014aa6ee25000)\n\tlibgomp.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libgomp.so.1 (0x000014aa6ed15000)\n\tlibc.so.6 => /lib64/libc.so.6 (0x000014aa6eb3b000)\n\t/lib64/ld-linux-x86-64.so.2 (0x000014aa763c6000)\n\tlibsuitesparseconfig.so.7 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuitesparseconfig.so.7 (0x000014aa6eb35000)\n\tlibstdc++.so.6 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libstdc++.so.6 (0x000014aa6e880000)\n\tlibgcc_s.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libgcc_s.so.1 (0x000014aa6e850000)\n\tlibcolamd.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libcolamd.so.3 (0x000014aa6e847000)\n\tlibbtf.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libbtf.so.2 (0x000014aa6e841000)\n\tlibcamd.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libcamd.so.3 (0x000014aa6e833000)\n\tlibccolamd.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libccolamd.so.3 (0x000014aa6e826000)\n\tlibgfortran.so.5 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libgfortran.so.5 (0x000014aa6e4c2000)\n\tlibquadmath.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libquadmath.so.0 (0x000014aa6e479000)\n\tlibmumps_common.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libmumps_common.so (0x000014aa6e3e0000)\n\tlibmpifort.so.12 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpifort.so.12 (0x000014aa6e2c5000)\n\tlibptscotcherr.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libptscotcherr.so.7.0 (0x000014aa6e2be000)\n\tlibscotcherr.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libscotcherr.so.7.0 (0x000014aa6e2b9000)\n\tlibz.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libz.so.1 (0x000014aa6e29e000)\n\tlibbz2.so.1.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libbz2.so.1.0 (0x000014aa6e289000)\n\tliblzma.so.5 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./liblzma.so.5 (0x000014aa6e258000)\n\tlibaws-c-s3.so.0unstable => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-s3.so.0unstable (0x000014aa6e20c000)\n\tlibsz.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libsz.so.2 (0x000014aa6e1fe000)\n\tlibaws-c-auth.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-auth.so.1.0.0 (0x000014aa6e1b9000)\n\tlibaws-c-sdkutils.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-sdkutils.so.1.0.0 (0x000014aa6e198000)\n\tlibaws-c-http.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-http.so.1.0.0 (0x000014aa6e12b000)\n\tlibaws-c-io.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-io.so.1.0.0 (0x000014aa6e0d3000)\n\tlibaws-c-common.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-common.so.1 (0x000014aa6e088000)\n\tlibrt.so.1 => /lib64/librt.so.1 (0x000014aa6e083000)\n\tlibxml2.so.16 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libxml2.so.16 (0x000014aa6df3f000)\n\tlibucp.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libucp.so.0 (0x000014aa6de3c000)\n\tlibucs.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libucs.so.0 (0x000014aa6ddca000)\n\tlibfabric.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libfabric.so.1 (0x000014aa6dbfb000)\n\tlibpord.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libpord.so (0x000014aa6dbdf000)\n\tlibptesmumps.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libptesmumps.so.7.0 (0x000014aa6dbd5000)\n\tlibaws-checksums.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-checksums.so.1.0.0 (0x000014aa6dbb1000)\n\tlibaws-c-cal.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-cal.so.1.0.0 (0x000014aa6db98000)\n\tlibaws-c-compression.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-compression.so.1.0.0 (0x000014aa6db93000)\n\tlibs2n.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libs2n.so.1 (0x000014aa6da11000)\n\tlibiconv.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/././libiconv.so.2 (0x000014aa6d8fc000)\n\tlibuct.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libuct.so.0 (0x000014aa6d8bc000)\n\tlibucm.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libucm.so.0 (0x000014aa6d8a1000)\n\tlibrdmacm.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./librdmacm.so.1 (0x000014aa6d87f000)\n\tlibefa.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libefa.so.1 (0x000014aa6d86d000)\n\tlibibverbs.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libibverbs.so.1 (0x000014aa6d846000)\n\tlibnl-3.so.200 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libnl-3.so.200 (0x000014aa6d821000)\n\tlibnl-route-3.so.200 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libnl-route-3.so.200 (0x000014aa6d789000)\n\tlibatomic.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libatomic.so.1 (0x000014aa6d77d000)\n\tlibcrypto.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/././libcrypto.so.3 (0x000014aa6d160000)\n"
+    },
+    "petsc_extension": {
+      "command": [
+        "ldd",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/petsc4py/lib/PETSc.abi3.so"
+      ],
+      "paths": [
+        "/usr/lib64/ld-linux-x86-64.so.2",
+        "/usr/lib64/libc.so.6"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x000014ecf9139000)\n\tlibpetsc.so.3.26 => not found\n\tlibmpi.so.12 => not found\n\tlibc.so.6 => /lib64/libc.so.6 (0x000014ecf88e9000)\n\t/lib64/ld-linux-x86-64.so.2 (0x000014ecf913b000)\n"
+    },
+    "pyscf_libnp_helper.so": {
+      "command": [
+        "ldd",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/pyscf/lib/libnp_helper.so"
+      ],
+      "paths": [
+        "/usr/lib64/ld-linux-x86-64.so.2",
+        "/usr/lib64/libc.so.6",
+        "/usr/lib64/libgomp.so.1.0.0"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x000014d3c082f000)\n\tlibblas.so.3 => not found\n\tlibgomp.so.1 => /lib64/libgomp.so.1 (0x000014d3c07aa000)\n\tlibc.so.6 => /lib64/libc.so.6 (0x000014d3c05d0000)\n\t/lib64/ld-linux-x86-64.so.2 (0x000014d3c0831000)\n"
+    },
+    "scipy": {
+      "command": [
+        "ldd",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/_fblas.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "paths": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libgcc_s.so.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libgfortran.so.5.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libomp.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libquadmath.so.0.0.0",
+        "/usr/lib64/ld-linux-x86-64.so.2",
+        "/usr/lib64/libc.so.6",
+        "/usr/lib64/libdl.so.2",
+        "/usr/lib64/libm.so.6",
+        "/usr/lib64/libpthread.so.0",
+        "/usr/lib64/librt.so.1"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x0000146ddb941000)\n\tliblapack.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/../../../../liblapack.so.3 (0x0000146dd9238000)\n\tlibc.so.6 => /lib64/libc.so.6 (0x0000146dd904d000)\n\tlibm.so.6 => /lib64/libm.so.6 (0x0000146dd8fa1000)\n\tlibpthread.so.0 => /lib64/libpthread.so.0 (0x0000146dd8f9c000)\n\tlibgfortran.so.5 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/../../../../libgfortran.so.5 (0x0000146dd8c38000)\n\tlibgomp.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/../../../../libgomp.so.1 (0x0000146dd8b28000)\n\t/lib64/ld-linux-x86-64.so.2 (0x0000146ddb943000)\n\tlibquadmath.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/../../../.././libquadmath.so.0 (0x0000146dd8adf000)\n\tlibgcc_s.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/../../../.././libgcc_s.so.1 (0x0000146dd8ab1000)\n\tlibrt.so.1 => /lib64/librt.so.1 (0x0000146dd8aaa000)\n\tlibdl.so.2 => /lib64/libdl.so.2 (0x0000146dd8aa5000)\n"
+    },
+    "slepc": {
+      "command": [
+        "ldd",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libslepc.so.3.26.1"
+      ],
+      "paths": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libHYPRE.so.3.2.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libamd.so.3.3.3",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libatomic.so.1.2.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-auth.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-cal.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-common.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-compression.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-http.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-io.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-s3.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-c-sdkutils.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libaws-checksums.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libbtf.so.2.3.2",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libbz2.so.1.0.8",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libcamd.so.3.3.3",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libccolamd.so.3.3.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libcholmod.so.5.3.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libcolamd.so.3.3.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libcrypto.so.3",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libdmumps.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libefa.so.1.7.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libfabric.so.1.33.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libfftw3.so.3.7.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libfftw3_mpi.so.3.7.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libgcc_s.so.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libgfortran.so.5.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libhdf5.so.320.2.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libhwloc.so.15.10.2",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libibverbs.so.1.19.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libiconv.so.2.7.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libklu.so.2.3.5",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/liblzma.so.5",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmetis.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpi.so.12.6.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpifort.so.12.6.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmumps_common.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libnl-3.so.200.26.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libnl-route-3.so.200.26.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libomp.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libparmetis.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libpetsc.so.3.26.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libpord.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libptesmumps.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotch.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotcherr.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotchparmetisv3.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libquadmath.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/librdmacm.so.1.5.66.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libs2n.so.1.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libscalapack.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libscotch.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libscotcherr.so.7.0.11",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsmumps.so",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libspqr.so.4.3.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libstdc++.so.6.0.36",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuitesparseconfig.so.7.10.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuperlu.so.7.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuperlu_dist.so.9.2.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libsz.so.2.0.1",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucm.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucp.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libucs.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libuct.so.0.0.0",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libumfpack.so.6.3.5",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libxml2.so.16.1.4",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libz.so.1.3.2",
+        "/usr/lib64/ld-linux-x86-64.so.2",
+        "/usr/lib64/libc.so.6",
+        "/usr/lib64/libdl.so.2",
+        "/usr/lib64/libm.so.6",
+        "/usr/lib64/libpthread.so.0",
+        "/usr/lib64/librt.so.1",
+        "/usr/lib64/libyaml-0.so.2.0.9"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x000014a104d8f000)\n\tlibpetsc.so.3.26 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libpetsc.so.3.26 (0x000014a102daf000)\n\tliblapack.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/liblapack.so.3 (0x000014a100740000)\n\tlibscalapack.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libscalapack.so (0x000014a100106000)\n\tlibmpi.so.12 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpi.so.12 (0x000014a0ff0d7000)\n\tlibc.so.6 => /lib64/libc.so.6 (0x000014a0feeec000)\n\tlibHYPRE.so.302 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libHYPRE.so.302 (0x000014a0fe83f000)\n\tlibspqr.so.4 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libspqr.so.4 (0x000014a0fe7d0000)\n\tlibumfpack.so.6 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libumfpack.so.6 (0x000014a0fe6ea000)\n\tlibklu.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libklu.so.2 (0x000014a0fe6b1000)\n\tlibcholmod.so.5 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libcholmod.so.5 (0x000014a0fe45f000)\n\tlibamd.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libamd.so.3 (0x000014a0fe450000)\n\tlibfftw3_mpi.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libfftw3_mpi.so.3 (0x000014a0fe438000)\n\tlibfftw3.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libfftw3.so.3 (0x000014a0fe1ef000)\n\tlibsmumps.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libsmumps.so (0x000014a0fdf71000)\n\tlibdmumps.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libdmumps.so (0x000014a0fdcf3000)\n\tlibpthread.so.0 => /lib64/libpthread.so.0 (0x000014a0fdcee000)\n\tlibsuperlu_dist.so.9 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuperlu_dist.so.9 (0x000014a0fdb03000)\n\tlibsuperlu.so.7 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuperlu.so.7 (0x000014a0fda77000)\n\tlibptscotchparmetisv3.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotchparmetisv3.so.7.0 (0x000014a0fda70000)\n\tlibptscotch.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libptscotch.so.7.0 (0x000014a0fda18000)\n\tlibscotch.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libscotch.so.7.0 (0x000014a0fd972000)\n\tlibhdf5.so.320 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libhdf5.so.320 (0x000014a0fd3d6000)\n\tlibparmetis.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libparmetis.so (0x000014a0fd350000)\n\tlibmetis.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libmetis.so (0x000014a0fd2dc000)\n\tlibm.so.6 => /lib64/libm.so.6 (0x000014a0fd22e000)\n\tlibyaml-0.so.2 => /lib64/libyaml-0.so.2 (0x000014a0fd20c000)\n\tlibhwloc.so.15 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libhwloc.so.15 (0x000014a0fd1ac000)\n\tlibdl.so.2 => /lib64/libdl.so.2 (0x000014a0fd1a7000)\n\tlibgomp.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libgomp.so.1 (0x000014a0fd097000)\n\t/lib64/ld-linux-x86-64.so.2 (0x000014a104d91000)\n\tlibgfortran.so.5 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libgfortran.so.5 (0x000014a0fcd33000)\n\tlibgcc_s.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libgcc_s.so.1 (0x000014a0fcd05000)\n\tlibucp.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libucp.so.0 (0x000014a0fcc02000)\n\tlibucs.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libucs.so.0 (0x000014a0fcb92000)\n\tlibfabric.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libfabric.so.1 (0x000014a0fc9c3000)\n\tlibrt.so.1 => /lib64/librt.so.1 (0x000014a0fc9bc000)\n\tlibsuitesparseconfig.so.7 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libsuitesparseconfig.so.7 (0x000014a0fc9b6000)\n\tlibstdc++.so.6 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libstdc++.so.6 (0x000014a0fc701000)\n\tlibcolamd.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libcolamd.so.3 (0x000014a0fc6f8000)\n\tlibbtf.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libbtf.so.2 (0x000014a0fc6f2000)\n\tlibcamd.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libcamd.so.3 (0x000014a0fc6e2000)\n\tlibccolamd.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libccolamd.so.3 (0x000014a0fc6d5000)\n\tlibquadmath.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libquadmath.so.0 (0x000014a0fc68c000)\n\tlibmumps_common.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libmumps_common.so (0x000014a0fc5f3000)\n\tlibmpifort.so.12 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpifort.so.12 (0x000014a0fc4d8000)\n\tlibptscotcherr.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libptscotcherr.so.7.0 (0x000014a0fc4d1000)\n\tlibscotcherr.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libscotcherr.so.7.0 (0x000014a0fc4cc000)\n\tlibz.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libz.so.1 (0x000014a0fc4b1000)\n\tlibbz2.so.1.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libbz2.so.1.0 (0x000014a0fc49c000)\n\tliblzma.so.5 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./liblzma.so.5 (0x000014a0fc46b000)\n\tlibaws-c-s3.so.0unstable => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-s3.so.0unstable (0x000014a0fc41f000)\n\tlibsz.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libsz.so.2 (0x000014a0fc411000)\n\tlibaws-c-auth.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-auth.so.1.0.0 (0x000014a0fc3cc000)\n\tlibaws-c-sdkutils.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-sdkutils.so.1.0.0 (0x000014a0fc3ab000)\n\tlibaws-c-http.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-http.so.1.0.0 (0x000014a0fc33e000)\n\tlibaws-c-io.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-io.so.1.0.0 (0x000014a0fc2e6000)\n\tlibaws-c-common.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-common.so.1 (0x000014a0fc29b000)\n\tlibxml2.so.16 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libxml2.so.16 (0x000014a0fc157000)\n\tlibuct.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libuct.so.0 (0x000014a0fc117000)\n\tlibucm.so.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libucm.so.0 (0x000014a0fc0fc000)\n\tlibrdmacm.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./librdmacm.so.1 (0x000014a0fc0d8000)\n\tlibefa.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libefa.so.1 (0x000014a0fc0c6000)\n\tlibibverbs.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libibverbs.so.1 (0x000014a0fc0a1000)\n\tlibnl-3.so.200 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libnl-3.so.200 (0x000014a0fc07c000)\n\tlibnl-route-3.so.200 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libnl-route-3.so.200 (0x000014a0fbfe4000)\n\tlibatomic.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libatomic.so.1 (0x000014a0fbfd6000)\n\tlibpord.so => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libpord.so (0x000014a0fbfba000)\n\tlibptesmumps.so.7.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/libptesmumps.so.7.0 (0x000014a0fbfb0000)\n\tlibaws-checksums.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-checksums.so.1.0.0 (0x000014a0fbf8e000)\n\tlibaws-c-cal.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-cal.so.1.0.0 (0x000014a0fbf73000)\n\tlibaws-c-compression.so.1.0.0 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libaws-c-compression.so.1.0.0 (0x000014a0fbf6e000)\n\tlibs2n.so.1 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/./libs2n.so.1 (0x000014a0fbdec000)\n\tlibiconv.so.2 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/././libiconv.so.2 (0x000014a0fbcd9000)\n\tlibcrypto.so.3 => /srv/home/rxu292/759project/.euler/envs/baselines/lib/././libcrypto.so.3 (0x000014a0fb6ba000)\n"
+    },
+    "slepc_extension": {
+      "command": [
+        "ldd",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/slepc4py/lib/SLEPc.abi3.so"
+      ],
+      "paths": [
+        "/usr/lib64/ld-linux-x86-64.so.2",
+        "/usr/lib64/libc.so.6"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x00001518ee98d000)\n\tlibslepc.so.3.26 => not found\n\tlibpetsc.so.3.26 => not found\n\tlibc.so.6 => /lib64/libc.so.6 (0x00001518ee59f000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00001518ee98f000)\n"
+    }
+  },
+  "dependency_targets": {
+    "mpi": {
+      "path": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/MPI.cpython-312-x86_64-linux-gnu.so",
+      "source": "imported module or package library"
+    },
+    "numpy": {
+      "path": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/_core/_multiarray_umath.cpython-312-x86_64-linux-gnu.so",
+      "source": "imported module or package library"
+    },
+    "petsc": {
+      "candidates": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libpetsc.so.3.26.1"
+      ],
+      "path": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libpetsc.so.3.26.1",
+      "source": "/proc/self/maps",
+      "status": "selected"
+    },
+    "petsc_extension": {
+      "path": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/petsc4py/lib/PETSc.abi3.so",
+      "source": "imported module or package library"
+    },
+    "pyscf_libnp_helper.so": {
+      "path": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/pyscf/lib/libnp_helper.so",
+      "source": "imported module or package library"
+    },
+    "scipy": {
+      "path": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/_fblas.cpython-312-x86_64-linux-gnu.so",
+      "source": "imported module or package library"
+    },
+    "slepc": {
+      "candidates": [
+        "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libslepc.so.3.26.1"
+      ],
+      "path": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libslepc.so.3.26.1",
+      "source": "/proc/self/maps",
+      "status": "selected"
+    },
+    "slepc_extension": {
+      "path": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/slepc4py/lib/SLEPc.abi3.so",
+      "source": "imported module or package library"
+    }
+  },
+  "executable": "/srv/home/rxu292/759project/.euler/envs/baselines/bin/python",
+  "failures": [],
+  "hostname": "euler01.engr.wisc.edu",
+  "job_id": "129538",
+  "mapped_libraries": [
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpi.so.12.6.1",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libmpifort.so.12.6.1",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libpetsc.so.3.26.1",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libscalapack.so",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libslepc.so.3.26.1",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/_fblas.cpython-312-x86_64-linux-gnu.so",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/_flapack.cpython-312-x86_64-linux-gnu.so",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/cython_blas.cpython-312-x86_64-linux-gnu.so",
+    "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/linalg/cython_lapack.cpython-312-x86_64-linux-gnu.so"
+  ],
+  "mpi": {
+    "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/MPI.cpython-312-x86_64-linux-gnu.so",
+    "library_version": "MPICH Version:      5.0.1\nMPICH Release date: Fri Apr 10 09:45:31 AM CDT 2026\nMPICH ABI:          18:1:6\nMPICH Device:       ch4:ucx ofi\nMPICH configure:    --prefix=/srv/home/rxu292/759project/.euler/envs/baselines --disable-doc --disable-dependency-tracking --enable-cxx --enable-fortran --enable-f08 --enable-mpi-abi --with-wrapper-dl-type=none --disable-static --with-device=ch4:ucx,ofi --with-ucx=/srv/home/rxu292/759project/.euler/envs/baselines --with-libfabric=/srv/home/rxu292/759project/.euler/envs/baselines --with-hwloc=/srv/home/rxu292/759project/.euler/envs/baselines --with-yaksa=embedded --with-pm=hydra:gforker\nMPICH CC:           x86_64-conda-linux-gnu-cc -I/srv/home/rxu292/759project/.euler/envs/baselines/include -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -fno-merge-constants -isystem /srv/home/rxu292/759project/.euler/envs/baselines/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_mpich_1787141874/work=/usr/local/src/conda/mpich-5.0.1 -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix   -O2\nMPICH CXX:          x86_64-conda-linux-gnu-c++ -I/srv/home/rxu292/759project/.euler/envs/baselines/include -fvisibility-inlines-hidden -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -fno-merge-constants -isystem /srv/home/rxu292/759project/.euler/envs/baselines/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_mpich_1787141874/work=/usr/local/src/conda/mpich-5.0.1 -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix -O2\nMPICH F77:          x86_64-conda-linux-gnu-gfortran -I/srv/home/rxu292/759project/.euler/envs/baselines/include -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -fno-merge-constants -isystem /srv/home/rxu292/759project/.euler/envs/baselines/include -I/home/conda/feedstock_root/build_artifacts/bld/rattler-build_mpich_1787141874/build_env/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_mpich_1787141874/work=/usr/local/src/conda/mpich-5.0.1 -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix -O2\nMPICH FC:           x86_64-conda-linux-gnu-gfortran -I/srv/home/rxu292/759project/.euler/envs/baselines/include -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -fno-merge-constants -isystem /srv/home/rxu292/759project/.euler/envs/baselines/include -I/home/conda/feedstock_root/build_artifacts/bld/rattler-build_mpich_1787141874/build_env/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_mpich_1787141874/work=/usr/local/src/conda/mpich-5.0.1 -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix -O2\nMPICH features:     threadcomm\n",
+    "size": 1,
+    "standard_version": [
+      5,
+      0
+    ],
+    "vendor": "MPICH",
+    "vendor_version": [
+      5,
+      0,
+      1
+    ]
+  },
+  "numpy_show_config": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/__config__.py:155: UserWarning: Install `pyyaml` for better output\n  warnings.warn(\"Install `pyyaml` for better output\", stacklevel=1)\n{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"15.3.0\",\n      \"commands\": \"x86_64-conda-linux-gnu-cc\",\n      \"args\": \"-march=nocona, -mtune=haswell, -ftree-vectorize, -fPIC, -fstack-protector-strong, -fno-plt, -O2, -ffunction-sections, -pipe, -fno-merge-constants, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include, -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_he827f4e_1794816433/work=/usr/local/src/conda/numpy-2.5.5, -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix, -DNDEBUG, -D_FORTIFY_SOURCE=2, -O2, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include\",\n      \"linker args\": \"-Wl,-O2, -Wl,--sort-common, -Wl,--as-needed, -Wl,-z,relro, -Wl,-z,now, -Wl,--disable-new-dtags, -Wl,--gc-sections, -Wl,--allow-shlib-undefined, -Wl,-rpath,/srv/home/rxu292/759project/.euler/envs/baselines/lib, -Wl,-rpath-link,/srv/home/rxu292/759project/.euler/envs/baselines/lib, -L/srv/home/rxu292/759project/.euler/envs/baselines/lib, -march=nocona, -mtune=haswell, -ftree-vectorize, -fPIC, -fstack-protector-strong, -fno-plt, -O2, -ffunction-sections, -pipe, -fno-merge-constants, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include, -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_he827f4e_1794816433/work=/usr/local/src/conda/numpy-2.5.5, -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix, -DNDEBUG, -D_FORTIFY_SOURCE=2, -O2, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.3.1\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"15.3.0\",\n      \"commands\": \"x86_64-conda-linux-gnu-c++\",\n      \"args\": \"-fvisibility-inlines-hidden, -fmessage-length=0, -march=nocona, -mtune=haswell, -ftree-vectorize, -fPIC, -fstack-protector-strong, -fno-plt, -O2, -ffunction-sections, -pipe, -fno-merge-constants, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include, -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_he827f4e_1794816433/work=/usr/local/src/conda/numpy-2.5.5, -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix, -DNDEBUG, -D_FORTIFY_SOURCE=2, -O2, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include\",\n      \"linker args\": \"-Wl,-O2, -Wl,--sort-common, -Wl,--as-needed, -Wl,-z,relro, -Wl,-z,now, -Wl,--disable-new-dtags, -Wl,--gc-sections, -Wl,--allow-shlib-undefined, -Wl,-rpath,/srv/home/rxu292/759project/.euler/envs/baselines/lib, -Wl,-rpath-link,/srv/home/rxu292/759project/.euler/envs/baselines/lib, -L/srv/home/rxu292/759project/.euler/envs/baselines/lib, -fvisibility-inlines-hidden, -fmessage-length=0, -march=nocona, -mtune=haswell, -ftree-vectorize, -fPIC, -fstack-protector-strong, -fno-plt, -O2, -ffunction-sections, -pipe, -fno-merge-constants, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include, -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_he827f4e_1794816433/work=/usr/local/src/conda/numpy-2.5.5, -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix, -DNDEBUG, -D_FORTIFY_SOURCE=2, -O2, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    }\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"blas\",\n      \"found\": true,\n      \"version\": \"3.9.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/include\",\n      \"lib directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/lib\",\n      \"openblas configuration\": \"unknown\",\n      \"pc file directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/lib/pkgconfig\"\n    },\n    \"lapack\": {\n      \"name\": \"lapack\",\n      \"found\": true,\n      \"version\": \"3.9.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/include\",\n      \"lib directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/lib\",\n      \"openblas configuration\": \"unknown\",\n      \"pc file directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/lib/pkgconfig\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/srv/home/rxu292/759project/.euler/envs/baselines/bin/python\",\n    \"version\": \"3.12\"\n  },\n  \"SIMD Extensions\": {\n    \"baseline\": [\n      \"X86_V2\"\n    ],\n    \"found\": [\n      \"X86_V3\",\n      \"X86_V4\",\n      \"AVX512_ICL\"\n    ],\n    \"not found\": [\n      \"AVX512_SPR\"\n    ]\n  }\n}\n",
+  "ok": true,
+  "operations": {
+    "numpy_dot": true,
+    "petsc_dense_matmult": true,
+    "pyscf_dot": true,
+    "scipy_dgemv": true
+  },
+  "packages": {
+    "mpi4py": {
+      "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/mpi4py/__init__.py",
+      "version": "4.1.2"
+    },
+    "numpy": {
+      "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/numpy/__init__.py",
+      "version": "2.5.5"
+    },
+    "petsc4py": {
+      "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/petsc4py/__init__.py",
+      "version": "3.26.1"
+    },
+    "pyscf": {
+      "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/pyscf/__init__.py",
+      "version": "2.15.1"
+    },
+    "scipy": {
+      "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/scipy/__init__.py",
+      "version": "1.18.1"
+    },
+    "slepc4py": {
+      "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/slepc4py/__init__.py",
+      "version": "3.26.1"
+    },
+    "threadpoolctl": {
+      "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/threadpoolctl.py",
+      "version": "3.8.0"
+    }
+  },
+  "petsc": {
+    "config": {
+      "PETSC_ARCH": "",
+      "PETSC_DIR": "/srv/home/rxu292/759project/.euler/envs/baselines"
+    },
+    "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/petsc4py/lib/PETSc.abi3.so",
+    "scalar_dtype": "float64",
+    "version": [
+      3,
+      26,
+      1
+    ],
+    "version_info": {
+      "authorinfo": [
+        "The PETSc Team",
+        "petsc-maint@mcs.anl.gov",
+        "https://petsc.org/"
+      ],
+      "date": "Oct 31, 2026",
+      "major": 3,
+      "minor": 26,
+      "release": true,
+      "subminor": 1
+    }
+  },
+  "platform": "Linux-6.12.0-211.68.1.el10_2.x86_64-x86_64-with-glibc2.39",
+  "prefix": "/srv/home/rxu292/759project/.euler/envs/baselines",
+  "pyscf_lib_num_threads": 1,
+  "python": "3.12.16",
+  "record_type": "environment_check",
+  "schema_version": 1,
+  "slepc": {
+    "config": {
+      "PETSC_ARCH": "",
+      "PETSC_DIR": "/srv/home/rxu292/759project/.euler/envs/baselines",
+      "SLEPC_DIR": "/srv/home/rxu292/759project/.euler/envs/baselines"
+    },
+    "file": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/python3.12/site-packages/slepc4py/lib/SLEPc.abi3.so",
+    "version": [
+      3,
+      26,
+      1
+    ]
+  },
+  "thread_environment": {
+    "BLIS_NUM_THREADS": "1",
+    "GOMP_CPU_AFFINITY": null,
+    "KMP_AFFINITY": null,
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OMP_PLACES": null,
+    "OMP_PROC_BIND": null,
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "threadpools": [
+    {
+      "filepath": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libomp.so",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libomp",
+      "user_api": "openmp",
+      "version": null
+    },
+    {
+      "architecture": "Cooperlake",
+      "filepath": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libopenblas",
+      "threading_layer": "openmp",
+      "user_api": "blas",
+      "version": "0.3.34"
+    }
+  ],
+  "utc": "2026-11-24T21:48:56.478094+00:00"
+}

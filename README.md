@@ -2,6 +2,8 @@
 
 A C++17 Davidson eigensolver for the lowest few eigenpairs of a dense real symmetric matrix. It has two backends: a serial baseline and an OpenMP version. Both are checked against NumPy and benchmarked against PySCF's Davidson solver.
 
+The Euler study adds SLEPc and single-socket 1/2/4/8-core scaling: [final baseline report](docs/baselines/report.md), [one-page summary](docs/baselines/summary.md), and [retained evidence / regeneration](results/euler/README.md). E6 is the primary result; E4 supplies the cross-socket comparison. The report and all figures regenerate locally from the compact retained evidence without running solvers.
+
 ## What it computes
 
 `Davidson(A, guess, nroots, tol, max_iter, backend)` ([davidson.h](davidson.h)) returns the `nroots` smallest eigenvalues λ₁ ≤ … ≤ λ_k of a symmetric n×n matrix `A`, along with orthonormal eigenvectors X (n×k).

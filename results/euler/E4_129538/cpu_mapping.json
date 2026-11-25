@@ -1,0 +1,104 @@
+{
+  "allowed_logical_cpus": [
+    14,
+    15,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    62,
+    63,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95
+  ],
+  "physical_cores": [
+    {
+      "socket": 0,
+      "core": 26,
+      "cpu": 14,
+      "allowed_siblings": [
+        14,
+        62
+      ]
+    },
+    {
+      "socket": 0,
+      "core": 27,
+      "cpu": 15,
+      "allowed_siblings": [
+        15,
+        63
+      ]
+    },
+    {
+      "socket": 1,
+      "core": 8,
+      "cpu": 42,
+      "allowed_siblings": [
+        42,
+        90
+      ]
+    },
+    {
+      "socket": 1,
+      "core": 9,
+      "cpu": 43,
+      "allowed_siblings": [
+        43,
+        91
+      ]
+    },
+    {
+      "socket": 1,
+      "core": 10,
+      "cpu": 44,
+      "allowed_siblings": [
+        44,
+        92
+      ]
+    },
+    {
+      "socket": 1,
+      "core": 11,
+      "cpu": 45,
+      "allowed_siblings": [
+        45,
+        93
+      ]
+    },
+    {
+      "socket": 1,
+      "core": 12,
+      "cpu": 46,
+      "allowed_siblings": [
+        46,
+        94
+      ]
+    },
+    {
+      "socket": 1,
+      "core": 13,
+      "cpu": 47,
+      "allowed_siblings": [
+        47,
+        95
+      ]
+    }
+  ],
+  "selected": [
+    14,
+    15,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47
+  ]
+}

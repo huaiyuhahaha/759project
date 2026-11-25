@@ -1,0 +1,13 @@
+PartitionName=instruction
+   AllowGroups=euler-courses AllowAccounts=ALL AllowQos=ALL
+   AllocNodes=ALL Default=NO QoS=N/A
+   DefaultTime=00:30:00 DisableRootJobs=NO ExclusiveUser=NO ExclusiveTopo=NO GraceTime=180 Hidden=NO
+   MaxNodes=UNLIMITED MaxTime=00:45:00 MinNodes=0 LLN=NO MaxCPUsPerNode=UNLIMITED MaxCPUsPerSocket=UNLIMITED
+   Nodes=euler[01-04,145]
+   PriorityJobFactor=1 PriorityTier=300 RootOnly=NO ReqResv=NO OverSubscribe=YES:4
+   OverTimeLimit=NONE PreemptMode=REQUEUE
+   State=UP TotalCPUs=640 TotalNodes=5 SelectTypeParameters=NONE
+   JobDefaults=(null)
+   DefMemPerCPU=2000 MaxMemPerNode=UNLIMITED
+   TRES=cpu=640,mem=1492000M,node=5,billing=640,gres/gpu=32
+

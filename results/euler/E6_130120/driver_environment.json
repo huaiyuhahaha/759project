@@ -1,0 +1,958 @@
+{
+  "python": "3.12.16",
+  "executable": "/srv/home/rxu292/759project/.euler/envs/baselines/bin/python",
+  "numpy": "2.5.5",
+  "numpy_show_config": "{\n  \"Compilers\": {\n    \"c\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"15.3.0\",\n      \"commands\": \"x86_64-conda-linux-gnu-cc\",\n      \"args\": \"-march=nocona, -mtune=haswell, -ftree-vectorize, -fPIC, -fstack-protector-strong, -fno-plt, -O2, -ffunction-sections, -pipe, -fno-merge-constants, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include, -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_he827f4e_1794816433/work=/usr/local/src/conda/numpy-2.5.5, -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix, -DNDEBUG, -D_FORTIFY_SOURCE=2, -O2, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include\",\n      \"linker args\": \"-Wl,-O2, -Wl,--sort-common, -Wl,--as-needed, -Wl,-z,relro, -Wl,-z,now, -Wl,--disable-new-dtags, -Wl,--gc-sections, -Wl,--allow-shlib-undefined, -Wl,-rpath,/srv/home/rxu292/759project/.euler/envs/baselines/lib, -Wl,-rpath-link,/srv/home/rxu292/759project/.euler/envs/baselines/lib, -L/srv/home/rxu292/759project/.euler/envs/baselines/lib, -march=nocona, -mtune=haswell, -ftree-vectorize, -fPIC, -fstack-protector-strong, -fno-plt, -O2, -ffunction-sections, -pipe, -fno-merge-constants, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include, -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_he827f4e_1794816433/work=/usr/local/src/conda/numpy-2.5.5, -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix, -DNDEBUG, -D_FORTIFY_SOURCE=2, -O2, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include\"\n    },\n    \"cython\": {\n      \"name\": \"cython\",\n      \"linker\": \"cython\",\n      \"version\": \"3.3.1\",\n      \"commands\": \"cython\"\n    },\n    \"c++\": {\n      \"name\": \"gcc\",\n      \"linker\": \"ld.bfd\",\n      \"version\": \"15.3.0\",\n      \"commands\": \"x86_64-conda-linux-gnu-c++\",\n      \"args\": \"-fvisibility-inlines-hidden, -fmessage-length=0, -march=nocona, -mtune=haswell, -ftree-vectorize, -fPIC, -fstack-protector-strong, -fno-plt, -O2, -ffunction-sections, -pipe, -fno-merge-constants, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include, -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_he827f4e_1794816433/work=/usr/local/src/conda/numpy-2.5.5, -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix, -DNDEBUG, -D_FORTIFY_SOURCE=2, -O2, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include\",\n      \"linker args\": \"-Wl,-O2, -Wl,--sort-common, -Wl,--as-needed, -Wl,-z,relro, -Wl,-z,now, -Wl,--disable-new-dtags, -Wl,--gc-sections, -Wl,--allow-shlib-undefined, -Wl,-rpath,/srv/home/rxu292/759project/.euler/envs/baselines/lib, -Wl,-rpath-link,/srv/home/rxu292/759project/.euler/envs/baselines/lib, -L/srv/home/rxu292/759project/.euler/envs/baselines/lib, -fvisibility-inlines-hidden, -fmessage-length=0, -march=nocona, -mtune=haswell, -ftree-vectorize, -fPIC, -fstack-protector-strong, -fno-plt, -O2, -ffunction-sections, -pipe, -fno-merge-constants, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include, -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_he827f4e_1794816433/work=/usr/local/src/conda/numpy-2.5.5, -fdebug-prefix-map=/srv/home/rxu292/759project/.euler/envs/baselines=/usr/local/src/conda-prefix, -DNDEBUG, -D_FORTIFY_SOURCE=2, -O2, -isystem, /srv/home/rxu292/759project/.euler/envs/baselines/include\"\n    }\n  },\n  \"Machine Information\": {\n    \"host\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    },\n    \"build\": {\n      \"cpu\": \"x86_64\",\n      \"family\": \"x86_64\",\n      \"endian\": \"little\",\n      \"system\": \"linux\"\n    }\n  },\n  \"Build Dependencies\": {\n    \"blas\": {\n      \"name\": \"blas\",\n      \"found\": true,\n      \"version\": \"3.9.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/include\",\n      \"lib directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/lib\",\n      \"openblas configuration\": \"unknown\",\n      \"pc file directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/lib/pkgconfig\"\n    },\n    \"lapack\": {\n      \"name\": \"lapack\",\n      \"found\": true,\n      \"version\": \"3.9.0\",\n      \"detection method\": \"pkgconfig\",\n      \"include directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/include\",\n      \"lib directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/lib\",\n      \"openblas configuration\": \"unknown\",\n      \"pc file directory\": \"/srv/home/rxu292/759project/.euler/envs/baselines/lib/pkgconfig\"\n    }\n  },\n  \"Python Information\": {\n    \"path\": \"/srv/home/rxu292/759project/.euler/envs/baselines/bin/python\",\n    \"version\": \"3.12\"\n  },\n  \"SIMD Extensions\": {\n    \"baseline\": [\n      \"X86_V2\"\n    ],\n    \"found\": [\n      \"X86_V3\",\n      \"X86_V4\",\n      \"AVX512_ICL\"\n    ],\n    \"not found\": [\n      \"AVX512_SPR\"\n    ]\n  }\n}\n",
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libopenblas",
+      "filepath": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libopenblasp-r0.3.34.so",
+      "version": "0.3.34",
+      "threading_layer": "openmp",
+      "architecture": "Cooperlake"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 1,
+      "prefix": "libomp",
+      "filepath": "/srv/home/rxu292/759project/.euler/envs/baselines/lib/libomp.so",
+      "version": null
+    }
+  ],
+  "cpu_mapping": {
+    "schema_version": 1,
+    "verified": true,
+    "created_utc": "2026-11-25T14:37:35.498806+00:00",
+    "host": "euler01.engr.wisc.edu",
+    "slurm_job_id": "130120",
+    "taskset": "/usr/bin/taskset",
+    "allowed_logical_cpus": [
+      3,
+      4,
+      6,
+      13,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      26,
+      27,
+      30,
+      31,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      51,
+      52,
+      54,
+      61,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      74,
+      75,
+      78,
+      79,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93
+    ],
+    "physical_cores": [
+      {
+        "socket": 0,
+        "core": 3,
+        "cpu": 3,
+        "allowed_siblings": [
+          3,
+          51
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 4,
+        "cpu": 4,
+        "allowed_siblings": [
+          4,
+          52
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 8,
+        "cpu": 18,
+        "allowed_siblings": [
+          18,
+          66
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 9,
+        "cpu": 19,
+        "allowed_siblings": [
+          19,
+          67
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 10,
+        "cpu": 20,
+        "allowed_siblings": [
+          20,
+          68
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 11,
+        "cpu": 21,
+        "allowed_siblings": [
+          21,
+          69
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 12,
+        "cpu": 22,
+        "allowed_siblings": [
+          22,
+          70
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 13,
+        "cpu": 23,
+        "allowed_siblings": [
+          23,
+          71
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 16,
+        "cpu": 6,
+        "allowed_siblings": [
+          6,
+          54
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 25,
+        "cpu": 13,
+        "allowed_siblings": [
+          13,
+          61
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 28,
+        "cpu": 16,
+        "allowed_siblings": [
+          16,
+          64
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 0,
+        "core": 29,
+        "cpu": 17,
+        "allowed_siblings": [
+          17,
+          65
+        ],
+        "numa_node": 0
+      },
+      {
+        "socket": 1,
+        "core": 2,
+        "cpu": 26,
+        "allowed_siblings": [
+          26,
+          74
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 3,
+        "cpu": 27,
+        "allowed_siblings": [
+          27,
+          75
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 8,
+        "cpu": 42,
+        "allowed_siblings": [
+          42,
+          90
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 9,
+        "cpu": 43,
+        "allowed_siblings": [
+          43,
+          91
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 10,
+        "cpu": 44,
+        "allowed_siblings": [
+          44,
+          92
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 11,
+        "cpu": 45,
+        "allowed_siblings": [
+          45,
+          93
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 16,
+        "cpu": 30,
+        "allowed_siblings": [
+          30,
+          78
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 17,
+        "cpu": 31,
+        "allowed_siblings": [
+          31,
+          79
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 26,
+        "cpu": 38,
+        "allowed_siblings": [
+          38,
+          86
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 27,
+        "cpu": 39,
+        "allowed_siblings": [
+          39,
+          87
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 28,
+        "cpu": 40,
+        "allowed_siblings": [
+          40,
+          88
+        ],
+        "numa_node": 1
+      },
+      {
+        "socket": 1,
+        "core": 29,
+        "cpu": 41,
+        "allowed_siblings": [
+          41,
+          89
+        ],
+        "numa_node": 1
+      }
+    ],
+    "verification": {
+      "sysfs_root": "/sys/devices/system/cpu",
+      "lscpu_command": [
+        "lscpu",
+        "--parse=CPU,CORE,SOCKET,NODE"
+      ],
+      "lscpu_csv": "# The following is the parsable format, which can be fed to other\n# programs. Each different item in every column has an unique ID\n# starting usually from zero.\n# CPU,Core,Socket,Node\n0,0,0,0\n1,1,0,0\n2,2,0,0\n3,3,0,0\n4,4,0,0\n5,5,0,0\n6,6,0,0\n7,7,0,0\n8,8,0,0\n9,9,0,0\n10,10,0,0\n11,11,0,0\n12,12,0,0\n13,13,0,0\n14,14,0,0\n15,15,0,0\n16,16,0,0\n17,17,0,0\n18,18,0,0\n19,19,0,0\n20,20,0,0\n21,21,0,0\n22,22,0,0\n23,23,0,0\n24,24,1,1\n25,25,1,1\n26,26,1,1\n27,27,1,1\n28,28,1,1\n29,29,1,1\n30,30,1,1\n31,31,1,1\n32,32,1,1\n33,33,1,1\n34,34,1,1\n35,35,1,1\n36,36,1,1\n37,37,1,1\n38,38,1,1\n39,39,1,1\n40,40,1,1\n41,41,1,1\n42,42,1,1\n43,43,1,1\n44,44,1,1\n45,45,1,1\n46,46,1,1\n47,47,1,1\n48,0,0,0\n49,1,0,0\n50,2,0,0\n51,3,0,0\n52,4,0,0\n53,5,0,0\n54,6,0,0\n55,7,0,0\n56,8,0,0\n57,9,0,0\n58,10,0,0\n59,11,0,0\n60,12,0,0\n61,13,0,0\n62,14,0,0\n63,15,0,0\n64,16,0,0\n65,17,0,0\n66,18,0,0\n67,19,0,0\n68,20,0,0\n69,21,0,0\n70,22,0,0\n71,23,0,0\n72,24,1,1\n73,25,1,1\n74,26,1,1\n75,27,1,1\n76,28,1,1\n77,29,1,1\n78,30,1,1\n79,31,1,1\n80,32,1,1\n81,33,1,1\n82,34,1,1\n83,35,1,1\n84,36,1,1\n85,37,1,1\n86,38,1,1\n87,39,1,1\n88,40,1,1\n89,41,1,1\n90,42,1,1\n91,43,1,1\n92,44,1,1\n93,45,1,1\n94,46,1,1\n95,47,1,1\n",
+      "cpu_evidence": [
+        {
+          "cpu": 3,
+          "socket": 0,
+          "core": 3,
+          "numa_node": 0,
+          "thread_siblings": [
+            3,
+            51
+          ],
+          "lscpu_core": 3
+        },
+        {
+          "cpu": 4,
+          "socket": 0,
+          "core": 4,
+          "numa_node": 0,
+          "thread_siblings": [
+            4,
+            52
+          ],
+          "lscpu_core": 4
+        },
+        {
+          "cpu": 6,
+          "socket": 0,
+          "core": 16,
+          "numa_node": 0,
+          "thread_siblings": [
+            6,
+            54
+          ],
+          "lscpu_core": 6
+        },
+        {
+          "cpu": 13,
+          "socket": 0,
+          "core": 25,
+          "numa_node": 0,
+          "thread_siblings": [
+            13,
+            61
+          ],
+          "lscpu_core": 13
+        },
+        {
+          "cpu": 16,
+          "socket": 0,
+          "core": 28,
+          "numa_node": 0,
+          "thread_siblings": [
+            16,
+            64
+          ],
+          "lscpu_core": 16
+        },
+        {
+          "cpu": 17,
+          "socket": 0,
+          "core": 29,
+          "numa_node": 0,
+          "thread_siblings": [
+            17,
+            65
+          ],
+          "lscpu_core": 17
+        },
+        {
+          "cpu": 18,
+          "socket": 0,
+          "core": 8,
+          "numa_node": 0,
+          "thread_siblings": [
+            18,
+            66
+          ],
+          "lscpu_core": 18
+        },
+        {
+          "cpu": 19,
+          "socket": 0,
+          "core": 9,
+          "numa_node": 0,
+          "thread_siblings": [
+            19,
+            67
+          ],
+          "lscpu_core": 19
+        },
+        {
+          "cpu": 20,
+          "socket": 0,
+          "core": 10,
+          "numa_node": 0,
+          "thread_siblings": [
+            20,
+            68
+          ],
+          "lscpu_core": 20
+        },
+        {
+          "cpu": 21,
+          "socket": 0,
+          "core": 11,
+          "numa_node": 0,
+          "thread_siblings": [
+            21,
+            69
+          ],
+          "lscpu_core": 21
+        },
+        {
+          "cpu": 22,
+          "socket": 0,
+          "core": 12,
+          "numa_node": 0,
+          "thread_siblings": [
+            22,
+            70
+          ],
+          "lscpu_core": 22
+        },
+        {
+          "cpu": 23,
+          "socket": 0,
+          "core": 13,
+          "numa_node": 0,
+          "thread_siblings": [
+            23,
+            71
+          ],
+          "lscpu_core": 23
+        },
+        {
+          "cpu": 26,
+          "socket": 1,
+          "core": 2,
+          "numa_node": 1,
+          "thread_siblings": [
+            26,
+            74
+          ],
+          "lscpu_core": 26
+        },
+        {
+          "cpu": 27,
+          "socket": 1,
+          "core": 3,
+          "numa_node": 1,
+          "thread_siblings": [
+            27,
+            75
+          ],
+          "lscpu_core": 27
+        },
+        {
+          "cpu": 30,
+          "socket": 1,
+          "core": 16,
+          "numa_node": 1,
+          "thread_siblings": [
+            30,
+            78
+          ],
+          "lscpu_core": 30
+        },
+        {
+          "cpu": 31,
+          "socket": 1,
+          "core": 17,
+          "numa_node": 1,
+          "thread_siblings": [
+            31,
+            79
+          ],
+          "lscpu_core": 31
+        },
+        {
+          "cpu": 38,
+          "socket": 1,
+          "core": 26,
+          "numa_node": 1,
+          "thread_siblings": [
+            38,
+            86
+          ],
+          "lscpu_core": 38
+        },
+        {
+          "cpu": 39,
+          "socket": 1,
+          "core": 27,
+          "numa_node": 1,
+          "thread_siblings": [
+            39,
+            87
+          ],
+          "lscpu_core": 39
+        },
+        {
+          "cpu": 40,
+          "socket": 1,
+          "core": 28,
+          "numa_node": 1,
+          "thread_siblings": [
+            40,
+            88
+          ],
+          "lscpu_core": 40
+        },
+        {
+          "cpu": 41,
+          "socket": 1,
+          "core": 29,
+          "numa_node": 1,
+          "thread_siblings": [
+            41,
+            89
+          ],
+          "lscpu_core": 41
+        },
+        {
+          "cpu": 42,
+          "socket": 1,
+          "core": 8,
+          "numa_node": 1,
+          "thread_siblings": [
+            42,
+            90
+          ],
+          "lscpu_core": 42
+        },
+        {
+          "cpu": 43,
+          "socket": 1,
+          "core": 9,
+          "numa_node": 1,
+          "thread_siblings": [
+            43,
+            91
+          ],
+          "lscpu_core": 43
+        },
+        {
+          "cpu": 44,
+          "socket": 1,
+          "core": 10,
+          "numa_node": 1,
+          "thread_siblings": [
+            44,
+            92
+          ],
+          "lscpu_core": 44
+        },
+        {
+          "cpu": 45,
+          "socket": 1,
+          "core": 11,
+          "numa_node": 1,
+          "thread_siblings": [
+            45,
+            93
+          ],
+          "lscpu_core": 45
+        },
+        {
+          "cpu": 51,
+          "socket": 0,
+          "core": 3,
+          "numa_node": 0,
+          "thread_siblings": [
+            3,
+            51
+          ],
+          "lscpu_core": 3
+        },
+        {
+          "cpu": 52,
+          "socket": 0,
+          "core": 4,
+          "numa_node": 0,
+          "thread_siblings": [
+            4,
+            52
+          ],
+          "lscpu_core": 4
+        },
+        {
+          "cpu": 54,
+          "socket": 0,
+          "core": 16,
+          "numa_node": 0,
+          "thread_siblings": [
+            6,
+            54
+          ],
+          "lscpu_core": 6
+        },
+        {
+          "cpu": 61,
+          "socket": 0,
+          "core": 25,
+          "numa_node": 0,
+          "thread_siblings": [
+            13,
+            61
+          ],
+          "lscpu_core": 13
+        },
+        {
+          "cpu": 64,
+          "socket": 0,
+          "core": 28,
+          "numa_node": 0,
+          "thread_siblings": [
+            16,
+            64
+          ],
+          "lscpu_core": 16
+        },
+        {
+          "cpu": 65,
+          "socket": 0,
+          "core": 29,
+          "numa_node": 0,
+          "thread_siblings": [
+            17,
+            65
+          ],
+          "lscpu_core": 17
+        },
+        {
+          "cpu": 66,
+          "socket": 0,
+          "core": 8,
+          "numa_node": 0,
+          "thread_siblings": [
+            18,
+            66
+          ],
+          "lscpu_core": 18
+        },
+        {
+          "cpu": 67,
+          "socket": 0,
+          "core": 9,
+          "numa_node": 0,
+          "thread_siblings": [
+            19,
+            67
+          ],
+          "lscpu_core": 19
+        },
+        {
+          "cpu": 68,
+          "socket": 0,
+          "core": 10,
+          "numa_node": 0,
+          "thread_siblings": [
+            20,
+            68
+          ],
+          "lscpu_core": 20
+        },
+        {
+          "cpu": 69,
+          "socket": 0,
+          "core": 11,
+          "numa_node": 0,
+          "thread_siblings": [
+            21,
+            69
+          ],
+          "lscpu_core": 21
+        },
+        {
+          "cpu": 70,
+          "socket": 0,
+          "core": 12,
+          "numa_node": 0,
+          "thread_siblings": [
+            22,
+            70
+          ],
+          "lscpu_core": 22
+        },
+        {
+          "cpu": 71,
+          "socket": 0,
+          "core": 13,
+          "numa_node": 0,
+          "thread_siblings": [
+            23,
+            71
+          ],
+          "lscpu_core": 23
+        },
+        {
+          "cpu": 74,
+          "socket": 1,
+          "core": 2,
+          "numa_node": 1,
+          "thread_siblings": [
+            26,
+            74
+          ],
+          "lscpu_core": 26
+        },
+        {
+          "cpu": 75,
+          "socket": 1,
+          "core": 3,
+          "numa_node": 1,
+          "thread_siblings": [
+            27,
+            75
+          ],
+          "lscpu_core": 27
+        },
+        {
+          "cpu": 78,
+          "socket": 1,
+          "core": 16,
+          "numa_node": 1,
+          "thread_siblings": [
+            30,
+            78
+          ],
+          "lscpu_core": 30
+        },
+        {
+          "cpu": 79,
+          "socket": 1,
+          "core": 17,
+          "numa_node": 1,
+          "thread_siblings": [
+            31,
+            79
+          ],
+          "lscpu_core": 31
+        },
+        {
+          "cpu": 86,
+          "socket": 1,
+          "core": 26,
+          "numa_node": 1,
+          "thread_siblings": [
+            38,
+            86
+          ],
+          "lscpu_core": 38
+        },
+        {
+          "cpu": 87,
+          "socket": 1,
+          "core": 27,
+          "numa_node": 1,
+          "thread_siblings": [
+            39,
+            87
+          ],
+          "lscpu_core": 39
+        },
+        {
+          "cpu": 88,
+          "socket": 1,
+          "core": 28,
+          "numa_node": 1,
+          "thread_siblings": [
+            40,
+            88
+          ],
+          "lscpu_core": 40
+        },
+        {
+          "cpu": 89,
+          "socket": 1,
+          "core": 29,
+          "numa_node": 1,
+          "thread_siblings": [
+            41,
+            89
+          ],
+          "lscpu_core": 41
+        },
+        {
+          "cpu": 90,
+          "socket": 1,
+          "core": 8,
+          "numa_node": 1,
+          "thread_siblings": [
+            42,
+            90
+          ],
+          "lscpu_core": 42
+        },
+        {
+          "cpu": 91,
+          "socket": 1,
+          "core": 9,
+          "numa_node": 1,
+          "thread_siblings": [
+            43,
+            91
+          ],
+          "lscpu_core": 43
+        },
+        {
+          "cpu": 92,
+          "socket": 1,
+          "core": 10,
+          "numa_node": 1,
+          "thread_siblings": [
+            44,
+            92
+          ],
+          "lscpu_core": 44
+        },
+        {
+          "cpu": 93,
+          "socket": 1,
+          "core": 11,
+          "numa_node": 1,
+          "thread_siblings": [
+            45,
+            93
+          ],
+          "lscpu_core": 45
+        }
+      ],
+      "core_comparison": "physical-core grouping; IDs may be renumbered"
+    },
+    "socket": 0,
+    "numa_node": 0,
+    "selected": [
+      3,
+      4,
+      6,
+      13,
+      16,
+      17,
+      18,
+      19
+    ],
+    "expectedcores": 8,
+    "socket_physical_core_counts": {
+      "0": 12,
+      "1": 12
+    },
+    "selected_socket_numa_physical_core_counts": {
+      "0": 12
+    },
+    "selection_rule": "most allocated physical cores per socket, then per NUMA node; ties use lowest ID; ascending representative CPUs",
+    "memory_policy": {
+      "mode": "pinned_first_touch",
+      "numactl": null,
+      "description": "numactl unavailable; matrix allocation/first touch runs on selected CPUs"
+    },
+    "affinity_probe": {
+      "command": [
+        "/usr/bin/taskset",
+        "-c",
+        "3,4,6,13,16,17,18,19",
+        "/srv/home/rxu292/759project/.euler/envs/baselines/bin/python",
+        "-c",
+        "import json,os; print(json.dumps(sorted(os.sched_getaffinity(0))))"
+      ],
+      "returncode": 0,
+      "stdout": "[3, 4, 6, 13, 16, 17, 18, 19]\n",
+      "stderr": ""
+    },
+    "_plan_path": "/srv/home/rxu292/759project/results/euler/E6_130120/single_socket.json",
+    "driver_runtime": {
+      "cpus": [
+        3,
+        4,
+        6,
+        13,
+        16,
+        17,
+        18,
+        19
+      ],
+      "socket": 0,
+      "numa_node": 0,
+      "physical_cores": 8,
+      "memory_policy": "pinned_first_touch"
+    }
+  },
+  "job_id": "130120",
+  "hostname": "euler01.engr.wisc.edu",
+  "environment_verified": true,
+  "source": {
+    "sha256": {
+      "matrix.cpp": "b67200f41d861768b63e37a5cd3cccaa8349212f06afba0096e6fce35f34e734",
+      "matrix.h": "e48ffa1633df54c2ae64fbc756c87262559afac030a2428eaed34d91813f5e5e",
+      "davidson.cpp": "1beee6fe07bc35ff020b907742ccf7d512b1b7fb6c9e85b9a3d28f1d628f8fff",
+      "davidson.h": "89da33686f8bcd46d804173de156b04faba5f4a611c6278d97640bfa5aaa37e9",
+      "bench/baseline_common.py": "1c0e293354d863fa9759d2f1ca819b2f0f0ccca19f904578229ea3fa5a408d71",
+      "bench/pyscf_baselines.py": "a32fb616bff4cb714bad190a9b03acde4c6ed3145d987c6fe3b378d9230f9470",
+      "bench/pyscf_davidson_bench.py": "72f5592a09f779ead0552c604abc500c5c834e3534ebcbe9ec820ac684676380",
+      "bench/run_baselines.py": "e741437fe835b65fc7e2fe9db0ee949f2847f394c43f21452a116b97269ac60a",
+      "bench/run_davidson_bench.py": "a5d4d6a306048193c7c8cd8beb58f8aeddbef17276230c535d0b93d036d413f0",
+      "bench/slepc_davidson_bench.py": "8eb815cc8d39ec57d94e33a806f38b9a00f4abdd5a07415397acaea452356bf9",
+      "bench/cpp_baselines_bench.cpp": "fd26fee506f3bd4f4eef7edc5c6334de1f352161944c6c9c122c487079259a09",
+      "bench/davidson_bench.cpp": "57b81e9583e04a4ac45a4fcf085f9f5a51dce1465bae9589c5171a2832d3c843",
+      "euler/check_numerics.py": "4ef067b8777ad667dd09843d44d678e658c2cb2d166b9dc5e66e3b3f33abba6e",
+      "euler/inspect_env.py": "aae6a34cb31db2db68e4ea9eb42f89d3e175e4b60c8d1071ad6160151e9df3ae",
+      "euler/record_hardware.py": "62b4eb2806b12ce68bf4dfd380755556e772ec9a9c21e73cc7ccfb7e58a5520b",
+      "euler/run_env_checks.py": "c9743f1bf188b83e843f821bfaddce04d404ce48f60e47ed84ee96fe4b19b33d",
+      "euler/single_socket.py": "6cbb03ca8d5853261c9722c82d0d534458423becfffb84ea8e6d0a48a9927384",
+      "euler/00_probe_node.sbatch": "efba2fd9383a954c77378680fdeb450f346cb26471e3abff18125161e4cfaa86",
+      "euler/02_check_env.sbatch": "5d4ab7cf345f3ec7e4d2da2ccb41742df6bcfedd6c86c9dc10acf066d5d32b31",
+      "euler/03_smoke.sbatch": "7291376cb4abc7a208461b27a417781cdbcd7eb65c907f5e448c7d9f3239e2c5",
+      "euler/04_baselines.sbatch": "540441c9c9907bc9216b49ed5bf5258beb82dad3e8fff2c91199b6d4ae419bb2",
+      "euler/05_profile.sbatch": "7b4d02659f399c9f93ab8ec39027263966958e3e45c8c7c108f68af79a3b85a7",
+      "euler/06_single_socket.sbatch": "8877e0d58b37a610653e0193b440ad43573e09a3250ccae2e67782b224b950be",
+      "euler/00_probe.sh": "45990700656e03274718ef8fe22b87720683d7932548566c705f87752f979738",
+      "euler/01_setup_env.sh": "4b800e97da7f0e0a75ebf2e6010b71bf94155317ab6c21dab13d8d6bc55c4a9d",
+      "euler/compiler_common.sh": "b7273526cffbbcc75fbc5400176dc2df8c68078c97f7340058691c168d4f6374",
+      "euler/probe_common.sh": "85641a9c2c0fb8b664ef32ff16f0829e85e1d6f781263c2b56face45ab404f6c",
+      "euler/run_baseline_job.sh": "8a21924ecdcb611caa1809d22f9f33097a3eab0d59b7b9fd711fce6fc5824b7a"
+    },
+    "revision": "0e014e36a1d5432063daaa8644df355db3e3801b",
+    "status": "M .gitignore\n M bench/pyscf_davidson_bench.py\n M davidson.cpp\n M matrix.cpp\n M matrix.h\n M matrix_optimize_4.cpp\n?? .euler/\n?? bench/baseline_common.py\n?? bench/cpp_baselines_bench.cpp\n?? bench/pyscf_baselines.py\n?? bench/run_baselines.py\n?? bench/slepc_davidson_bench.py\n?? docs/\n?? euler/\n?? results/"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "n": 64,
+  "input_checksum": "20eb8cfe7d4a4138",
+  "eigenvalues": [
+    0.9996767756840593,
+    1.9997221531639418,
+    2.999764711254253,
+    3.9995440444978407
+  ],
+  "method": "numpy.linalg.eigvalsh(A)[:4]",
+  "blas_threads": 1,
+  "elapsed_s": 0.0776135423220694,
+  "numpy": "2.5.5",
+  "input_sha256": "52b09b93698e5f2574b171118fe1d9df32cca6a8f76930eaca40badd18819f90"
+}

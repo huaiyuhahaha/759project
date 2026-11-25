@@ -1,0 +1,16 @@
+NodeName=euler01 Arch=x86_64 CoresPerSocket=24 
+   CPUAlloc=92 CPUEfctv=96 CPUTot=96 CPULoad=45.87
+   AvailableFeatures=amd,epyc,genoa,gpu,ada,quadro_gpu,ssd
+   ActiveFeatures=amd,epyc,genoa,gpu,ada,quadro_gpu,ssd
+   Gres=gpu:rtx4000ada:8,scratch:1720G
+   NodeAddr=2607:f388:1082:4a01:eaeb:d3ff:fecc:f7a0 NodeHostName=euler01 Version=25.05.7
+   OS=Linux 6.12.0-211.68.1.el10_2.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Oct 23 09:42:35 EDT 2026 
+   RealMemory=248000 AllocMem=93112 FreeMem=198706 Sockets=2 Boards=1
+   State=MIXED ThreadsPerCore=2 TmpDisk=0 Weight=1 Owner=N/A MCS_label=N/A
+   Partitions=interactive,research,instruction 
+   BootTime=2026-10-28T11:44:20 SlurmdStartTime=2026-10-28T11:45:06
+   LastBusyTime=2026-10-29T00:47:25 ResumeAfterTime=None
+   CfgTRES=cpu=96,mem=248000M,billing=96,gres/gpu=8
+   AllocTRES=cpu=92,mem=93112M,gres/gpu=6
+   CurrentWatts=0 AveWatts=0
+

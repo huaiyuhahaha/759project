@@ -1,0 +1,15 @@
+{
+  "cpus": [
+    4
+  ],
+  "socket": 0,
+  "numa_node": 0,
+  "physical_cores": 1,
+  "memory_policy": "pinned_first_touch",
+  "rank": 1,
+  "mpi_size": 2,
+  "host": "euler01.engr.wisc.edu",
+  "slurm_job_id": "130120",
+  "plan_path": "/srv/home/rxu292/759project/results/euler/E6_130120/single_socket.json",
+  "verified_before_solver_exec": true
+}

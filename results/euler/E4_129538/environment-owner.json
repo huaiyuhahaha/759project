@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "uid": 2172379,
+  "prefix": "/srv/home/rxu292/759project/.euler/envs/baselines",
+  "repo": "/srv/home/rxu292/759project",
+  "spec_sha256": "c544f2ed24684d2a1a50841b8fa3cd35fa13ed4a1b6be7d886a340dd611a0721",
+  "status": "ready",
+  "pyscf_source": "conda-forge",
+  "e1_artifacts": "/srv/home/rxu292/759project/results/euler/E1_login_20261124T005142Z_8j8pE5",
+  "adopted_from": "/srv/home/rxu292/759project/results/euler/E1_login_20261123T221657Z_i7ag5g"
+}

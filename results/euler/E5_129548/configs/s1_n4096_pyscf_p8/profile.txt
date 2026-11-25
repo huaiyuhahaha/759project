@@ -1,0 +1,68 @@
+         3840 function calls in 0.118 seconds
+
+   Ordered by: cumulative time
+   List reduced from 90 to 60 due to restriction <60>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001    0.118    0.118 linalg_helper.py:290(davidson1)
+       12    0.000    0.000    0.107    0.009 pyscf_davidson_bench.py:90(__call__)
+       32    0.107    0.003    0.107    0.003 {method 'dot' of 'numpy.ndarray' objects}
+       24    0.003    0.000    0.003    0.000 linalg_helper.py:1649(_outprod_to_subspace)
+       12    0.000    0.000    0.002    0.000 _util.py:1102(wrapper)
+       12    0.001    0.000    0.002    0.000 _decomp.py:311(eigh)
+       11    0.001    0.000    0.001    0.000 linalg_helper.py:1707(_normalize_xt_)
+       12    0.001    0.000    0.001    0.000 linalg_helper.py:165(_fill_heff_hermitian)
+        9    0.001    0.000    0.001    0.000 linalg_helper.py:1626(_qr)
+       10    0.000    0.000    0.001    0.000 linalg_helper.py:1683(_sort_elast)
+       12    0.000    0.000    0.000    0.000 _util.py:364(_asarray_validated)
+        9    0.000    0.000    0.000    0.000 _linalg.py:547(inv)
+       24    0.000    0.000    0.000    0.000 einsumfunc.py:1242(einsum)
+       12    0.000    0.000    0.000    0.000 _function_base_impl.py:615(asarray_chkfinite)
+       24    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath.c_einsum}
+       26    0.000    0.000    0.000    0.000 pyscf_davidson_bench.py:74(precond)
+       12    0.000    0.000    0.000    0.000 lapack.py:1067(_compute_lwork)
+       12    0.000    0.000    0.000    0.000 _aliases.py:70(asarray)
+      265    0.000    0.000    0.000    0.000 {method 'conj' of 'numpy.generic' objects}
+       21    0.000    0.000    0.000    0.000 {built-in method numpy.array}
+       22    0.000    0.000    0.000    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+       10    0.000    0.000    0.000    0.000 fromnumeric.py:2474(any)
+       11    0.000    0.000    0.000    0.000 {built-in method builtins.locals}
+       12    0.000    0.000    0.000    0.000 {method 'all' of 'numpy.ndarray' objects}
+       22    0.000    0.000    0.000    0.000 fromnumeric.py:1259(argmax)
+      743    0.000    0.000    0.000    0.000 {method 'conj' of 'numpy.ndarray' objects}
+       36    0.000    0.000    0.000    0.000 lapack.py:1097(<genexpr>)
+       10    0.000    0.000    0.000    0.000 fromnumeric.py:86(_wrapreduction_any_all)
+       12    0.000    0.000    0.000    0.000 _methods.py:64(_all)
+        9    0.000    0.000    0.000    0.000 _twodim_base_impl.py:178(eye)
+       12    0.000    0.000    0.000    0.000 _sparse.py:10(issparse)
+      494    0.000    0.000    0.000    0.000 {built-in method numpy.asarray}
+       70    0.000    0.000    0.000    0.000 {built-in method builtins.abs}
+       24    0.000    0.000    0.000    0.000 lapack.py:1101(_check_work_float)
+       22    0.000    0.000    0.000    0.000 fromnumeric.py:48(_wrapfunc)
+       38    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+      743    0.000    0.000    0.000    0.000 multiarray.py:751(dot)
+       12    0.000    0.000    0.000    0.000 blas.py:403(getter)
+        9    0.000    0.000    0.000    0.000 _ufunc_config.py:472(__enter__)
+        9    0.000    0.000    0.000    0.000 _linalg.py:201(_commonType)
+       34    0.000    0.000    0.000    0.000 {built-in method numpy.zeros}
+       12    0.000    0.000    0.000    0.000 _helpers.py:683(_check_device)
+       22    0.000    0.000    0.000    0.000 {method 'argmax' of 'numpy.ndarray' objects}
+       12    0.000    0.000    0.000    0.000 _util.py:1041(_deprecate_dtypes)
+       55    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+       12    0.000    0.000    0.000    0.000 <frozen abc>:117(__instancecheck__)
+       33    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+       12    0.000    0.000    0.000    0.000 _type_check_impl.py:265(iscomplexobj)
+       12    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
+      114    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+       11    0.000    0.000    0.000    0.000 pyscf_baselines.py:67(observe)
+       12    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+      120    0.000    0.000    0.000    0.000 einsumfunc.py:1234(_einsum_dispatcher)
+      107    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        9    0.000    0.000    0.000    0.000 _ufunc_config.py:488(__exit__)
+       12    0.000    0.000    0.000    0.000 enum.py:202(__get__)
+        9    0.000    0.000    0.000    0.000 _linalg.py:163(_makearray)
+       12    0.000    0.000    0.000    0.000 core.py:6704(isMaskedArray)
+        9    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath._make_extobj}
+
+

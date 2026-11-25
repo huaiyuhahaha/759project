@@ -1,0 +1,11 @@
+Compiler policy: system /usr/bin/g++; no compiler module.
+Reason: E3 129413 exposed incompatible gcc/14.3.0 C++ headers.
+Flags: -std=c++17 -O3 -march=native -fopenmp -Wall -Wextra -pedantic
+Resolved compiler: /usr/bin/g++
+g++ (GCC) 14.3.1 20251022 (Red Hat 14.3.1-4)
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Target: x86_64-redhat-linux
+libstdc++: /usr/lib/gcc/x86_64-redhat-linux/14/libstdc++.so

@@ -1,0 +1,30 @@
+JobId=130120 JobName=baselines_E6
+   UserId=rxu292(2172379) GroupId=pvt-rxu292(2172379) MCS_label=N/A
+   Priority=87 Nice=0 Account=(null) QOS=normal
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:08 TimeLimit=00:30:00 TimeMin=N/A
+   SubmitTime=2026-11-25T08:34:03 EligibleTime=2026-11-25T08:34:03
+   AccrueTime=2026-11-25T08:34:03
+   StartTime=2026-11-25T08:37:27 EndTime=2026-11-25T09:07:27 Deadline=N/A
+   PreemptEligibleTime=2026-11-25T08:37:27 PreemptTime=None
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-11-25T08:37:27 Scheduler=Main
+   Partition=instruction AllocNode:Sid=0.0.0.0:3699370
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=euler01
+   BatchHost=euler01
+   NumNodes=1 NumCPUs=48 NumTasks=1 CPUs/Task=48 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=48,mem=16G,node=1,billing=48
+   AllocTRES=cpu=48,mem=16G,node=1,billing=48
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=48 MinMemoryNode=16G MinTmpDiskNode=0
+   Features=genoa DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/srv/home/rxu292/759project/euler/06_single_socket.sbatch
+   WorkDir=/srv/home/rxu292/759project
+   StdErr=/srv/home/rxu292/759project/results/euler/E6_130120.slurm.err
+   StdIn=/dev/null
+   StdOut=/srv/home/rxu292/759project/results/euler/E6_130120.slurm.out
+   TresPerTask=cpu=48
+   
+

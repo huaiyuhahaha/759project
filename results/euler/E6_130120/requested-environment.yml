@@ -1,0 +1,27 @@
+# Stage 2 solve request; E1 exports the actual versions and build strings.
+# 01_setup_env.sh enforces strict channel priority without editing ~/.condarc.
+name: baselines-euler
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - numpy
+  - scipy
+  - h5py
+  - threadpoolctl
+  - pyscf
+  # real_* selects CPU real-scalar builds. Verify float64 at runtime in E2.
+  - petsc=*=real_*
+  - petsc4py
+  - slepc=*=real_*
+  - slepc4py
+  - mpi=*=mpich
+  - mpich
+  - mpi4py
+  - libblas=*=*openblas
+  - libcblas=*=*openblas
+  - liblapack=*=*openblas
+  # Used only for a documented PySCF fallback if conda-forge has no package.
+  - pip
+  - setuptools

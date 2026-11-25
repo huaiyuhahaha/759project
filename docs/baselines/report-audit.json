@@ -1,0 +1,2445 @@
+{
+  "e4": {
+    "capped_below_target": [
+      "s1_n64_cpp_serial_p1",
+      "s1_n64_cpp_openmp_p1",
+      "s1_n64_cpp_openmp_p8",
+      "s1_n64_pyscf_p1",
+      "s1_n64_pyscf_p8",
+      "s1_n64_slepc_p1",
+      "s1_n128_cpp_serial_p1",
+      "s1_n128_cpp_openmp_p1",
+      "s1_n128_cpp_openmp_p8",
+      "s1_n128_pyscf_p1",
+      "s1_n128_pyscf_p8",
+      "s1_n128_slepc_p1",
+      "s1_n256_cpp_serial_p1",
+      "s1_n256_cpp_openmp_p1",
+      "s1_n256_cpp_openmp_p8",
+      "s1_n256_pyscf_p1",
+      "s1_n256_pyscf_p8",
+      "s1_n256_slepc_p1",
+      "s1_n512_cpp_openmp_p8",
+      "s1_n512_pyscf_p1",
+      "s1_n512_slepc_p1",
+      "s2_n64_cpp_serial_p1",
+      "s2_n64_cpp_openmp_p1",
+      "s2_n64_cpp_openmp_p8",
+      "s2_n64_pyscf_p1",
+      "s2_n64_pyscf_p8",
+      "s2_n64_slepc_p1",
+      "s2_n128_cpp_serial_p1",
+      "s2_n128_cpp_openmp_p1",
+      "s2_n128_cpp_openmp_p8",
+      "s2_n128_pyscf_p1",
+      "s2_n128_pyscf_p8",
+      "s2_n128_slepc_p1",
+      "s2_n256_cpp_serial_p1",
+      "s2_n256_cpp_openmp_p1",
+      "s2_n256_cpp_openmp_p8",
+      "s2_n256_pyscf_p1",
+      "s2_n256_pyscf_p8",
+      "s2_n256_slepc_p1",
+      "s2_n512_cpp_openmp_p8",
+      "s2_n512_pyscf_p1",
+      "s2_n512_slepc_p1"
+    ],
+    "configurations": 98,
+    "error_records": 0,
+    "expected_configurations": 98,
+    "failed_configurations": [],
+    "hashes": {
+      "environment.json": "23f4708f6401f9566f313a0439483cc8c9733a0e3203ba1b520547defafac642",
+      "raw.jsonl": "2bb168e7a81680cbaf12c01e20d3132f366023615d12a1c4aa3d9e4b56b2805e",
+      "run.json": "9b1a0f23f8329fd08a455f876834703fe7a80a4d03eb5ca00272a0fa280eac73",
+      "source.json": "629df68fedcddbf2eba259d9e0c149212462254c78ba6b28b01c20c41b75b775",
+      "summary.csv": "c9fdbfe1d0d777f6efda8388a5b545c1bda2e42a593b5157290987984a19ded5"
+    },
+    "input_checksums": {
+      "1024": "3d70c0a8d9e64af0",
+      "128": "2d5a0883a5be6e54",
+      "2048": "f559e02c1377bad8",
+      "256": "8062cb07a3c03bf0",
+      "4096": "df0a2f6cfde1fb18",
+      "512": "22b609d39ba4198c",
+      "64": "20eb8cfe7d4a4138"
+    },
+    "input_fingerprints": {
+      "1024": {
+        "sha256": "18b6963c6905082acec32ebcc3f15939257bd18345129520acd9e327984a8d8d",
+        "size": 8421376,
+        "validation": "packaging_manifest"
+      },
+      "128": {
+        "sha256": "6714477eda72993551070387a941551435792a52060cc6ff689552d6aef8a44b",
+        "size": 135168,
+        "validation": "packaging_manifest"
+      },
+      "2048": {
+        "sha256": "b712ca3dc80444ff6986f8b02905128d219729976ec6f121c388160a35ac7d0d",
+        "size": 33619968,
+        "validation": "packaging_manifest"
+      },
+      "256": {
+        "sha256": "957d92eb884bfb66b4b8e42a4eee56f0bfe57b34eddd4b87b7a349a8ff355de5",
+        "size": 532480,
+        "validation": "packaging_manifest"
+      },
+      "4096": {
+        "sha256": "59269644acabf893ab1e6578bf1b7afee6c74cab5cb8add33e1e036c6693beb8",
+        "size": 134348800,
+        "validation": "packaging_manifest"
+      },
+      "512": {
+        "sha256": "4e4e9431284d645b3811fdcac661a4a8dde91d199da952be8064e8a3dbc6b165",
+        "size": 2113536,
+        "validation": "packaging_manifest"
+      },
+      "64": {
+        "sha256": "52b09b93698e5f2574b171118fe1d9df32cca6a8f76930eaca40badd18819f90",
+        "size": 34816,
+        "validation": "packaging_manifest"
+      }
+    },
+    "input_validation_note": "bytes = freshly rehashed input dump; packaging_manifest = hash and size verified during packaging, with input bytes subsequently omitted",
+    "job_id": "129538",
+    "maximum_accuracy": {
+      "max_eigenvalue_error": 8.948397578478762e-13,
+      "max_orth_error": 5.9766719751448315e-15,
+      "max_residual": 9.610690583563231e-09
+    },
+    "measured_samples": 11798,
+    "missing_expected_configurations": [],
+    "retention": {
+      "archive": {
+        "path": "evidence.zip",
+        "sha256": "9241c83756cb567d7f9332eb33a0252b2975db9fc8de12d966aae3bf4dcb9082",
+        "size": 11690599
+      },
+      "archived_members": 3452,
+      "input_validation": {
+        "1024": "packaging_manifest",
+        "128": "packaging_manifest",
+        "2048": "packaging_manifest",
+        "256": "packaging_manifest",
+        "4096": "packaging_manifest",
+        "512": "packaging_manifest",
+        "64": "packaging_manifest"
+      },
+      "manifest_sha256": "539ee3f1ffb9f1d4c1e2e8edd4bcfa0d05c7efc5d1a42a48e0a810dcf5378fce",
+      "mode": "compact_evidence_archive",
+      "omitted_input_dumps": [
+        "input_n1024.bin",
+        "input_n128.bin",
+        "input_n2048.bin",
+        "input_n256.bin",
+        "input_n4096.bin",
+        "input_n512.bin",
+        "input_n64.bin"
+      ]
+    },
+    "samples": 11896,
+    "step": "E4",
+    "warmups": 98,
+    "warnings": []
+  },
+  "e4_e6_comparison": {
+    "changed_harness_sources": [
+      "bench/run_baselines.py",
+      "euler/06_single_socket.sbatch",
+      "euler/record_hardware.py",
+      "euler/run_baseline_job.sh",
+      "euler/single_socket.py"
+    ],
+    "compared_settings_rows": 98,
+    "compiler_flags_identical": true,
+    "e4_job_id": "129538",
+    "e6_job_id": "130120",
+    "identical_inputs_and_references": {
+      "1024": {
+        "input_sha256": "18b6963c6905082acec32ebcc3f15939257bd18345129520acd9e327984a8d8d",
+        "input_validation": {
+          "E4": "packaging_manifest",
+          "E6": "packaging_manifest"
+        },
+        "reference_sha256": "f7e56de219ee8ea2c04d86013cce34a501d070c47dea6ece27cfc52743822596"
+      },
+      "128": {
+        "input_sha256": "6714477eda72993551070387a941551435792a52060cc6ff689552d6aef8a44b",
+        "input_validation": {
+          "E4": "packaging_manifest",
+          "E6": "packaging_manifest"
+        },
+        "reference_sha256": "e2921e0d838afc503cb424bf0b9e4bbbe86c812ff4c73d564c7fbe92bc343e81"
+      },
+      "2048": {
+        "input_sha256": "b712ca3dc80444ff6986f8b02905128d219729976ec6f121c388160a35ac7d0d",
+        "input_validation": {
+          "E4": "packaging_manifest",
+          "E6": "packaging_manifest"
+        },
+        "reference_sha256": "5a76ab1c461508917ae7e01b10d70408a6d4c540be798e458996b92b34ad290b"
+      },
+      "256": {
+        "input_sha256": "957d92eb884bfb66b4b8e42a4eee56f0bfe57b34eddd4b87b7a349a8ff355de5",
+        "input_validation": {
+          "E4": "packaging_manifest",
+          "E6": "packaging_manifest"
+        },
+        "reference_sha256": "eaa5faf98fc8b469a8a6d04eac8ab9c3ade09a17498aab232ad15a90886b67f4"
+      },
+      "4096": {
+        "input_sha256": "59269644acabf893ab1e6578bf1b7afee6c74cab5cb8add33e1e036c6693beb8",
+        "input_validation": {
+          "E4": "packaging_manifest",
+          "E6": "packaging_manifest"
+        },
+        "reference_sha256": "664b5dec91d5308702b7c2fdbd708794a1f789b8bc418850c30a97cd2bd49279"
+      },
+      "512": {
+        "input_sha256": "4e4e9431284d645b3811fdcac661a4a8dde91d199da952be8064e8a3dbc6b165",
+        "input_validation": {
+          "E4": "packaging_manifest",
+          "E6": "packaging_manifest"
+        },
+        "reference_sha256": "365a295188984f1a57bca795fe3989a4eb7a618a5996f3962c29fbc06fd4f3a7"
+      },
+      "64": {
+        "input_sha256": "52b09b93698e5f2574b171118fe1d9df32cca6a8f76930eaca40badd18819f90",
+        "input_validation": {
+          "E4": "packaging_manifest",
+          "E6": "packaging_manifest"
+        },
+        "reference_sha256": "3f69a0550a4ec319fc5f0d460e8704ffcaea600a36ce72a641a426226f5faf06"
+      }
+    },
+    "interpretation": "Separate shared-node jobs; placement comparison does not isolate every source of timing variation.",
+    "numerical_environment_identical": true,
+    "numerical_sources_identical": [
+      "matrix.cpp",
+      "matrix.h",
+      "davidson.cpp",
+      "davidson.h",
+      "bench/baseline_common.py",
+      "bench/cpp_baselines_bench.cpp",
+      "bench/davidson_bench.cpp",
+      "bench/pyscf_baselines.py",
+      "bench/pyscf_davidson_bench.py",
+      "bench/slepc_davidson_bench.py"
+    ],
+    "same_hostname": true,
+    "settings_excluded_placement_fields": [
+      "thread_environment.OMP_PLACES"
+    ]
+  },
+  "e5": {
+    "capped_below_target": [],
+    "configurations": 8,
+    "error_records": 0,
+    "expected_configurations": 8,
+    "failed_configurations": [],
+    "hashes": {
+      "environment.json": "e7260fd843522775d2d99a66747aea4922fddd881d0f69ec345477f484ab7dbd",
+      "raw.jsonl": "76ab298c10eb613b3e8590259580b0c388f0f99416af0c397a0ad64b9e8cd9c3",
+      "run.json": "c7afc44e3f45f9ad14f8181655ee2a87af59191b4cb2694ece71da6bfda45a84",
+      "source.json": "629df68fedcddbf2eba259d9e0c149212462254c78ba6b28b01c20c41b75b775",
+      "summary.csv": "413a2ec5d7e7dfcb03f88121f106a9467b23e8151ffff03a16a7835656a0dc45"
+    },
+    "input_checksums": {
+      "1024": "3d70c0a8d9e64af0",
+      "4096": "df0a2f6cfde1fb18"
+    },
+    "input_fingerprints": {
+      "1024": {
+        "sha256": "18b6963c6905082acec32ebcc3f15939257bd18345129520acd9e327984a8d8d",
+        "size": 8421376,
+        "validation": "packaging_manifest"
+      },
+      "4096": {
+        "sha256": "59269644acabf893ab1e6578bf1b7afee6c74cab5cb8add33e1e036c6693beb8",
+        "size": 134348800,
+        "validation": "packaging_manifest"
+      }
+    },
+    "input_validation_note": "bytes = freshly rehashed input dump; packaging_manifest = hash and size verified during packaging, with input bytes subsequently omitted",
+    "job_id": "129548",
+    "maximum_accuracy": {
+      "max_eigenvalue_error": 8.948397578478762e-13,
+      "max_orth_error": 1.9811941779229562e-15,
+      "max_residual": 8.309493165217534e-09
+    },
+    "measured_samples": 8,
+    "missing_expected_configurations": [],
+    "retention": {
+      "archive": {
+        "path": "evidence.zip",
+        "sha256": "a4d48e4ddd0f18d780b704457f8eebbb35f14a4f29046586a5c092292c3c4649",
+        "size": 50885
+      },
+      "archived_members": 17,
+      "input_validation": {
+        "1024": "packaging_manifest",
+        "4096": "packaging_manifest"
+      },
+      "manifest_sha256": "b5aa8e468098662846f788d5dfabcc1e49e4b8bd0ce4273a82a49e2bc69f4982",
+      "mode": "compact_evidence_archive",
+      "omitted_input_dumps": [
+        "input_n1024.bin",
+        "input_n4096.bin"
+      ]
+    },
+    "samples": 16,
+    "step": "E5",
+    "warmups": 8,
+    "warnings": []
+  },
+  "e6": {
+    "capped_below_target": [
+      "s1_n64_cpp_serial_p1",
+      "s1_n64_cpp_openmp_p1",
+      "s1_n64_cpp_openmp_p2",
+      "s1_n64_cpp_openmp_p4",
+      "s1_n64_cpp_openmp_p8",
+      "s1_n64_pyscf_p1",
+      "s1_n64_pyscf_p2",
+      "s1_n64_pyscf_p4",
+      "s1_n64_pyscf_p8",
+      "s1_n64_slepc_p1",
+      "s1_n64_slepc_p2",
+      "s1_n128_cpp_serial_p1",
+      "s1_n128_cpp_openmp_p1",
+      "s1_n128_cpp_openmp_p2",
+      "s1_n128_cpp_openmp_p4",
+      "s1_n128_cpp_openmp_p8",
+      "s1_n128_pyscf_p1",
+      "s1_n128_pyscf_p2",
+      "s1_n128_pyscf_p4",
+      "s1_n128_pyscf_p8",
+      "s1_n128_slepc_p1",
+      "s1_n128_slepc_p2",
+      "s1_n256_cpp_serial_p1",
+      "s1_n256_cpp_openmp_p1",
+      "s1_n256_cpp_openmp_p2",
+      "s1_n256_cpp_openmp_p4",
+      "s1_n256_cpp_openmp_p8",
+      "s1_n256_pyscf_p1",
+      "s1_n256_pyscf_p2",
+      "s1_n256_pyscf_p4",
+      "s1_n256_pyscf_p8",
+      "s1_n256_slepc_p1",
+      "s1_n256_slepc_p2",
+      "s1_n512_cpp_openmp_p4",
+      "s1_n512_cpp_openmp_p8",
+      "s1_n512_pyscf_p1",
+      "s1_n512_slepc_p1",
+      "s2_n64_cpp_serial_p1",
+      "s2_n64_cpp_openmp_p1",
+      "s2_n64_cpp_openmp_p2",
+      "s2_n64_cpp_openmp_p4",
+      "s2_n64_cpp_openmp_p8",
+      "s2_n64_pyscf_p1",
+      "s2_n64_pyscf_p2",
+      "s2_n64_pyscf_p4",
+      "s2_n64_pyscf_p8",
+      "s2_n64_slepc_p1",
+      "s2_n64_slepc_p2",
+      "s2_n128_cpp_serial_p1",
+      "s2_n128_cpp_openmp_p1",
+      "s2_n128_cpp_openmp_p2",
+      "s2_n128_cpp_openmp_p4",
+      "s2_n128_cpp_openmp_p8",
+      "s2_n128_pyscf_p1",
+      "s2_n128_pyscf_p2",
+      "s2_n128_pyscf_p4",
+      "s2_n128_pyscf_p8",
+      "s2_n128_slepc_p1",
+      "s2_n128_slepc_p2",
+      "s2_n256_cpp_serial_p1",
+      "s2_n256_cpp_openmp_p1",
+      "s2_n256_cpp_openmp_p2",
+      "s2_n256_cpp_openmp_p4",
+      "s2_n256_cpp_openmp_p8",
+      "s2_n256_pyscf_p1",
+      "s2_n256_pyscf_p2",
+      "s2_n256_pyscf_p4",
+      "s2_n256_pyscf_p8",
+      "s2_n256_slepc_p1",
+      "s2_n256_slepc_p2",
+      "s2_n512_cpp_openmp_p4",
+      "s2_n512_cpp_openmp_p8",
+      "s2_n512_pyscf_p1",
+      "s2_n512_pyscf_p2",
+      "s2_n512_slepc_p1"
+    ],
+    "configurations": 182,
+    "error_records": 0,
+    "expected_configurations": 182,
+    "failed_configurations": [],
+    "hashes": {
+      "build/compiler.txt": "862b260dfdf5299a74a4888403c61a95eaf608edece2a16e7263337e5283253a",
+      "cpu_mapping.json": "6fc8bde452c839fe2e3a39c08f1484b9bb2bb489b27c1714eeef299d457293c0",
+      "environment.json": "051ddde504874eb199210cb15c1555f72191cb90359794b68b76c616fbde62e3",
+      "hardware.json": "fb5c011d4d1c2859e949338683c3aa9c551789e8b31852f64782accdb65a267d",
+      "raw.jsonl": "053d2a834e8764b6e6cac8527ab236734c5d1e9719aa1b0bfaf2d9c28bf3cc6c",
+      "run.json": "409d85b8eb8ba61314c962600b8fb8131642293847ef8988c581a6bfb5995b06",
+      "single_socket.json": "9009ef32f72d46a6f721f17cde372cd1c9dd6eab76a4d55dc79177a447835829",
+      "source.json": "c1f7c01f191bf305abd3e3835c8c89896c6ba201ba64e2301340ad1f053ee4d0",
+      "summary.csv": "549bdab5f6b84219fc67a61d9b1b345ab4d70b789335ddda633c505b075cfdad"
+    },
+    "input_checksums": {
+      "1024": "3d70c0a8d9e64af0",
+      "128": "2d5a0883a5be6e54",
+      "2048": "f559e02c1377bad8",
+      "256": "8062cb07a3c03bf0",
+      "4096": "df0a2f6cfde1fb18",
+      "512": "22b609d39ba4198c",
+      "64": "20eb8cfe7d4a4138"
+    },
+    "input_fingerprints": {
+      "1024": {
+        "sha256": "18b6963c6905082acec32ebcc3f15939257bd18345129520acd9e327984a8d8d",
+        "size": 8421376,
+        "validation": "packaging_manifest"
+      },
+      "128": {
+        "sha256": "6714477eda72993551070387a941551435792a52060cc6ff689552d6aef8a44b",
+        "size": 135168,
+        "validation": "packaging_manifest"
+      },
+      "2048": {
+        "sha256": "b712ca3dc80444ff6986f8b02905128d219729976ec6f121c388160a35ac7d0d",
+        "size": 33619968,
+        "validation": "packaging_manifest"
+      },
+      "256": {
+        "sha256": "957d92eb884bfb66b4b8e42a4eee56f0bfe57b34eddd4b87b7a349a8ff355de5",
+        "size": 532480,
+        "validation": "packaging_manifest"
+      },
+      "4096": {
+        "sha256": "59269644acabf893ab1e6578bf1b7afee6c74cab5cb8add33e1e036c6693beb8",
+        "size": 134348800,
+        "validation": "packaging_manifest"
+      },
+      "512": {
+        "sha256": "4e4e9431284d645b3811fdcac661a4a8dde91d199da952be8064e8a3dbc6b165",
+        "size": 2113536,
+        "validation": "packaging_manifest"
+      },
+      "64": {
+        "sha256": "52b09b93698e5f2574b171118fe1d9df32cca6a8f76930eaca40badd18819f90",
+        "size": 34816,
+        "validation": "packaging_manifest"
+      }
+    },
+    "input_validation_note": "bytes = freshly rehashed input dump; packaging_manifest = hash and size verified during packaging, with input bytes subsequently omitted",
+    "job_id": "130120",
+    "maximum_accuracy": {
+      "max_eigenvalue_error": 8.948397578478762e-13,
+      "max_orth_error": 5.9766719751448315e-15,
+      "max_residual": 9.61069065752276e-09
+    },
+    "measured_samples": 22569,
+    "missing_expected_configurations": [],
+    "placement": {
+      "allocated_logical_cpus": 48,
+      "allocated_physical_cores": 24,
+      "memory_policy": "pinned_first_touch",
+      "nested_subsets_verified": true,
+      "numa_node": 0,
+      "rank_placement_records": 210,
+      "selected_cpus": [
+        3,
+        4,
+        6,
+        13,
+        16,
+        17,
+        18,
+        19
+      ],
+      "socket": 0,
+      "socket_physical_core_counts": {
+        "0": 12,
+        "1": 12
+      },
+      "sysfs_lscpu_grouping_verified": true
+    },
+    "retention": {
+      "archive": {
+        "path": "evidence.zip",
+        "sha256": "eb0b8b41e6a9f18ebfcf91241fad4f8bcc1f937c61c4b235aa9b3e12087e3d73",
+        "size": 18375568
+      },
+      "archived_members": 7356,
+      "input_validation": {
+        "1024": "packaging_manifest",
+        "128": "packaging_manifest",
+        "2048": "packaging_manifest",
+        "256": "packaging_manifest",
+        "4096": "packaging_manifest",
+        "512": "packaging_manifest",
+        "64": "packaging_manifest"
+      },
+      "manifest_sha256": "5e05bacc589acc1bb2f3566bf311f9568c995b024c7910ea39ef3ba73d2372cb",
+      "mode": "compact_evidence_archive",
+      "omitted_input_dumps": [
+        "input_n1024.bin",
+        "input_n128.bin",
+        "input_n2048.bin",
+        "input_n256.bin",
+        "input_n4096.bin",
+        "input_n512.bin",
+        "input_n64.bin"
+      ]
+    },
+    "samples": 22751,
+    "step": "E6",
+    "warmups": 182,
+    "warnings": []
+  },
+  "figures": {
+    "figures": {
+      "efficiency": {
+        "caption": "Same-sweep one-core reference for each solver; efficiency is speedup / cores.",
+        "files": [
+          {
+            "path": "efficiency.png",
+            "sha256": "fc8fe441a8572ea2ffb19e9c886da37b54bfdd3ac651d9ad2376140a7f2c4d67"
+          },
+          {
+            "path": "efficiency.pdf",
+            "sha256": "cff32714cdd85c95b3c13c2c2a38d6f6f2327d3c15c7c76e11138c3824d04951"
+          }
+        ]
+      },
+      "speedup": {
+        "caption": "Same-sweep one-core reference for each solver; efficiency is speedup / cores.",
+        "files": [
+          {
+            "path": "speedup.png",
+            "sha256": "51ee8404ae398271394c62919ceaca00e5d26c2a3233b2c0afcf9f19712beca1"
+          },
+          {
+            "path": "speedup.pdf",
+            "sha256": "77a84fd21ce8445e14d76ac11dca3b9b9d2226be202d09591acba04c64696320"
+          }
+        ]
+      },
+      "time_per_matvec": {
+        "caption": "SLEPc omitted: vector-equivalent counts are unverified. This is not isolated matvec kernel time.",
+        "files": [
+          {
+            "path": "time_per_matvec.png",
+            "sha256": "bdd41ac9ffe4bb1f2466f19f884af96133cc18f55ac9afbd682333134e54f1ad"
+          },
+          {
+            "path": "time_per_matvec.pdf",
+            "sha256": "070740e40db282ea5a3a0f4517ccb139104d2cd32df1b6906b4be7b1f96b916a"
+          }
+        ]
+      },
+      "time_vs_n_1core": {
+        "caption": "Log-log solve-time medians on 1 cores; both sweeps shown separately.",
+        "files": [
+          {
+            "path": "time_vs_n_1core.png",
+            "sha256": "519c997381f522252b83a68fe3af7fc20c415701ce4b55f420fe9d14053f0740"
+          },
+          {
+            "path": "time_vs_n_1core.pdf",
+            "sha256": "8f093c81caccf8696f899d2e91c598e40ec7021a9ece56e1ec0f0911267616a8"
+          }
+        ]
+      },
+      "time_vs_n_8core": {
+        "caption": "Log-log solve-time medians on 8 cores; both sweeps shown separately.",
+        "files": [
+          {
+            "path": "time_vs_n_8core.png",
+            "sha256": "43c91d5c4e2dfd72f44b30da8e83c748223df6b1c936831badfa4bb1089f4eb1"
+          },
+          {
+            "path": "time_vs_n_8core.pdf",
+            "sha256": "e2b1b5b0e890fdcf31b98324dda76ac88273bb6c3fee96e9d70f8f87eb90143f"
+          }
+        ]
+      }
+    },
+    "job_id": "130120",
+    "matplotlib_version": "3.9.2",
+    "series": [
+      {
+        "config_ids": [
+          "s1_n64_cpp_serial_p1",
+          "s1_n128_cpp_serial_p1",
+          "s1_n256_cpp_serial_p1",
+          "s1_n512_cpp_serial_p1",
+          "s1_n1024_cpp_serial_p1",
+          "s1_n2048_cpp_serial_p1",
+          "s1_n4096_cpp_serial_p1"
+        ],
+        "cores": 1,
+        "figure": "time_vs_n_1core",
+        "solver": "cpp_serial",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.6593249999999999,
+          0.984719,
+          3.2960415000000003,
+          11.868669,
+          40.880979999999994,
+          150.651498,
+          602.3681469999999
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_cpp_serial_p1",
+          "s2_n128_cpp_serial_p1",
+          "s2_n256_cpp_serial_p1",
+          "s2_n512_cpp_serial_p1",
+          "s2_n1024_cpp_serial_p1",
+          "s2_n2048_cpp_serial_p1",
+          "s2_n4096_cpp_serial_p1"
+        ],
+        "cores": 1,
+        "figure": "time_vs_n_1core",
+        "solver": "cpp_serial",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.664914,
+          0.9860440000000001,
+          3.292332,
+          11.812658,
+          40.588666,
+          149.70030400000002,
+          600.6185419999999
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_cpp_openmp_p1",
+          "s1_n128_cpp_openmp_p1",
+          "s1_n256_cpp_openmp_p1",
+          "s1_n512_cpp_openmp_p1",
+          "s1_n1024_cpp_openmp_p1",
+          "s1_n2048_cpp_openmp_p1",
+          "s1_n4096_cpp_openmp_p1"
+        ],
+        "cores": 1,
+        "figure": "time_vs_n_1core",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.70441,
+          1.06602,
+          3.466854,
+          12.205963,
+          41.488889,
+          152.086018,
+          607.818665
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_cpp_openmp_p1",
+          "s2_n128_cpp_openmp_p1",
+          "s2_n256_cpp_openmp_p1",
+          "s2_n512_cpp_openmp_p1",
+          "s2_n1024_cpp_openmp_p1",
+          "s2_n2048_cpp_openmp_p1",
+          "s2_n4096_cpp_openmp_p1"
+        ],
+        "cores": 1,
+        "figure": "time_vs_n_1core",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.70897,
+          1.061275,
+          3.436164,
+          12.130642,
+          41.247715,
+          151.111854,
+          606.174611
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_pyscf_p1",
+          "s1_n128_pyscf_p1",
+          "s1_n256_pyscf_p1",
+          "s1_n512_pyscf_p1",
+          "s1_n1024_pyscf_p1",
+          "s1_n2048_pyscf_p1",
+          "s1_n4096_pyscf_p1"
+        ],
+        "cores": 1,
+        "figure": "time_vs_n_1core",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          3.486120142042637,
+          3.83192440494895,
+          3.8650149945169687,
+          4.879044601693749,
+          8.563041221350431,
+          29.78388755582273,
+          110.4881230276078
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_pyscf_p1",
+          "s2_n128_pyscf_p1",
+          "s2_n256_pyscf_p1",
+          "s2_n512_pyscf_p1",
+          "s2_n1024_pyscf_p1",
+          "s2_n2048_pyscf_p1",
+          "s2_n4096_pyscf_p1"
+        ],
+        "cores": 1,
+        "figure": "time_vs_n_1core",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          3.487894544377923,
+          3.8374890573322773,
+          3.864484839141369,
+          4.9011241644620895,
+          8.251348044723272,
+          28.026052517816424,
+          109.56716001965106
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_slepc_p1",
+          "s1_n128_slepc_p1",
+          "s1_n256_slepc_p1",
+          "s1_n512_slepc_p1",
+          "s1_n1024_slepc_p1",
+          "s1_n2048_slepc_p1",
+          "s1_n4096_slepc_p1"
+        ],
+        "cores": 1,
+        "figure": "time_vs_n_1core",
+        "solver": "slepc",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          3.047253005206585,
+          3.1805550679564476,
+          3.1991456635296345,
+          4.427212523296475,
+          8.617412531748414,
+          32.910187263041735,
+          123.02095536142588
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_slepc_p1",
+          "s2_n128_slepc_p1",
+          "s2_n256_slepc_p1",
+          "s2_n512_slepc_p1",
+          "s2_n1024_slepc_p1",
+          "s2_n2048_slepc_p1",
+          "s2_n4096_slepc_p1"
+        ],
+        "cores": 1,
+        "figure": "time_vs_n_1core",
+        "solver": "slepc",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          3.1598093919456005,
+          3.1925251241773367,
+          3.2208007760345936,
+          4.271219950169325,
+          8.33510304801166,
+          33.14756089821458,
+          125.75821438804269
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_cpp_openmp_p8",
+          "s1_n128_cpp_openmp_p8",
+          "s1_n256_cpp_openmp_p8",
+          "s1_n512_cpp_openmp_p8",
+          "s1_n1024_cpp_openmp_p8",
+          "s1_n2048_cpp_openmp_p8",
+          "s1_n4096_cpp_openmp_p8"
+        ],
+        "cores": 8,
+        "figure": "time_vs_n_8core",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.6206339999999999,
+          0.49861700000000003,
+          0.8735525000000001,
+          2.0956300000000003,
+          5.968925,
+          20.0920055,
+          78.574435
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_cpp_openmp_p8",
+          "s2_n128_cpp_openmp_p8",
+          "s2_n256_cpp_openmp_p8",
+          "s2_n512_cpp_openmp_p8",
+          "s2_n1024_cpp_openmp_p8",
+          "s2_n2048_cpp_openmp_p8",
+          "s2_n4096_cpp_openmp_p8"
+        ],
+        "cores": 8,
+        "figure": "time_vs_n_8core",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.6118585,
+          0.4736065,
+          0.840522,
+          2.0566545,
+          5.9279850000000005,
+          19.895082000000002,
+          78.403542
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_pyscf_p8",
+          "s1_n128_pyscf_p8",
+          "s1_n256_pyscf_p8",
+          "s1_n512_pyscf_p8",
+          "s1_n1024_pyscf_p8",
+          "s1_n2048_pyscf_p8",
+          "s1_n4096_pyscf_p8"
+        ],
+        "cores": 8,
+        "figure": "time_vs_n_8core",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          3.4705244470387697,
+          3.814604366198182,
+          3.9275705348700285,
+          21.843350026756525,
+          33.77486439421773,
+          98.73148030601442,
+          168.27017813920975
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_pyscf_p8",
+          "s2_n128_pyscf_p8",
+          "s2_n256_pyscf_p8",
+          "s2_n512_pyscf_p8",
+          "s2_n1024_pyscf_p8",
+          "s2_n2048_pyscf_p8",
+          "s2_n4096_pyscf_p8"
+        ],
+        "cores": 8,
+        "figure": "time_vs_n_8core",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          3.527240129187703,
+          3.7912381812930107,
+          3.8910703733563423,
+          21.94388653151691,
+          44.84080569818616,
+          14.77616443298757,
+          132.14667607098818
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_slepc_p8",
+          "s1_n128_slepc_p8",
+          "s1_n256_slepc_p8",
+          "s1_n512_slepc_p8",
+          "s1_n1024_slepc_p8",
+          "s1_n2048_slepc_p8",
+          "s1_n4096_slepc_p8"
+        ],
+        "cores": 8,
+        "figure": "time_vs_n_8core",
+        "solver": "slepc",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          7.784840650856495,
+          7.974153850227594,
+          7.3402039706707,
+          7.503706496208906,
+          8.700132835656404,
+          12.141742510721087,
+          34.93925603106618
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_slepc_p8",
+          "s2_n128_slepc_p8",
+          "s2_n256_slepc_p8",
+          "s2_n512_slepc_p8",
+          "s2_n1024_slepc_p8",
+          "s2_n2048_slepc_p8",
+          "s2_n4096_slepc_p8"
+        ],
+        "cores": 8,
+        "figure": "time_vs_n_8core",
+        "solver": "slepc",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          7.510416209697723,
+          7.7181789092719555,
+          7.221287582069635,
+          7.343783974647522,
+          8.393679279834032,
+          11.856448370963335,
+          34.69274193048477
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n1024_cpp_openmp_p1",
+          "s1_n1024_cpp_openmp_p2",
+          "s1_n1024_cpp_openmp_p4",
+          "s1_n1024_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.9684536535601498,
+          3.755739582771331,
+          6.950814258848956
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n1024_cpp_openmp_p1",
+          "s2_n1024_cpp_openmp_p2",
+          "s2_n1024_cpp_openmp_p4",
+          "s2_n1024_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.9598443422027416,
+          3.767664359875815,
+          6.958134172066899
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n1024_pyscf_p1",
+          "s1_n1024_pyscf_p2",
+          "s1_n1024_pyscf_p4",
+          "s1_n1024_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.2934689737867189,
+          1.0220299556798706,
+          0.2535329563844652
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n1024_pyscf_p1",
+          "s2_n1024_pyscf_p2",
+          "s2_n1024_pyscf_p4",
+          "s2_n1024_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.2405990046228317,
+          0.40747654374587655,
+          0.1840142681704099
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n1024_slepc_p1",
+          "s1_n1024_slepc_p2",
+          "s1_n1024_slepc_p4",
+          "s1_n1024_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "slepc",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.0628880489258978,
+          1.0621896966680628,
+          0.9904920642626315
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n1024_slepc_p1",
+          "s2_n1024_slepc_p2",
+          "s2_n1024_slepc_p4",
+          "s2_n1024_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "slepc",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.0746997645861116,
+          1.0679922971130582,
+          0.9930213878956393
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n2048_cpp_openmp_p1",
+          "s1_n2048_cpp_openmp_p2",
+          "s1_n2048_cpp_openmp_p4",
+          "s1_n2048_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.9855329334925726,
+          3.9078899406187664,
+          7.569479214008776
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n2048_cpp_openmp_p1",
+          "s2_n2048_cpp_openmp_p2",
+          "s2_n2048_cpp_openmp_p4",
+          "s2_n2048_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.983933525926526,
+          3.9115986446170243,
+          7.595437606138038
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n2048_pyscf_p1",
+          "s1_n2048_pyscf_p2",
+          "s1_n2048_pyscf_p4",
+          "s1_n2048_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.5683028010330626,
+          0.2747902843450432,
+          0.3016655626301633
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n2048_pyscf_p1",
+          "s2_n2048_pyscf_p2",
+          "s2_n2048_pyscf_p4",
+          "s2_n2048_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.5027664060319708,
+          0.3938055901945201,
+          1.8967068649593986
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n2048_slepc_p1",
+          "s1_n2048_slepc_p2",
+          "s1_n2048_slepc_p4",
+          "s1_n2048_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "slepc",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.464067538849924,
+          2.64083344619531,
+          2.7104995212987126
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n2048_slepc_p1",
+          "s2_n2048_slepc_p2",
+          "s2_n2048_slepc_p4",
+          "s2_n2048_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "slepc",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.4463340409448908,
+          2.4781648325071433,
+          2.7957411748524605
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n4096_cpp_openmp_p1",
+          "s1_n4096_cpp_openmp_p2",
+          "s1_n4096_cpp_openmp_p4",
+          "s1_n4096_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.9931410606333486,
+          3.951526395330482,
+          7.735577926840964
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n4096_cpp_openmp_p1",
+          "s2_n4096_cpp_openmp_p2",
+          "s2_n4096_cpp_openmp_p4",
+          "s2_n4096_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.9894893488003587,
+          3.941158669729248,
+          7.7314697211001
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n4096_pyscf_p1",
+          "s1_n4096_pyscf_p2",
+          "s1_n4096_pyscf_p4",
+          "s1_n4096_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.436742985089015,
+          1.3095955360741407,
+          0.6566114343576738
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n4096_pyscf_p1",
+          "s2_n4096_pyscf_p2",
+          "s2_n4096_pyscf_p4",
+          "s2_n4096_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.4420156737031382,
+          1.939468954613465,
+          0.8291329246964367
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n4096_slepc_p1",
+          "s1_n4096_slepc_p2",
+          "s1_n4096_slepc_p4",
+          "s1_n4096_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "slepc",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.560795616312609,
+          2.6589423002086376,
+          3.520995273970402
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n4096_slepc_p1",
+          "s2_n4096_slepc_p2",
+          "s2_n4096_slepc_p4",
+          "s2_n4096_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "speedup",
+        "solver": "slepc",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          1.5304931584053059,
+          2.89276755114753,
+          3.6249142440234166
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n1024_cpp_openmp_p1",
+          "s1_n1024_cpp_openmp_p2",
+          "s1_n1024_cpp_openmp_p4",
+          "s1_n1024_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.9842268267800749,
+          0.9389348956928327,
+          0.8688517823561195
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n1024_cpp_openmp_p1",
+          "s2_n1024_cpp_openmp_p2",
+          "s2_n1024_cpp_openmp_p4",
+          "s2_n1024_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.9799221711013708,
+          0.9419160899689537,
+          0.8697667715083623
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n1024_pyscf_p1",
+          "s1_n1024_pyscf_p2",
+          "s1_n1024_pyscf_p4",
+          "s1_n1024_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.6467344868933594,
+          0.25550748891996766,
+          0.03169161954805815
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n1024_pyscf_p1",
+          "s2_n1024_pyscf_p2",
+          "s2_n1024_pyscf_p4",
+          "s2_n1024_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.6202995023114158,
+          0.10186913593646914,
+          0.023001783521301236
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n1024_slepc_p1",
+          "s1_n1024_slepc_p2",
+          "s1_n1024_slepc_p4",
+          "s1_n1024_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "slepc",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.5314440244629489,
+          0.2655474241670157,
+          0.12381150803282893
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n1024_slepc_p1",
+          "s2_n1024_slepc_p2",
+          "s2_n1024_slepc_p4",
+          "s2_n1024_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "slepc",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.5373498822930558,
+          0.26699807427826455,
+          0.12412767348695491
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n2048_cpp_openmp_p1",
+          "s1_n2048_cpp_openmp_p2",
+          "s1_n2048_cpp_openmp_p4",
+          "s1_n2048_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.9927664667462863,
+          0.9769724851546916,
+          0.946184901751097
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n2048_cpp_openmp_p1",
+          "s2_n2048_cpp_openmp_p2",
+          "s2_n2048_cpp_openmp_p4",
+          "s2_n2048_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.991966762963263,
+          0.9778996611542561,
+          0.9494297007672547
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n2048_pyscf_p1",
+          "s1_n2048_pyscf_p2",
+          "s1_n2048_pyscf_p4",
+          "s1_n2048_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.7841514005165313,
+          0.0686975710862608,
+          0.037708195328770414
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n2048_pyscf_p1",
+          "s2_n2048_pyscf_p2",
+          "s2_n2048_pyscf_p4",
+          "s2_n2048_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.7513832030159854,
+          0.09845139754863003,
+          0.23708835811992482
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n2048_slepc_p1",
+          "s1_n2048_slepc_p2",
+          "s1_n2048_slepc_p4",
+          "s1_n2048_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "slepc",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.732033769424962,
+          0.6602083615488274,
+          0.3388124401623391
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n2048_slepc_p1",
+          "s2_n2048_slepc_p2",
+          "s2_n2048_slepc_p4",
+          "s2_n2048_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "slepc",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.7231670204724454,
+          0.6195412081267858,
+          0.34946764685655757
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n4096_cpp_openmp_p1",
+          "s1_n4096_cpp_openmp_p2",
+          "s1_n4096_cpp_openmp_p4",
+          "s1_n4096_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.9965705303166743,
+          0.9878815988326205,
+          0.9669472408551205
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n4096_cpp_openmp_p1",
+          "s2_n4096_cpp_openmp_p2",
+          "s2_n4096_cpp_openmp_p4",
+          "s2_n4096_cpp_openmp_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.9947446744001793,
+          0.985289667432312,
+          0.9664337151375125
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n4096_pyscf_p1",
+          "s1_n4096_pyscf_p2",
+          "s1_n4096_pyscf_p4",
+          "s1_n4096_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.7183714925445075,
+          0.3273988840185352,
+          0.08207642929470922
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n4096_pyscf_p1",
+          "s2_n4096_pyscf_p2",
+          "s2_n4096_pyscf_p4",
+          "s2_n4096_pyscf_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.7210078368515691,
+          0.48486723865336623,
+          0.10364161558705459
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n4096_slepc_p1",
+          "s1_n4096_slepc_p2",
+          "s1_n4096_slepc_p4",
+          "s1_n4096_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "slepc",
+        "sweep": 1,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.7803978081563046,
+          0.6647355750521594,
+          0.44012440924630025
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n4096_slepc_p1",
+          "s2_n4096_slepc_p2",
+          "s2_n4096_slepc_p4",
+          "s2_n4096_slepc_p8"
+        ],
+        "cores": null,
+        "figure": "efficiency",
+        "solver": "slepc",
+        "sweep": 2,
+        "x": [
+          1,
+          2,
+          4,
+          8
+        ],
+        "y": [
+          1.0,
+          0.7652465792026529,
+          0.7231918877868825,
+          0.45311428050292707
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_cpp_serial_p1",
+          "s1_n128_cpp_serial_p1",
+          "s1_n256_cpp_serial_p1",
+          "s1_n512_cpp_serial_p1",
+          "s1_n1024_cpp_serial_p1",
+          "s1_n2048_cpp_serial_p1",
+          "s1_n4096_cpp_serial_p1"
+        ],
+        "cores": 1,
+        "figure": "time_per_matvec",
+        "solver": "cpp_serial",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.03878382352941176,
+          0.0615449375,
+          0.20600259375,
+          0.7912446000000001,
+          3.1446907692307686,
+          12.5542915,
+          50.19734558333332
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_cpp_serial_p1",
+          "s2_n128_cpp_serial_p1",
+          "s2_n256_cpp_serial_p1",
+          "s2_n512_cpp_serial_p1",
+          "s2_n1024_cpp_serial_p1",
+          "s2_n2048_cpp_serial_p1",
+          "s2_n4096_cpp_serial_p1"
+        ],
+        "cores": 1,
+        "figure": "time_per_matvec",
+        "solver": "cpp_serial",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.03911258823529412,
+          0.06162775,
+          0.20577075,
+          0.7875105333333334,
+          3.1222050769230774,
+          12.475025333333335,
+          50.05154516666666
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_cpp_openmp_p1",
+          "s1_n128_cpp_openmp_p1",
+          "s1_n256_cpp_openmp_p1",
+          "s1_n512_cpp_openmp_p1",
+          "s1_n1024_cpp_openmp_p1",
+          "s1_n2048_cpp_openmp_p1",
+          "s1_n4096_cpp_openmp_p1"
+        ],
+        "cores": 1,
+        "figure": "time_per_matvec",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.04143588235294118,
+          0.06662625,
+          0.21667837499999998,
+          0.8137308666666667,
+          3.191453,
+          12.673834833333332,
+          50.65155541666667
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_cpp_openmp_p1",
+          "s2_n128_cpp_openmp_p1",
+          "s2_n256_cpp_openmp_p1",
+          "s2_n512_cpp_openmp_p1",
+          "s2_n1024_cpp_openmp_p1",
+          "s2_n2048_cpp_openmp_p1",
+          "s2_n4096_cpp_openmp_p1"
+        ],
+        "cores": 1,
+        "figure": "time_per_matvec",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.04170411764705882,
+          0.06632968750000001,
+          0.21476024999999999,
+          0.8087094666666667,
+          3.172901153846154,
+          12.5926545,
+          50.51455091666667
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_pyscf_p1",
+          "s1_n128_pyscf_p1",
+          "s1_n256_pyscf_p1",
+          "s1_n512_pyscf_p1",
+          "s1_n1024_pyscf_p1",
+          "s1_n2048_pyscf_p1",
+          "s1_n4096_pyscf_p1"
+        ],
+        "cores": 1,
+        "figure": "time_per_matvec",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.1089412544388324,
+          0.11611892136208939,
+          0.12078171857865527,
+          0.15247014380292967,
+          0.267595038167201,
+          0.9607705663168622,
+          3.4527538446127437
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_pyscf_p1",
+          "s2_n128_pyscf_p1",
+          "s2_n256_pyscf_p1",
+          "s2_n512_pyscf_p1",
+          "s2_n1024_pyscf_p1",
+          "s2_n2048_pyscf_p1",
+          "s2_n4096_pyscf_p1"
+        ],
+        "cores": 1,
+        "figure": "time_per_matvec",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.1089967045118101,
+          0.11628754719188719,
+          0.12076515122316778,
+          0.1531601301394403,
+          0.25785462639760226,
+          0.9040662102521427,
+          3.4239737506140955
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_cpp_openmp_p8",
+          "s1_n128_cpp_openmp_p8",
+          "s1_n256_cpp_openmp_p8",
+          "s1_n512_cpp_openmp_p8",
+          "s1_n1024_cpp_openmp_p8",
+          "s1_n2048_cpp_openmp_p8",
+          "s1_n4096_cpp_openmp_p8"
+        ],
+        "cores": 8,
+        "figure": "time_per_matvec",
+        "solver": "cpp_openmp",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.036507882352941175,
+          0.0311635625,
+          0.05459703125,
+          0.13970866666666665,
+          0.4591480769230769,
+          1.6743337916666667,
+          6.547869583333333
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_cpp_openmp_p8",
+          "s2_n128_cpp_openmp_p8",
+          "s2_n256_cpp_openmp_p8",
+          "s2_n512_cpp_openmp_p8",
+          "s2_n1024_cpp_openmp_p8",
+          "s2_n2048_cpp_openmp_p8",
+          "s2_n4096_cpp_openmp_p8"
+        ],
+        "cores": 8,
+        "figure": "time_per_matvec",
+        "solver": "cpp_openmp",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.035991676470588235,
+          0.02960040625,
+          0.052532625,
+          0.13711029999999996,
+          0.45599884615384617,
+          1.6579235,
+          6.5336285
+        ]
+      },
+      {
+        "config_ids": [
+          "s1_n64_pyscf_p8",
+          "s1_n128_pyscf_p8",
+          "s1_n256_pyscf_p8",
+          "s1_n512_pyscf_p8",
+          "s1_n1024_pyscf_p8",
+          "s1_n2048_pyscf_p8",
+          "s1_n4096_pyscf_p8"
+        ],
+        "cores": 8,
+        "figure": "time_per_matvec",
+        "solver": "pyscf",
+        "sweep": 1,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.10845388896996155,
+          0.11559407170297523,
+          0.12273657921468839,
+          0.6826046883361414,
+          1.055464512319304,
+          3.1848864614843357,
+          5.258443066850305
+        ]
+      },
+      {
+        "config_ids": [
+          "s2_n64_pyscf_p8",
+          "s2_n128_pyscf_p8",
+          "s2_n256_pyscf_p8",
+          "s2_n512_pyscf_p8",
+          "s2_n1024_pyscf_p8",
+          "s2_n2048_pyscf_p8",
+          "s2_n4096_pyscf_p8"
+        ],
+        "cores": 8,
+        "figure": "time_per_matvec",
+        "solver": "pyscf",
+        "sweep": 2,
+        "x": [
+          64,
+          128,
+          256,
+          512,
+          1024,
+          2048,
+          4096
+        ],
+        "y": [
+          0.11022625403711572,
+          0.1148860054937276,
+          0.1215959491673857,
+          0.6857464541099034,
+          1.4012751780683175,
+          0.4766504655802442,
+          4.129583627218381
+        ]
+      }
+    ],
+    "sweep_convention": "separate series; no pooling, smoothing or confidence intervals"
+  },
+  "generator_sha256": {
+    "baseline_environment.py": "c593913172c6dba74ee3ca6b421388afac20eba5360aeb62e3307875fd9df190",
+    "baseline_evidence.py": "841bf8d762a28ffcc18e0c1cb5b9038ac879ac277eb2296853b3d70b3fcb3806",
+    "baseline_figures.py": "60ce0e5fecec26cc29066aac5f034b9d871d1f86a29fb1587e5b2332f6f1d924",
+    "baseline_final.py": "3435fc62b46ec064a2ba381f953a1a8830189f4bdc6a6d32144afd3772087cd2",
+    "baseline_report.py": "a7fc66801f018fcaf5d150d1e87f902ab2f75b684edc77c3f648d10db5a4a25c",
+    "baseline_storage.py": "afeb2700214689fdfd3cf4bdea6cf91838b9082dd0df3f1dc5948ccb4cde6f7d"
+  },
+  "primary": "e6",
+  "profile_metrics": [
+    {
+      "config_id": "s1_n1024_pyscf_p1",
+      "cores": 1,
+      "csv_line": 2,
+      "davidson_calls": 1,
+      "dot_calls": 32,
+      "dot_fraction_percent": 41.265209029883835,
+      "gate_pass": true,
+      "n": 1024,
+      "paths": [
+        "configs/s1_n1024_pyscf_p1/profile.prof",
+        "configs/s1_n1024_pyscf_p1/profile.txt"
+      ],
+      "solver": "pyscf"
+    },
+    {
+      "config_id": "s1_n1024_pyscf_p8",
+      "cores": 8,
+      "csv_line": 3,
+      "davidson_calls": 1,
+      "dot_calls": 32,
+      "dot_fraction_percent": 88.9868085157205,
+      "gate_pass": true,
+      "n": 1024,
+      "paths": [
+        "configs/s1_n1024_pyscf_p8/profile.prof",
+        "configs/s1_n1024_pyscf_p8/profile.txt"
+      ],
+      "solver": "pyscf"
+    },
+    {
+      "config_id": "s1_n1024_slepc_p1",
+      "cores": 1,
+      "csv_line": 4,
+      "events": {
+        "BVMatProject": {
+          "count": 50,
+          "max_ms": 0.52523,
+          "stage_time_percent": 6.0
+        },
+        "BVOrthogonalizeV": {
+          "count": 44,
+          "max_ms": 0.24282,
+          "stage_time_percent": 3.0
+        },
+        "MatMult": {
+          "count": 40,
+          "max_ms": 5.104,
+          "stage_time_percent": 57.0
+        },
+        "VecReduceComm": {
+          "count": 89,
+          "max_ms": 0.0046099999999999995,
+          "stage_time_percent": 0.0
+        }
+      },
+      "gate_pass": true,
+      "n": 1024,
+      "paths": [
+        "configs/s1_n1024_slepc_p1/views/petsc-log.txt"
+      ],
+      "solver": "slepc"
+    },
+    {
+      "config_id": "s1_n1024_slepc_p8",
+      "cores": 8,
+      "csv_line": 5,
+      "events": {
+        "BVMatProject": {
+          "count": 50,
+          "max_ms": 1.1902,
+          "stage_time_percent": 12.0
+        },
+        "BVOrthogonalizeV": {
+          "count": 44,
+          "max_ms": 1.1012000000000002,
+          "stage_time_percent": 12.0
+        },
+        "MatMult": {
+          "count": 40,
+          "max_ms": 1.5403,
+          "stage_time_percent": 16.0
+        },
+        "SFBcastEnd": {
+          "count": 40,
+          "max_ms": 0.64651,
+          "stage_time_percent": 6.0
+        },
+        "VecReduceComm": {
+          "count": 89,
+          "max_ms": 0.69002,
+          "stage_time_percent": 7.0
+        }
+      },
+      "gate_pass": true,
+      "n": 1024,
+      "paths": [
+        "configs/s1_n1024_slepc_p8/views/petsc-log.txt"
+      ],
+      "solver": "slepc"
+    },
+    {
+      "config_id": "s1_n4096_pyscf_p1",
+      "cores": 1,
+      "csv_line": 6,
+      "davidson_calls": 1,
+      "dot_calls": 32,
+      "dot_fraction_percent": 90.66902078267671,
+      "gate_pass": true,
+      "n": 4096,
+      "paths": [
+        "configs/s1_n4096_pyscf_p1/profile.prof",
+        "configs/s1_n4096_pyscf_p1/profile.txt"
+      ],
+      "solver": "pyscf"
+    },
+    {
+      "config_id": "s1_n4096_pyscf_p8",
+      "cores": 8,
+      "csv_line": 7,
+      "davidson_calls": 1,
+      "dot_calls": 32,
+      "dot_fraction_percent": 90.49892123078236,
+      "gate_pass": true,
+      "n": 4096,
+      "paths": [
+        "configs/s1_n4096_pyscf_p8/profile.prof",
+        "configs/s1_n4096_pyscf_p8/profile.txt"
+      ],
+      "solver": "pyscf"
+    },
+    {
+      "config_id": "s1_n4096_slepc_p1",
+      "cores": 1,
+      "csv_line": 8,
+      "events": {
+        "BVMatProject": {
+          "count": 45,
+          "max_ms": 0.8745200000000001,
+          "stage_time_percent": 1.0
+        },
+        "BVOrthogonalizeV": {
+          "count": 40,
+          "max_ms": 0.71712,
+          "stage_time_percent": 1.0
+        },
+        "MatMult": {
+          "count": 36,
+          "max_ms": 119.15,
+          "stage_time_percent": 95.0
+        },
+        "VecReduceComm": {
+          "count": 80,
+          "max_ms": 0.006690000000000001,
+          "stage_time_percent": 0.0
+        }
+      },
+      "gate_pass": true,
+      "n": 4096,
+      "paths": [
+        "configs/s1_n4096_slepc_p1/views/petsc-log.txt"
+      ],
+      "solver": "slepc"
+    },
+    {
+      "config_id": "s1_n4096_slepc_p8",
+      "cores": 8,
+      "csv_line": 9,
+      "events": {
+        "BVMatProject": {
+          "count": 45,
+          "max_ms": 9.0534,
+          "stage_time_percent": 6.0
+        },
+        "BVOrthogonalizeV": {
+          "count": 40,
+          "max_ms": 1.2260000000000002,
+          "stage_time_percent": 2.0
+        },
+        "MatMult": {
+          "count": 36,
+          "max_ms": 47.842999999999996,
+          "stage_time_percent": 80.0
+        },
+        "SFBcastEnd": {
+          "count": 36,
+          "max_ms": 22.952,
+          "stage_time_percent": 13.0
+        },
+        "VecReduceComm": {
+          "count": 80,
+          "max_ms": 0.7743500000000001,
+          "stage_time_percent": 1.0
+        }
+      },
+      "gate_pass": true,
+      "n": 4096,
+      "paths": [
+        "configs/s1_n4096_slepc_p8/views/petsc-log.txt"
+      ],
+      "solver": "slepc"
+    }
+  ],
+  "schema_version": 2
+}

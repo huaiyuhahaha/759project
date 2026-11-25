@@ -1,3 +1,27 @@
 tensor.cpp
 test*
+.euler/
+.vscode/
+**/__pycache__/
+*.py[cod]
+
+# Regenerable matrices/builds and duplicate transfer files.
+results/**/input_*.bin
+results/**/raw.jsonl
+results/**/*.tar.gz
+results/**/build/davidson_bench
+results/**/build/cpp_baselines_bench
+results/**/build/compiler_probe
+results/**/build/compiler_probe.cpp
+
+# Exact raw samples and repeated EPS views are retained in evidence.zip instead.
+results/**/configs/*/samples.jsonl
+results/**/configs/*/views/repeat*.view.txt
+
+# Discovery, installation and smoke-run outputs are not final benchmark evidence.
+/results/euler/E[0-3]*
+!/results/euler/E1_login_20261124T005142Z_8j8pE5/
+/results/euler/E1_login_20261124T005142Z_8j8pE5/*
+!/results/euler/E1_login_20261124T005142Z_8j8pE5/conda-packages.json
+!/results/euler/E1_login_20261124T005142Z_8j8pE5/conda-explicit.txt
 

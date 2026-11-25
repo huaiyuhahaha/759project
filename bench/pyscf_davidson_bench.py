@@ -190,4 +190,7 @@ def main():
 
 
 if __name__ == "__main__":
+    if "--baseline" in sys.argv[1:]:
+        from pyscf_baselines import main as baseline_main
+        sys.exit(baseline_main())
     sys.exit(main())

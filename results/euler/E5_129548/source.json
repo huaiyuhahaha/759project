@@ -1,0 +1,31 @@
+{
+  "sha256": {
+    "matrix.cpp": "b67200f41d861768b63e37a5cd3cccaa8349212f06afba0096e6fce35f34e734",
+    "matrix.h": "e48ffa1633df54c2ae64fbc756c87262559afac030a2428eaed34d91813f5e5e",
+    "davidson.cpp": "1beee6fe07bc35ff020b907742ccf7d512b1b7fb6c9e85b9a3d28f1d628f8fff",
+    "davidson.h": "89da33686f8bcd46d804173de156b04faba5f4a611c6278d97640bfa5aaa37e9",
+    "bench/baseline_common.py": "1c0e293354d863fa9759d2f1ca819b2f0f0ccca19f904578229ea3fa5a408d71",
+    "bench/pyscf_baselines.py": "a32fb616bff4cb714bad190a9b03acde4c6ed3145d987c6fe3b378d9230f9470",
+    "bench/pyscf_davidson_bench.py": "72f5592a09f779ead0552c604abc500c5c834e3534ebcbe9ec820ac684676380",
+    "bench/run_baselines.py": "1918cb6ba39301b2b14196a51abfcd2544db6e50f4d4636776d72806c6dcc59e",
+    "bench/run_davidson_bench.py": "a5d4d6a306048193c7c8cd8beb58f8aeddbef17276230c535d0b93d036d413f0",
+    "bench/slepc_davidson_bench.py": "8eb815cc8d39ec57d94e33a806f38b9a00f4abdd5a07415397acaea452356bf9",
+    "bench/cpp_baselines_bench.cpp": "fd26fee506f3bd4f4eef7edc5c6334de1f352161944c6c9c122c487079259a09",
+    "bench/davidson_bench.cpp": "57b81e9583e04a4ac45a4fcf085f9f5a51dce1465bae9589c5171a2832d3c843",
+    "euler/check_numerics.py": "4ef067b8777ad667dd09843d44d678e658c2cb2d166b9dc5e66e3b3f33abba6e",
+    "euler/inspect_env.py": "aae6a34cb31db2db68e4ea9eb42f89d3e175e4b60c8d1071ad6160151e9df3ae",
+    "euler/run_env_checks.py": "c9743f1bf188b83e843f821bfaddce04d404ce48f60e47ed84ee96fe4b19b33d",
+    "euler/00_probe_node.sbatch": "efba2fd9383a954c77378680fdeb450f346cb26471e3abff18125161e4cfaa86",
+    "euler/02_check_env.sbatch": "5d4ab7cf345f3ec7e4d2da2ccb41742df6bcfedd6c86c9dc10acf066d5d32b31",
+    "euler/03_smoke.sbatch": "7291376cb4abc7a208461b27a417781cdbcd7eb65c907f5e448c7d9f3239e2c5",
+    "euler/04_baselines.sbatch": "540441c9c9907bc9216b49ed5bf5258beb82dad3e8fff2c91199b6d4ae419bb2",
+    "euler/05_profile.sbatch": "7b4d02659f399c9f93ab8ec39027263966958e3e45c8c7c108f68af79a3b85a7",
+    "euler/00_probe.sh": "45990700656e03274718ef8fe22b87720683d7932548566c705f87752f979738",
+    "euler/01_setup_env.sh": "4b800e97da7f0e0a75ebf2e6010b71bf94155317ab6c21dab13d8d6bc55c4a9d",
+    "euler/compiler_common.sh": "b7273526cffbbcc75fbc5400176dc2df8c68078c97f7340058691c168d4f6374",
+    "euler/probe_common.sh": "85641a9c2c0fb8b664ef32ff16f0829e85e1d6f781263c2b56face45ab404f6c",
+    "euler/run_baseline_job.sh": "5ba8b80a1db707e00bb182413b53e2f274275d8216ad473b7c8bbc3386691932"
+  },
+  "revision": "0e014e36a1d5432063daaa8644df355db3e3801b",
+  "status": "M .gitignore\n M bench/pyscf_davidson_bench.py\n M davidson.cpp\n M matrix.cpp\n M matrix.h\n M matrix_optimize_4.cpp\n?? .euler/\n?? bench/baseline_common.py\n?? bench/cpp_baselines_bench.cpp\n?? bench/pyscf_baselines.py\n?? bench/run_baselines.py\n?? bench/slepc_davidson_bench.py\n?? docs/\n?? euler/\n?? results/"
+}

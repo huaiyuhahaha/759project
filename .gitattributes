@@ -1,0 +1,13 @@
+# Preserve scientific artifact bytes/hashes across Windows and Linux checkouts.
+results/** -text
+
+# New analysis and Euler scripts must work identically on the cluster and locally.
+analysis/*.py text eol=lf
+euler/*.py text eol=lf
+euler/*.sh text eol=lf
+euler/*.sbatch text eol=lf
+euler/env/*.yml text eol=lf
+docs/**/*.md text eol=lf
+docs/**/*.json text eol=lf
+docs/**/*.png binary
+docs/**/*.pdf binary
