@@ -1,5 +1,8 @@
+#include "matrix_comp.h"
+
 #include <immintrin.h>
 #include <algorithm>
+#include <complex>
 #include <cstddef>
 #include <stdexcept>
 
@@ -231,4 +234,34 @@ void cache_register_multiplication(const double* A, const double* B, double* C,
 
     delete[] A_block;
     delete[] B_block;
+}
+
+template <>
+Matrix<double> Matrix<double>::operator*(const Matrix<double>& other) const {
+    if (cols_ != other.rows_)
+        throw std::invalid_argument("Matrix multiplication dimensions do not match");
+
+    Matrix<double> result(rows_, other.cols_);
+    constexpr int block_depth = 256;
+    // The kernel accumulates C += A*B; result starts filled with zeros.
+    cache_register_multiplication(data_, other.data_, result.data_,
+                                  rows_, other.cols_, cols_, block_depth);
+    return result;
+}
+
+template <>
+Matrix<std::complex<double>> Matrix<std::complex<double>>::operator*(
+    const Matrix<std::complex<double>>& other) const {
+    if (cols_ != other.rows_)
+        throw std::invalid_argument("Matrix multiplication dimensions do not match");
+
+    Matrix<std::complex<double>> result(rows_, other.cols_);
+    for (int i = 0; i < rows_; ++i) {
+        for (int k = 0; k < cols_; ++k) {
+            const std::complex<double> a = (*this)[i][k];
+            for (int j = 0; j < other.cols_; ++j)
+                result[i][j] += a * other[k][j];
+        }
+    }
+    return result;
 }
