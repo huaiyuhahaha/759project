@@ -61,12 +61,10 @@ void Matrix::swap(Matrix& other) noexcept {
 }
 
 double* Matrix::operator[](int row) {
-    check_row(row);
     return data_ + static_cast<std::size_t>(row) * cols_;
 }
 
 const double* Matrix::operator[](int row) const {
-    check_row(row);
     return data_ + static_cast<std::size_t>(row) * cols_;
 }
 
@@ -110,11 +108,6 @@ std::size_t Matrix::checked_size(int rows, int cols) {
     if (c != 0 && r > std::numeric_limits<std::size_t>::max() / c)
         throw std::overflow_error("Matrix size is too large");
     return r * c;
-}
-
-void Matrix::check_row(int row) const {
-    if (row < 0 || row >= rows_)
-        throw std::out_of_range("Matrix row index out of range");
 }
 
 void Matrix::require_same_shape(const Matrix& other, const char* operation) const {

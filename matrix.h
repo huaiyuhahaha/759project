@@ -16,6 +16,7 @@ public:
     int rows() const noexcept;
     int cols() const noexcept;
 
+    // Unchecked access: row and column indices must be in range.
     double* operator[](int row);
     const double* operator[](int row) const;
 
@@ -31,7 +32,6 @@ private:
     std::size_t size() const noexcept;
     void swap(Matrix& other) noexcept;
     static std::size_t checked_size(int rows, int cols);
-    void check_row(int row) const;
     void require_same_shape(const Matrix& other, const char* operation) const;
 };
 
